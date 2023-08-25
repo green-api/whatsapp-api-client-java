@@ -85,7 +85,7 @@ class GreenApiSendingTest extends GreenApiTest {
 
     @Test
     void sendLocation() {
-        var locatinMsg = OutgoingLocation.builder()
+        var locationMsg = OutgoingLocation.builder()
             .chatId("79851150769@c.us")
             .nameLocation("TEST")
             .address("613123, Perm")
@@ -93,7 +93,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .longitude(89.8728409)
             .build();
 
-        var response = greenApiClient.sending.sendLocation(locatinMsg);
+        var response = greenApiClient.sending.sendLocation(locationMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

@@ -1,9 +1,6 @@
 package com.greenapi.client;
 
-import com.greenapi.client.methods.GreenApiAccount;
-import com.greenapi.client.methods.GreenApiGroups;
-import com.greenapi.client.methods.GreenApiJournals;
-import com.greenapi.client.methods.GreenApiSending;
+import com.greenapi.client.methods.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +23,11 @@ public class GreenApiConfiguration {
         greenApiClient.sending = new GreenApiSending(host, hostMedia, instanceId, token);
         greenApiClient.journals = new GreenApiJournals(host, instanceId, token);
         greenApiClient.groups = new GreenApiGroups(host, instanceId, token);
+        greenApiClient.marking = new GreenApiMarking(host, instanceId, token);
+        greenApiClient.queues = new GreenApiQueues(host, instanceId, token);
+        greenApiClient.webHooks = new GreenApiWebHooks(host, instanceId, token);
+        greenApiClient.service = new GreenApiService(host, instanceId, token);
+        greenApiClient.receiving = new GreenApiReceiving(host, instanceId, token);
 
         return greenApiClient;
     }
