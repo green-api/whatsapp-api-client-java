@@ -12,7 +12,7 @@ class GreenApiJournalsTest extends GreenApiTest {
     @Test
     void getChatHistory() {
         var dto = GetChatHistoryReq.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .count(3)
             .build();
 
@@ -25,8 +25,8 @@ class GreenApiJournalsTest extends GreenApiTest {
     @Test
     void getMessage() {
         var dto = MessageReq.builder()
-            .chatId("79851150769@c.us")
-            .idMessage("BAE5A3696DFA6796")
+            .chatId(chatId)
+            .idMessage(messageId)
             .build();
 
         var response = greenApiClient.journals.getMessage(dto);

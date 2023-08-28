@@ -13,6 +13,9 @@ public class GreenApiMarking {
     private String instanceId;
     private String token;
 
+    /**The method is aimed for marking messages in a chat as read.
+     * Either all messages or a specified message in a chat can be marked as read.
+     * https://green-api.com/en/docs/api/marks/ReadChat/*/
     public ResponseEntity<String> readChat(MessageReq messageReq) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();

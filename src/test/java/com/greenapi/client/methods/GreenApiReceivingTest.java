@@ -29,8 +29,8 @@ class GreenApiReceivingTest extends GreenApiTest {
     @Test
     void downloadFile() {
         var dto = MessageReq.builder()
-            .chatId("79851150769@c.us")
-            .idMessage("BAE5F74BAE5B79C9")
+            .chatId(chatId)
+            .idMessage(fileMessageId)
             .build();
 
         var response = greenApiClient.receiving.downloadFile(dto);

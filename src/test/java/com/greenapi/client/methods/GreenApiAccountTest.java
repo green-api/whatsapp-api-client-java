@@ -73,7 +73,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void setProfilePicture() {
-        var file = new File("/Users/kocherov/Desktop/avatarExample.jpeg");
+        var file = new File(fileUrl);
 
         var response = greenApiClient.account.setProfilePicture(file);
         log.info(response);

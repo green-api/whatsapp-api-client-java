@@ -21,6 +21,8 @@ public class GreenApiGroups {
     private String instanceId;
     private String token;
 
+    /**The method is aimed for creating a group chat.
+     * https://green-api.com/en/docs/api/groups/CreateGroup/*/
     public ResponseEntity<String> createGroup(CreateGroupReq createGroupReq) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -39,6 +41,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method changes a group chat name.
+     * https://green-api.com/en/docs/api/groups/UpdateGroupName/*/
     public ResponseEntity<String> updateGroupName(ChangeGroupNameReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -57,6 +61,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method gets group chat data.
+     * https://green-api.com/en/docs/api/groups/GetGroupData/*/
     public ResponseEntity<String> getGroupData(String groupId) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -78,6 +84,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method adds a participant to a group chat.
+     * https://green-api.com/en/docs/api/groups/AddGroupParticipant/*/
     public ResponseEntity<String> addGroupParticipant(ChangeParticipantReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -96,6 +104,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method removes a participant from a group chat.
+     * https://green-api.com/en/docs/api/groups/RemoveGroupParticipant/*/
     public ResponseEntity<String> removeGroupParticipant(ChangeParticipantReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -114,6 +124,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method sets a group chat participant as an administrator.
+     * https://green-api.com/en/docs/api/groups/SetGroupAdmin/*/
     public ResponseEntity<String> setGroupAdmin(ChangeParticipantReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -132,6 +144,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method removes a participant from group chat administration rights.
+     * https://green-api.com/en/docs/api/groups/RemoveAdmin/*/
     public ResponseEntity<String> removeGroupAdmin(ChangeParticipantReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -150,6 +164,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method sets a group picture.
+     * https://green-api.com/en/docs/api/groups/SetGroupPicture/*/
     public ResponseEntity<String> setGroupPicture(ChangeGroupPictureReq dto) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
@@ -172,6 +188,8 @@ public class GreenApiGroups {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**The method makes the current account user leave the group chat.
+     * https://green-api.com/en/docs/api/groups/LeaveGroup/*/
     public ResponseEntity<String> leaveGroup(String groupId) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();

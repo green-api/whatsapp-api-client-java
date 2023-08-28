@@ -2,8 +2,8 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.ChangeGroupNameReq;
 import com.greenapi.client.dto.request.ChangeGroupPictureReq;
-import com.greenapi.client.dto.request.CreateGroupReq;
 import com.greenapi.client.dto.request.ChangeParticipantReq;
+import com.greenapi.client.dto.request.CreateGroupReq;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ class GreenApiGroupsTest extends GreenApiTest {
     @Test
     void createGroup() {
         var membersList = new ArrayList<String>();
-        membersList.add("79851150769@c.us");
+        membersList.add(chatId);
 
         var dto = CreateGroupReq.builder()
             .groupName("GREENGROUP")
@@ -35,7 +35,7 @@ class GreenApiGroupsTest extends GreenApiTest {
     void updateGroupName() {
         var dto = ChangeGroupNameReq.builder()
             .groupName("GREENGROUP1")
-            .groupId("120363169960827018@g.us")
+            .groupId(groupChatId)
             .build();
 
         var response = greenApiClient.groups.updateGroupName(dto);
@@ -46,7 +46,7 @@ class GreenApiGroupsTest extends GreenApiTest {
 
     @Test
     void getGroupData() {
-        var response = greenApiClient.groups.getGroupData("120363169960827018@g.us");
+        var response = greenApiClient.groups.getGroupData(groupChatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -55,8 +55,8 @@ class GreenApiGroupsTest extends GreenApiTest {
     @Test
     void removeGroupParticipant() {
         var dto = ChangeParticipantReq.builder()
-            .groupId("120363169960827018@g.us")
-            .participantChatId("79851150769@c.us")
+            .groupId(groupChatId)
+            .participantChatId(chatId)
             .build();
 
         var response = greenApiClient.groups.removeGroupParticipant(dto);
@@ -68,8 +68,8 @@ class GreenApiGroupsTest extends GreenApiTest {
     @Test
     void addGroupParticipant() {
         var dto = ChangeParticipantReq.builder()
-            .groupId("120363169960827018@g.us")
-            .participantChatId("79851150769@c.us")
+            .groupId(groupChatId)
+            .participantChatId(chatId)
             .build();
 
         var response = greenApiClient.groups.addGroupParticipant(dto);
@@ -81,8 +81,8 @@ class GreenApiGroupsTest extends GreenApiTest {
     @Test
     void setGroupAdmin() {
         var dto = ChangeParticipantReq.builder()
-            .groupId("120363169960827018@g.us")
-            .participantChatId("79851150769@c.us")
+            .groupId(groupChatId)
+            .participantChatId(chatId)
             .build();
 
         var response = greenApiClient.groups.setGroupAdmin(dto);
@@ -94,8 +94,8 @@ class GreenApiGroupsTest extends GreenApiTest {
     @Test
     void removeAdmin() {
         var dto = ChangeParticipantReq.builder()
-            .groupId("120363169960827018@g.us")
-            .participantChatId("79851150769@c.us")
+            .groupId(groupChatId)
+            .participantChatId(chatId)
             .build();
 
         var response = greenApiClient.groups.removeGroupAdmin(dto);
@@ -106,10 +106,10 @@ class GreenApiGroupsTest extends GreenApiTest {
 
     @Test
     void setGroupPicture() {
-        var file = new File("/Users/kocherov/Desktop/avatarExample.jpeg");
+        var file = new File(fileUrl);
         var dto = ChangeGroupPictureReq.builder()
             .file(file)
-            .groupId("120363169960827018@g.us")
+            .groupId(groupChatId)
             .build();
 
         var response = greenApiClient.groups.setGroupPicture(dto);
@@ -118,7 +118,7 @@ class GreenApiGroupsTest extends GreenApiTest {
 
     /*@Test
     void leaveGroup() {
-        var response = greenApiClient.groups.leaveGroup("120363169960827018@g.us");
+        var response = greenApiClient.groups.leaveGroup(groupChatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

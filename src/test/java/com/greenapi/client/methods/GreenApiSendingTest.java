@@ -1,6 +1,6 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.domain.Contact;
+import com.greenapi.client.domain.*;
 import com.greenapi.client.dto.request.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Log4j2
 class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendMessage() {
         var textMsg = OutgoingMessage.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .message("TEST")
             .build();
 
@@ -28,9 +29,9 @@ class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendContact() {
         var contactMsg = OutgoingContact.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .contact(Contact.builder()
-                .phoneContact(79851150769L)
+                .phoneContact(79851111111L)
                 .firstName("TEST")
                 .lastName("TEST")
                 .company("TEST")
@@ -45,9 +46,9 @@ class GreenApiSendingTest extends GreenApiTest {
 
     @Test
     void sendFileByUpload() throws IOException {
-        var file = new File("/Users/kocherov/Desktop/avatarExample.jpeg");
+        var file = new File(fileUrl);
         var fileByUploadMsg = OutgoingFileByUpload.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .fileName(file.getName())
             .file(file)
             .build();
@@ -60,7 +61,7 @@ class GreenApiSendingTest extends GreenApiTest {
 
     @Test
     void uploadFile() throws IOException {
-        var file = new File("/Users/kocherov/Desktop/avatarExample.jpeg");
+        var file = new File(fileUrl);
 
         var response = greenApiClient.sending.uploadFile(file);
         log.info(response);
@@ -71,7 +72,7 @@ class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendFileByUrl() {
         var fileByUrlMsg = OutgoingFileByUrl.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .urlFile("https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375")
             .fileName("horse.png")
             .caption("Лошадка")
@@ -86,7 +87,7 @@ class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendLocation() {
         var locationMsg = OutgoingLocation.builder()
-            .chatId("79851150769@c.us")
+            .chatId(chatId)
             .nameLocation("TEST")
             .address("613123, Perm")
             .latitude(44.9370129)
@@ -94,6 +95,45 @@ class GreenApiSendingTest extends GreenApiTest {
             .build();
 
         var response = greenApiClient.sending.sendLocation(locationMsg);
+        log.info(response);
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void sendButtons() {
+        var buttons = new ArrayList<Button>();
+        buttons.add(new Button(1, "button1"));
+        buttons.add(new Button(2, "button2"));
+        buttons.add(new Button(3, "button3"));
+
+        var dto = OutgoingButtons.builder()
+            .message("TEST")
+            .footer("FOOTER")
+            .buttons(buttons)
+            .build();
+
+        var response = greenApiClient.sending.sendButtons(dto);
+        log.info(response);
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void templateButtons() {
+        var outgoingButtons = new ArrayList<TemplateButtons>();
+        outgoingButtons.add(new TemplateButtons(1,
+            new UrlButton("https://www.google.com/", "test"),
+            new CallButton("call", 79851111111L),
+            new QuickReplyButton(messageId, "reply")));
+
+        var dto = OutgoingTemplateButtons.builder()
+            .message("TEST")
+            .footer("FOOTER")
+            .templateButtons(outgoingButtons)
+            .build();
+
+        var response = greenApiClient.sending.sendTemplateButtons(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

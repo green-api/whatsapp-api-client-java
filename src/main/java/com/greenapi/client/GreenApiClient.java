@@ -10,6 +10,5 @@ public class GreenApiClient {
     public GreenApiQueues queues;
     public GreenApiMarking marking;
     public GreenApiReceiving receiving;
-    public GreenApiWebHooks webHooks;
     public GreenApiService service;
 }

@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class GreenApiConfiguration {
-    @Value("${green-api.test-data.host}")
+    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.test-data.hostMedia}")
+    @Value("${green-api.hostMedia}")
     private String hostMedia;
-    @Value("${green-api.test-data.instanceId}")
+    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.test-data.token}")
+    @Value("${green-api.token}")
     private String token;
 
     @Bean
@@ -25,7 +25,6 @@ public class GreenApiConfiguration {
         greenApiClient.groups = new GreenApiGroups(host, instanceId, token);
         greenApiClient.marking = new GreenApiMarking(host, instanceId, token);
         greenApiClient.queues = new GreenApiQueues(host, instanceId, token);
-        greenApiClient.webHooks = new GreenApiWebHooks(host, instanceId, token);
         greenApiClient.service = new GreenApiService(host, instanceId, token);
         greenApiClient.receiving = new GreenApiReceiving(host, instanceId, token);
 

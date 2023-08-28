@@ -12,8 +12,8 @@ class GreenApiMarkingTest extends GreenApiTest {
     @Test
     void readChat() {
         var dto = MessageReq.builder()
-            .chatId("79851150769@c.us")
-            .idMessage("BAE5F74BAE5B79C9")
+            .chatId(chatId)
+            .idMessage(messageId)
             .build();
 
         var response = greenApiClient.marking.readChat(dto);

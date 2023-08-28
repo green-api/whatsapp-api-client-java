@@ -1,6 +1,5 @@
 green-api:
-  test-data:
-    host: https://api.green-api.com
-    hostMedia: https://media.green-api.com
-    instanceId: 1101848922
-    token: ${GAPI_TOKEN}
+  host: https://api.green-api.com
+  hostMedia: https://media.green-api.com
+  instanceId: 1101848922
+  token: ${GAPI_TOKEN}

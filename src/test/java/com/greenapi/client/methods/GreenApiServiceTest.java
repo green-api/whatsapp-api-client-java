@@ -20,8 +20,6 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void getAvatar() {
-        var chatId = "79851150769@c.us";
-
         var response = greenApiClient.service.getAvatar(chatId);
         log.info(response);
 
@@ -38,8 +36,6 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void getContactInfo() {
-        var chatId = "79851150769@c.us";
-
         var response = greenApiClient.service.getContactInfo(chatId);
         log.info(response);
 
@@ -49,8 +45,8 @@ class GreenApiServiceTest extends GreenApiTest {
     /*@Test
     void deleteMessage() {
         var dto = MessageReq.builder()
-            .chatId("79851150769@c.us")
-            .idMessage("BAE5F74BAE5B79C9")
+            .chatId(chatId)
+            .idMessage(messageId)
             .build();
 
         var response = greenApiClient.service.deleteMessage(dto);
@@ -61,8 +57,6 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void archiveChat() {
-        var chatId = "79851150769@c.us";
-
         var response = greenApiClient.service.archiveChat(chatId);
         log.info(response);
 
@@ -71,8 +65,6 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void unarchiveChat() {
-        var chatId = "79851150769@c.us";
-
         var response = greenApiClient.service.unarchiveChat(chatId);
         log.info(response);
 
@@ -81,10 +73,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void setDisappearingChat() {
-        var chatId = "79851150769@c.us";
-        var expiration = 0L;
-
-        var response = greenApiClient.service.setDisappearingChat(chatId, expiration);
+        var response = greenApiClient.service.setDisappearingChat(chatId, 0L);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
