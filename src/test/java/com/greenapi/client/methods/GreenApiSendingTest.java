@@ -120,7 +120,7 @@ class GreenApiSendingTest extends GreenApiTest {
     }
 
     @Test
-    void templateButtons() {
+    void sendTemplateButtons() {
         var outgoingButtons = new ArrayList<TemplateButtons>();
         outgoingButtons.add(new TemplateButtons(1,
             new UrlButton("https://www.google.com/", "test"),
@@ -134,6 +134,29 @@ class GreenApiSendingTest extends GreenApiTest {
             .build();
 
         var response = greenApiClient.sending.sendTemplateButtons(dto);
+        log.info(response);
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void sendListMessage() {
+        var rows = new ArrayList<Row>();
+        rows.add(new Row("id1","row1"));
+        rows.add(new Row("id2","row2"));
+
+        var sections = new ArrayList<Section>();
+        sections.add(new Section("Section1", rows));
+
+        var dto = OutgoingListMessage.builder()
+            .message("message")
+            .title("title")
+            .footer("footer")
+            .buttonText("button text")
+            .sections(sections)
+            .build();
+
+        var response = greenApiClient.sending.sendListMessage(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

@@ -87,6 +87,29 @@ public class GreenApiSending {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
+    /**TThe method is aimed for sending a message with a select button from a list of values to a personal or a group chat.
+     * https://green-api.com/en/docs/api/sending/SendListMessage/
+     *
+     * Attention, please! The method is temporarily not working.
+     * When the method is called, a 403 error will be returned.*/
+    public ResponseEntity<String> sendListMessage(OutgoingListMessage dto) {
+        var restTemplate = new RestTemplate();
+        var stringBuilder = new StringBuilder();
+
+        stringBuilder
+            .append(host)
+            .append("/waInstance").append(instanceId)
+            .append("/sendListMessage/")
+            .append(token);
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+    }
+
     /**The method is aimed for sending a contact message.
      * https://green-api.com/en/docs/api/sending/SendContact/*/
     public ResponseEntity<String> sendContact(OutgoingContact contact) {
