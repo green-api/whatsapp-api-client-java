@@ -2,22 +2,26 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.GetChatHistoryReq;
 import com.greenapi.client.dto.request.MessageReq;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@AllArgsConstructor
-@Builder
+@Component("journals")
 public class GreenApiJournals {
+    @Value("${green-api.host}")
     private String host;
+    @Value("${green-api.instanceId}")
     private String instanceId;
+    @Value("${green-api.token}")
     private String token;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**The method returns the chat message history.
      * https://green-api.com/en/docs/api/journals/GetChatHistory/*/
     public ResponseEntity<String> getChatHistory(GetChatHistoryReq getChatHistoryReq) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -37,7 +41,6 @@ public class GreenApiJournals {
     /**The method returns the chat message.
      * https://green-api.com/en/docs/api/journals/GetMessage/*/
     public ResponseEntity<String> getMessage(MessageReq messageReq) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -58,7 +61,6 @@ public class GreenApiJournals {
      * In the default mode the incoming messages for 24 hours are returned.
      * https://green-api.com/en/docs/api/journals/LastIncomingMessages/*/
     public ResponseEntity<String> lastIncomingMessages(Integer minutes) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -79,7 +81,6 @@ public class GreenApiJournals {
      * In the default mode the last messages for 24 hours are returned.
      * https://green-api.com/en/docs/api/journals/LastOutgoingMessages/*/
     public ResponseEntity<String> lastOutgoingMessages(Integer minutes) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder

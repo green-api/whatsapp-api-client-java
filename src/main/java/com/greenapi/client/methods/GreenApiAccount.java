@@ -1,25 +1,29 @@
 package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.InstanceSettings;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 
-@AllArgsConstructor
-@Builder
+@Component(value = "account")
 public class GreenApiAccount {
+    @Value("${green-api.host}")
     private String host;
+    @Value("${green-api.instanceId}")
     private String instanceId;
+    @Value("${green-api.token}")
     private String token;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**This method return instance settings https://green-api.com/en/docs/api/account/GetSettings/*/
     public ResponseEntity<String> getSettings() {
-        var restTemplate = new RestTemplate();
         var requestUrl = new StringBuilder();
 
         requestUrl
@@ -126,8 +130,8 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, String.class);
     }
 
-    /**The method is aimed for getting the status of the account instance socket connection with WhatsApp.
-     * https://green-api.com/en/docs/api/account/GetStatusInstance/*/
+    /**The method is aimed for setting an account picture.
+     * https://green-api.com/en/docs/api/account/SetProfilePicture/*/
     public ResponseEntity<String> setProfilePicture(File file) {
         var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();

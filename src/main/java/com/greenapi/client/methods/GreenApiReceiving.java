@@ -1,22 +1,26 @@
 package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@AllArgsConstructor
-@Builder
+@Component("receiving")
 public class GreenApiReceiving {
+    @Value("${green-api.host}")
     private String host;
+    @Value("${green-api.instanceId}")
     private String instanceId;
+    @Value("${green-api.token}")
     private String token;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**The method is aimed for receiving one incoming notification from the notifications queue.
      * https://green-api.com/en/docs/api/receiving/technology-http-api/ReceiveNotification/*/
     public ResponseEntity<String> receiveNotification() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -31,7 +35,6 @@ public class GreenApiReceiving {
     /**The method is aimed for deleting an incoming notification from the notification queue.
      * https://green-api.com/en/docs/api/receiving/technology-http-api/DeleteNotification/*/
     public ResponseEntity<String> deleteNotification(int receiptId) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -50,7 +53,6 @@ public class GreenApiReceiving {
      * (Files storage period and, accordingly, the capability to download them is limited by WhatsApp)
      * https://green-api.com/en/docs/api/receiving/files/DownloadFile/*/
     public ResponseEntity<String> downloadFile(MessageReq messageReq) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder

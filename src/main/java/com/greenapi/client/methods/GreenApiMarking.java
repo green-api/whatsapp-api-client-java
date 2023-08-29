@@ -1,23 +1,27 @@
 package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@AllArgsConstructor
-@Builder
+@Component("marking")
 public class GreenApiMarking {
+    @Value("${green-api.host}")
     private String host;
+    @Value("${green-api.instanceId}")
     private String instanceId;
+    @Value("${green-api.token}")
     private String token;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**The method is aimed for marking messages in a chat as read.
      * Either all messages or a specified message in a chat can be marked as read.
      * https://green-api.com/en/docs/api/marks/ReadChat/*/
     public ResponseEntity<String> readChat(MessageReq messageReq) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder

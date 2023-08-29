@@ -4,27 +4,31 @@ import com.greenapi.client.dto.request.ChangeGroupNameReq;
 import com.greenapi.client.dto.request.ChangeGroupPictureReq;
 import com.greenapi.client.dto.request.ChangeParticipantReq;
 import com.greenapi.client.dto.request.CreateGroupReq;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@AllArgsConstructor
-@Builder
+@Component("groups")
 public class GreenApiGroups {
+    @Value("${green-api.host}")
     private String host;
+    @Value("${green-api.instanceId}")
     private String instanceId;
+    @Value("${green-api.token}")
     private String token;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**The method is aimed for creating a group chat.
      * https://green-api.com/en/docs/api/groups/CreateGroup/*/
     public ResponseEntity<String> createGroup(CreateGroupReq createGroupReq) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -44,7 +48,6 @@ public class GreenApiGroups {
     /**The method changes a group chat name.
      * https://green-api.com/en/docs/api/groups/UpdateGroupName/*/
     public ResponseEntity<String> updateGroupName(ChangeGroupNameReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -64,7 +67,6 @@ public class GreenApiGroups {
     /**The method gets group chat data.
      * https://green-api.com/en/docs/api/groups/GetGroupData/*/
     public ResponseEntity<String> getGroupData(String groupId) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -87,7 +89,6 @@ public class GreenApiGroups {
     /**The method adds a participant to a group chat.
      * https://green-api.com/en/docs/api/groups/AddGroupParticipant/*/
     public ResponseEntity<String> addGroupParticipant(ChangeParticipantReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -107,7 +108,6 @@ public class GreenApiGroups {
     /**The method removes a participant from a group chat.
      * https://green-api.com/en/docs/api/groups/RemoveGroupParticipant/*/
     public ResponseEntity<String> removeGroupParticipant(ChangeParticipantReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -127,7 +127,6 @@ public class GreenApiGroups {
     /**The method sets a group chat participant as an administrator.
      * https://green-api.com/en/docs/api/groups/SetGroupAdmin/*/
     public ResponseEntity<String> setGroupAdmin(ChangeParticipantReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -147,7 +146,6 @@ public class GreenApiGroups {
     /**The method removes a participant from group chat administration rights.
      * https://green-api.com/en/docs/api/groups/RemoveAdmin/*/
     public ResponseEntity<String> removeGroupAdmin(ChangeParticipantReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -167,7 +165,6 @@ public class GreenApiGroups {
     /**The method sets a group picture.
      * https://green-api.com/en/docs/api/groups/SetGroupPicture/*/
     public ResponseEntity<String> setGroupPicture(ChangeGroupPictureReq dto) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -191,7 +188,6 @@ public class GreenApiGroups {
     /**The method makes the current account user leave the group chat.
      * https://green-api.com/en/docs/api/groups/LeaveGroup/*/
     public ResponseEntity<String> leaveGroup(String groupId) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
