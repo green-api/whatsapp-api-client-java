@@ -97,7 +97,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, String.class);
     }
 
     /**The method deletes a message from a chat.

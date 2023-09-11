@@ -37,7 +37,6 @@ public class GreenApiAccount {
 
     /**Use this method for change instance settings https://green-api.com/en/docs/api/account/SetSettings/*/
     public ResponseEntity<String> setSetting(InstanceSettings instanceSettings) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -57,7 +56,6 @@ public class GreenApiAccount {
     /**The method is aimed for getting the account state
      * https://green-api.com/en/docs/api/account/GetStateInstance/*/
     public ResponseEntity<String> getStateInstance() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -72,7 +70,6 @@ public class GreenApiAccount {
     /**The method is aimed for getting the status of the account instance socket connection with WhatsApp.
      * https://green-api.com/en/docs/api/account/GetStatusInstance/*/
     public ResponseEntity<String> getStatusInstance() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -87,7 +84,6 @@ public class GreenApiAccount {
     /**The method is aimed for rebooting an account.
      * https://green-api.com/en/docs/api/account/Reboot/*/
     public ResponseEntity<String> reboot() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -102,7 +98,6 @@ public class GreenApiAccount {
     /**The method is aimed for logging out an account.
      * https://green-api.com/en/docs/api/account/Logout/*/
     public ResponseEntity<String> logout() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -118,7 +113,6 @@ public class GreenApiAccount {
      * To authorize your account, you have to scan a QR code from application WhatsApp Business on your phone.
      * https://green-api.com/en/docs/api/account/QR/*/
     public ResponseEntity<String> getQrCode() {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -133,7 +127,6 @@ public class GreenApiAccount {
     /**The method is aimed for setting an account picture.
      * https://green-api.com/en/docs/api/account/SetProfilePicture/*/
     public ResponseEntity<String> setProfilePicture(File file) {
-        var restTemplate = new RestTemplate();
         var stringBuilder = new StringBuilder();
 
         stringBuilder

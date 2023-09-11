@@ -199,7 +199,10 @@ public class GreenApiGroups {
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var requestEntity = new HttpEntity<>(groupId, headers);
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("groupId", groupId);
+
+        var requestEntity = new HttpEntity<>(requestBody, headers);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
     }
