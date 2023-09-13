@@ -1,9 +1,7 @@
 package com.greenapi.client.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.greenapi.client.domain.Section;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -18,4 +16,22 @@ public class OutgoingListMessage extends Outgoing {
     private final String footer;
     private final String buttonText;
     private final List<Section> sections;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class Section {
+        private String title;
+        private List<Row> rows;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class Row {
+        private String rowId;
+        private String title;
+    }
 }

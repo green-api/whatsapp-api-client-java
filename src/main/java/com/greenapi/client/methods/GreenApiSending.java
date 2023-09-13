@@ -1,7 +1,11 @@
 package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.*;
+import com.greenapi.client.dto.response.SendFileByUploadResp;
+import com.greenapi.client.dto.response.SendMessageResp;
+import com.greenapi.client.dto.response.UploadFileResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
@@ -25,11 +29,12 @@ public class GreenApiSending {
     @Value("${green-api.token}")
     private String token;
     @Autowired
+    @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
     /**The method is aimed for sending a text message to a personal or a group chat.
-     * https://green-api.com/en/docs/api/sending/SendMessage/*/
-    public ResponseEntity<String> sendMessage(OutgoingMessage message) {
+     * https://greenapi.com/en/docs/api/sending/SendMessage/*/
+    public ResponseEntity<SendMessageResp> sendMessage(OutgoingMessage message) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -43,15 +48,15 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(message, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**The method is aimed for sending a button message to a personal or a group chat.
-     * https://green-api.com/en/docs/api/sending/SendButtons/
+     * https://greenapi.com/en/docs/api/sending/SendButtons/
      *
      * Attention, please! The method is temporarily not working.
      * When the method is called, a 403 error will be returned.*/
-    public ResponseEntity<String> sendButtons(OutgoingButtons buttons) {
+    public ResponseEntity<SendMessageResp> sendButtons(OutgoingButtons buttons) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -65,15 +70,15 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(buttons, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**The method is aimed for sending a message with template list interactive buttons to a personal or a group chat.
-     * https://green-api.com/en/docs/api/sending/SendTemplateButtons/
+     * https://greenapi.com/en/docs/api/sending/SendTemplateButtons/
      *
      * Attention, please! The method is temporarily not working.
      * When the method is called, a 403 error will be returned.*/
-    public ResponseEntity<String> sendTemplateButtons(OutgoingTemplateButtons buttons) {
+    public ResponseEntity<SendMessageResp> sendTemplateButtons(OutgoingTemplateButtons buttons) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -87,15 +92,15 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(buttons, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**TThe method is aimed for sending a message with a select button from a list of values to a personal or a group chat.
-     * https://green-api.com/en/docs/api/sending/SendListMessage/
+     * https://greenapi.com/en/docs/api/sending/SendListMessage/
      *
      * Attention, please! The method is temporarily not working.
      * When the method is called, a 403 error will be returned.*/
-    public ResponseEntity<String> sendListMessage(OutgoingListMessage dto) {
+    public ResponseEntity<SendMessageResp> sendListMessage(OutgoingListMessage dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -109,12 +114,12 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**The method is aimed for sending a contact message.
-     * https://green-api.com/en/docs/api/sending/SendContact/*/
-    public ResponseEntity<String> sendContact(OutgoingContact contact) {
+     * https://greenapi.com/en/docs/api/sending/SendContact/*/
+    public ResponseEntity<SendMessageResp> sendContact(OutgoingContact contact) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -128,12 +133,12 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(contact, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**The method is aimed for sending a file uploaded by form (form-data).
-     * https://green-api.com/en/docs/api/sending/SendFileByUpload/*/
-    public ResponseEntity<String> sendFileByUpload(OutgoingFileByUpload dto) {
+     * https://greenapi.com/en/docs/api/sending/SendFileByUpload/*/
+    public ResponseEntity<SendFileByUploadResp> sendFileByUpload(OutgoingFileByUpload dto) {
         var stringBuilder = new StringBuilder();
         stringBuilder
             .append(hostMedia)
@@ -153,12 +158,12 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(form, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendFileByUploadResp.class);
     }
 
     /**The method is aimed for sending a file uploaded by Url.
-     * https://green-api.com/en/docs/api/sending/SendFileByUrl/*/
-    public ResponseEntity<String> sendFileByUrl(OutgoingFileByUrl fileByUrl) {
+     * https://greenapi.com/en/docs/api/sending/SendFileByUrl/*/
+    public ResponseEntity<SendMessageResp> sendFileByUrl(OutgoingFileByUrl fileByUrl) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -172,12 +177,12 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(fileByUrl, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**The method is designed to upload a file to the cloud storage, which can be sent using the sendFileByUrl method.
-     * https://green-api.com/en/docs/api/sending/UploadFile/*/
-    public ResponseEntity<String> uploadFile(File file) throws IOException {
+     * https://greenapi.com/en/docs/api/sending/UploadFile/*/
+    public ResponseEntity<UploadFileResp> uploadFile(File file) throws IOException {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -194,12 +199,12 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(byteArrayResource, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, UploadFileResp.class);
     }
 
     /**The method is aimed for sending location message
-     * https://green-api.com/en/docs/api/sending/SendLocation/*/
-    public ResponseEntity<String> sendLocation(OutgoingLocation location) {
+     * https://greenapi.com/en/docs/api/sending/SendLocation/*/
+    public ResponseEntity<SendMessageResp> sendLocation(OutgoingLocation location) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -213,6 +218,6 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(location, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 }

@@ -4,7 +4,9 @@ import com.greenapi.client.dto.request.ChangeGroupNameReq;
 import com.greenapi.client.dto.request.ChangeGroupPictureReq;
 import com.greenapi.client.dto.request.ChangeParticipantReq;
 import com.greenapi.client.dto.request.CreateGroupReq;
+import com.greenapi.client.dto.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
@@ -24,11 +26,12 @@ public class GreenApiGroups {
     @Value("${green-api.token}")
     private String token;
     @Autowired
+    @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
     /**The method is aimed for creating a group chat.
-     * https://green-api.com/en/docs/api/groups/CreateGroup/*/
-    public ResponseEntity<String> createGroup(CreateGroupReq createGroupReq) {
+     * https://greenapi.com/en/docs/api/groups/CreateGroup/*/
+    public ResponseEntity<CreateGroupResp> createGroup(CreateGroupReq createGroupReq) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -42,12 +45,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(createGroupReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, CreateGroupResp.class);
     }
 
     /**The method changes a group chat name.
-     * https://green-api.com/en/docs/api/groups/UpdateGroupName/*/
-    public ResponseEntity<String> updateGroupName(ChangeGroupNameReq dto) {
+     * https://greenapi.com/en/docs/api/groups/UpdateGroupName/*/
+    public ResponseEntity<ChangeGroupNameResp> updateGroupName(ChangeGroupNameReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -61,12 +64,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, ChangeGroupNameResp.class);
     }
 
     /**The method gets group chat data.
-     * https://green-api.com/en/docs/api/groups/GetGroupData/*/
-    public ResponseEntity<String> getGroupData(String groupId) {
+     * https://greenapi.com/en/docs/api/groups/GetGroupData/*/
+    public ResponseEntity<GroupData> getGroupData(String groupId) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -83,12 +86,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, GroupData.class);
     }
 
     /**The method adds a participant to a group chat.
-     * https://green-api.com/en/docs/api/groups/AddGroupParticipant/*/
-    public ResponseEntity<String> addGroupParticipant(ChangeParticipantReq dto) {
+     * https://greenapi.com/en/docs/api/groups/AddGroupParticipant/*/
+    public ResponseEntity<AddGroupParticipantResp> addGroupParticipant(ChangeParticipantReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -102,12 +105,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, AddGroupParticipantResp.class);
     }
 
     /**The method removes a participant from a group chat.
-     * https://green-api.com/en/docs/api/groups/RemoveGroupParticipant/*/
-    public ResponseEntity<String> removeGroupParticipant(ChangeParticipantReq dto) {
+     * https://greenapi.com/en/docs/api/groups/RemoveGroupParticipant/*/
+    public ResponseEntity<RemoveGroupParticipantResp> removeGroupParticipant(ChangeParticipantReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -121,12 +124,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, RemoveGroupParticipantResp.class);
     }
 
     /**The method sets a group chat participant as an administrator.
-     * https://green-api.com/en/docs/api/groups/SetGroupAdmin/*/
-    public ResponseEntity<String> setGroupAdmin(ChangeParticipantReq dto) {
+     * https://greenapi.com/en/docs/api/groups/SetGroupAdmin/*/
+    public ResponseEntity<SetGroupAdminResp> setGroupAdmin(ChangeParticipantReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -140,12 +143,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetGroupAdminResp.class);
     }
 
     /**The method removes a participant from group chat administration rights.
-     * https://green-api.com/en/docs/api/groups/RemoveAdmin/*/
-    public ResponseEntity<String> removeGroupAdmin(ChangeParticipantReq dto) {
+     * https://greenapi.com/en/docs/api/groups/RemoveAdmin/*/
+    public ResponseEntity<RemoveGroupAdminResp> removeGroupAdmin(ChangeParticipantReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -159,12 +162,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, RemoveGroupAdminResp.class);
     }
 
     /**The method sets a group picture.
-     * https://green-api.com/en/docs/api/groups/SetGroupPicture/*/
-    public ResponseEntity<String> setGroupPicture(ChangeGroupPictureReq dto) {
+     * https://greenapi.com/en/docs/api/groups/SetGroupPicture/*/
+    public ResponseEntity<SetGroupPictureResp> setGroupPicture(ChangeGroupPictureReq dto) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -182,12 +185,12 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(form, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetGroupPictureResp.class);
     }
 
     /**The method makes the current account user leave the group chat.
-     * https://green-api.com/en/docs/api/groups/LeaveGroup/*/
-    public ResponseEntity<String> leaveGroup(String groupId) {
+     * https://greenapi.com/en/docs/api/groups/LeaveGroup/*/
+    public ResponseEntity<LeaveGroupResp> leaveGroup(String groupId) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -204,8 +207,6 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, LeaveGroupResp.class);
     }
-
-
 }

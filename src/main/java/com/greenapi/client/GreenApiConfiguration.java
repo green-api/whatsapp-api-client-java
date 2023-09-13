@@ -8,8 +8,9 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class GreenApiConfiguration {
 
-    @Bean
+    @Bean(name = "gapiRestTemplate")
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder.build();
+        return restTemplateBuilder
+            .build();
     }
 }

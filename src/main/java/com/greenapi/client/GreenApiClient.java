@@ -6,20 +6,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GreenApiClient {
-    @Autowired
     public GreenApiAccount account;
-    @Autowired
     public GreenApiSending sending;
-    @Autowired
     public GreenApiJournals journals;
-    @Autowired
     public GreenApiGroups groups;
-    @Autowired
     public GreenApiQueues queues;
-    @Autowired
     public GreenApiMarking marking;
-    @Autowired
     public GreenApiReceiving receiving;
-    @Autowired
     public GreenApiService service;
+
+    @Autowired
+    public GreenApiClient(
+        GreenApiAccount account,
+        GreenApiSending sending,
+        GreenApiJournals journals,
+        GreenApiGroups groups,
+        GreenApiQueues queues,
+        GreenApiMarking marking,
+        GreenApiReceiving receiving,
+        GreenApiService service
+    ) {
+        this.account = account;
+        this.sending = sending;
+        this.journals = journals;
+        this.groups = groups;
+        this.queues = queues;
+        this.marking = marking;
+        this.receiving = receiving;
+        this.service = service;
+    }
 }

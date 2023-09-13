@@ -1,6 +1,6 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.dto.request.InstanceSettings;
+import com.greenapi.client.dto.request.InstanceSettingsReq;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void setSetting() {
-        var instanceSettings = InstanceSettings.builder()
+        var instanceSettings = InstanceSettingsReq.builder()
             .delaySendMessagesMilliseconds(15000)
             .build();
 

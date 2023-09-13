@@ -2,6 +2,7 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -16,10 +17,11 @@ public class GreenApiReceiving {
     @Value("${green-api.token}")
     private String token;
     @Autowired
+    @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
     /**The method is aimed for receiving one incoming notification from the notifications queue.
-     * https://green-api.com/en/docs/api/receiving/technology-http-api/ReceiveNotification/*/
+     * https://greenapi.com/en/docs/api/receiving/technology-http-api/ReceiveNotification/*/
     public ResponseEntity<String> receiveNotification() {
         var stringBuilder = new StringBuilder();
 
@@ -33,7 +35,7 @@ public class GreenApiReceiving {
     }
 
     /**The method is aimed for deleting an incoming notification from the notification queue.
-     * https://green-api.com/en/docs/api/receiving/technology-http-api/DeleteNotification/*/
+     * https://greenapi.com/en/docs/api/receiving/technology-http-api/DeleteNotification/*/
     public ResponseEntity<String> deleteNotification(int receiptId) {
         var stringBuilder = new StringBuilder();
 
@@ -51,8 +53,8 @@ public class GreenApiReceiving {
      * Links to incoming files are transmitted in Incoming messages, and you can also get them using LastIncomingMessages method.
      * You can get links to outgoing files using LastOutgoingMessages method.
      * (Files storage period and, accordingly, the capability to download them is limited by WhatsApp)
-     * https://green-api.com/en/docs/api/receiving/files/DownloadFile/*/
-    public ResponseEntity<String> downloadFile(MessageReq messageReq) {
+     * https://greenapi.com/en/docs/api/receiving/files/DownloadFile/*/
+    public ResponseEntity<byte[]> downloadFile(MessageReq messageReq) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -66,6 +68,6 @@ public class GreenApiReceiving {
 
         var requestEntity = new HttpEntity<>(messageReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, byte[].class);
     }
 }

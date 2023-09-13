@@ -1,4 +1,4 @@
-package com.greenapi.client.domain;
+package com.greenapi.client.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

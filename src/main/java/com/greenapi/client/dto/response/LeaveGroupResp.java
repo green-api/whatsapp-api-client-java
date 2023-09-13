@@ -1,4 +1,4 @@
-package com.greenapi.client.domain;
+package com.greenapi.client.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class CallButton {
-    private String displayText;
-    private Long phoneNumber;
+public class LeaveGroupResp {
+    private boolean leaveGroup;
 }
