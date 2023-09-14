@@ -1,7 +1,7 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.models.*;
 import com.greenapi.client.dto.request.*;
+import com.greenapi.client.models.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -142,8 +142,8 @@ class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendListMessage() {
         var rows = new ArrayList<OutgoingListMessage.Row>();
-        rows.add(new OutgoingListMessage.Row("id1","row1"));
-        rows.add(new OutgoingListMessage.Row("id2","row2"));
+        rows.add(new OutgoingListMessage.Row("id1", "row1"));
+        rows.add(new OutgoingListMessage.Row("id2", "row2"));
 
         var sections = new ArrayList<OutgoingListMessage.Section>();
         sections.add(new OutgoingListMessage.Section("Section1", rows));

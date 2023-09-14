@@ -1,7 +1,6 @@
 package com.greenapi.client.models.notifications.incomingMessageData;
 
 import com.greenapi.client.models.notifications.incomingMessageData.messageData.ButtonsResponseMessage;
-import com.greenapi.client.models.notifications.incomingMessageData.messageData.FileMessageData;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
