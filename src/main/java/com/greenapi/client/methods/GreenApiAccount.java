@@ -25,7 +25,9 @@ public class GreenApiAccount {
     @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
-    /**This method return instance settings https://greenapi.com/en/docs/api/account/GetSettings/*/
+    /**
+     * This method return instance settings https://greenapi.com/en/docs/api/account/GetSettings/
+     */
     public ResponseEntity<Settings> getSettings() {
         var requestUrl = new StringBuilder();
 
@@ -38,7 +40,9 @@ public class GreenApiAccount {
         return restTemplate.exchange(requestUrl.toString(), HttpMethod.GET, null, Settings.class);
     }
 
-    /**The method is aimed to get information about the WhatsApp account https://greenapi.com/en/api/account/GetWaSettings/*/
+    /**
+     * The method is aimed to get information about the WhatsApp account https://greenapi.com/en/api/account/GetWaSettings/
+     */
     public ResponseEntity<WaSettings> getWaSettings() {
         var requestUrl = new StringBuilder();
 
@@ -51,7 +55,9 @@ public class GreenApiAccount {
         return restTemplate.exchange(requestUrl.toString(), HttpMethod.GET, null, WaSettings.class);
     }
 
-    /**Use this method for change instance settings https://greenapi.com/en/docs/api/account/SetSettings/*/
+    /**
+     * Use this method for change instance settings https://greenapi.com/en/docs/api/account/SetSettings/
+     */
     public ResponseEntity<SetSettingsResp> setSetting(InstanceSettingsReq instanceSettings) {
         var stringBuilder = new StringBuilder();
 
@@ -69,8 +75,10 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetSettingsResp.class);
     }
 
-    /**The method is aimed for getting the account state
-     * https://greenapi.com/en/docs/api/account/GetStateInstance/*/
+    /**
+     * The method is aimed for getting the account state
+     * https://greenapi.com/en/docs/api/account/GetStateInstance/
+     */
     public ResponseEntity<StateInstanceResp> getStateInstance() {
         var stringBuilder = new StringBuilder();
 
@@ -83,8 +91,10 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, StateInstanceResp.class);
     }
 
-    /**The method is aimed for getting the status of the account instance socket connection with WhatsApp.
-     * https://greenapi.com/en/docs/api/account/GetStatusInstance/*/
+    /**
+     * The method is aimed for getting the status of the account instance socket connection with WhatsApp.
+     * https://greenapi.com/en/docs/api/account/GetStatusInstance/
+     */
     public ResponseEntity<StatusInstanceResp> getStatusInstance() {
         var stringBuilder = new StringBuilder();
 
@@ -97,8 +107,10 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, StatusInstanceResp.class);
     }
 
-    /**The method is aimed for rebooting an account.
-     * https://greenapi.com/en/docs/api/account/Reboot/*/
+    /**
+     * The method is aimed for rebooting an account.
+     * https://greenapi.com/en/docs/api/account/Reboot/
+     */
     public ResponseEntity<RebootResp> reboot() {
         var stringBuilder = new StringBuilder();
 
@@ -111,8 +123,10 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, RebootResp.class);
     }
 
-    /**The method is aimed for logging out an account.
-     * https://greenapi.com/en/docs/api/account/Logout/*/
+    /**
+     * The method is aimed for logging out an account.
+     * https://greenapi.com/en/docs/api/account/Logout/
+     */
     public ResponseEntity<LogoutResp> logout() {
         var stringBuilder = new StringBuilder();
 
@@ -125,9 +139,11 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, LogoutResp.class);
     }
 
-    /**The method is aimed for getting QR code.
+    /**
+     * The method is aimed for getting QR code.
      * To authorize your account, you have to scan a QR code from application WhatsApp Business on your phone.
-     * https://greenapi.com/en/docs/api/account/QR/*/
+     * https://greenapi.com/en/docs/api/account/QR/
+     */
     public ResponseEntity<Qr> getQrCode() {
         var stringBuilder = new StringBuilder();
 
@@ -140,8 +156,10 @@ public class GreenApiAccount {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, Qr.class);
     }
 
-    /**The method is aimed for setting an account picture.
-     * https://greenapi.com/en/docs/api/account/SetProfilePicture/*/
+    /**
+     * The method is aimed for setting an account picture.
+     * https://greenapi.com/en/docs/api/account/SetProfilePicture/
+     */
     public ResponseEntity<SetProfilePictureResp> setProfilePicture(File file) {
         var stringBuilder = new StringBuilder();
 

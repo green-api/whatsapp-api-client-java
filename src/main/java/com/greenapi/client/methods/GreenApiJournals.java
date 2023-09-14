@@ -2,8 +2,8 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.GetChatHistoryReq;
 import com.greenapi.client.dto.request.MessageReq;
-import com.greenapi.client.models.ChatHistoryMessage;
 import com.greenapi.client.dto.response.ChatMessage;
+import com.greenapi.client.models.ChatHistoryMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +26,10 @@ public class GreenApiJournals {
     @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
-    /**The method returns the chat message history.
-     * https://greenapi.com/en/docs/api/journals/GetChatHistory/*/
+    /**
+     * The method returns the chat message history.
+     * https://greenapi.com/en/docs/api/journals/GetChatHistory/
+     */
     public ResponseEntity<List<ChatHistoryMessage>> getChatHistory(GetChatHistoryReq getChatHistoryReq) {
         var stringBuilder = new StringBuilder();
 
@@ -45,8 +47,10 @@ public class GreenApiJournals {
         });
     }
 
-    /**The method returns the chat message.
-     * https://greenapi.com/en/docs/api/journals/GetMessage/*/
+    /**
+     * The method returns the chat message.
+     * https://greenapi.com/en/docs/api/journals/GetMessage/
+     */
     public ResponseEntity<ChatMessage> getMessage(MessageReq messageReq) {
         var stringBuilder = new StringBuilder();
 
@@ -64,9 +68,11 @@ public class GreenApiJournals {
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, ChatMessage.class);
     }
 
-    /**The method returns the last incoming messages of the account.
+    /**
+     * The method returns the last incoming messages of the account.
      * In the default mode the incoming messages for 24 hours are returned.
-     * https://greenapi.com/en/docs/api/journals/LastIncomingMessages/*/
+     * https://greenapi.com/en/docs/api/journals/LastIncomingMessages/
+     */
     public ResponseEntity<List<ChatMessage>> lastIncomingMessages(Integer minutes) {
         var stringBuilder = new StringBuilder();
 
@@ -81,12 +87,15 @@ public class GreenApiJournals {
 
         var requestEntity = new HttpEntity<>(minutes, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
+        });
     }
 
-    /**The method returns the last outgoing messages of the account.
+    /**
+     * The method returns the last outgoing messages of the account.
      * In the default mode the last messages for 24 hours are returned.
-     * https://greenapi.com/en/docs/api/journals/LastOutgoingMessages/*/
+     * https://greenapi.com/en/docs/api/journals/LastOutgoingMessages/
+     */
     public ResponseEntity<List<ChatMessage>> lastOutgoingMessages(Integer minutes) {
         var stringBuilder = new StringBuilder();
 
@@ -101,6 +110,7 @@ public class GreenApiJournals {
 
         var requestEntity = new HttpEntity<>(minutes, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
+        });
     }
 }

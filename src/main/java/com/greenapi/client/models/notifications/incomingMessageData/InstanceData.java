@@ -1,6 +1,8 @@
-package com.greenapi.client.models.notifications;
+package com.greenapi.client.models.notifications.incomingMessageData;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor

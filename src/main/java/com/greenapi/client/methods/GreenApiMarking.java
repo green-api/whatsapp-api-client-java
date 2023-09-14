@@ -21,9 +21,11 @@ public class GreenApiMarking {
     @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
-    /**The method is aimed for marking messages in a chat as read.
+    /**
+     * The method is aimed for marking messages in a chat as read.
      * Either all messages or a specified message in a chat can be marked as read.
-     * https://greenapi.com/en/docs/api/marks/ReadChat/*/
+     * https://greenapi.com/en/docs/api/marks/ReadChat/
+     */
     public ResponseEntity<ReadChatResp> readChat(MessageReq messageReq) {
         var stringBuilder = new StringBuilder();
 

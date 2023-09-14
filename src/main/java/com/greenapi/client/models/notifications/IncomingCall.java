@@ -12,11 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IncomingMessageReceived {
+public class IncomingCall {
+    private String from;
     private String typeWebhook;
     private InstanceData instanceData;
     private Long timestamp;
     private String idMessage;
-    private SenderData senderData;
-    private IncomingMessageData messageData;
 }

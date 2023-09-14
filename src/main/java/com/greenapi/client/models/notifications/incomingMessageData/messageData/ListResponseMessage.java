@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @Builder
-public class TextMessageData {
-    private final String textMessage;
-    private final boolean isTemplateMessage;
+public class ListResponseMessage {
+    private final String selectedIndex;
+    private final String selectedId;
+    private final String selectedDisplayText;
+    private final String stanzaId;
 }

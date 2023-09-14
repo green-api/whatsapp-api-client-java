@@ -1,7 +1,7 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.models.QueueMessage;
 import com.greenapi.client.dto.response.ClearMessagesQueueResp;
+import com.greenapi.client.models.QueueMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +25,11 @@ public class GreenApiQueues {
     @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
-    /**The method is aimed for getting a list of messages in the queue to be sent.
+    /**
+     * The method is aimed for getting a list of messages in the queue to be sent.
      * Messages sending rate is managed by Messages sending delay parameter in settings.
-     * https://greenapi.com/en/docs/api/queues/ShowMessagesQueue/*/
+     * https://greenapi.com/en/docs/api/queues/ShowMessagesQueue/
+     */
     public ResponseEntity<List<QueueMessage>> showMessagesQueue() {
         var stringBuilder = new StringBuilder();
 
@@ -37,11 +39,14 @@ public class GreenApiQueues {
             .append("/showMessagesQueue/")
             .append(token);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+        });
     }
 
-    /**The method is aimed for clearing the queue of messages to be sent.
-     * https://greenapi.com/en/docs/api/queues/ClearMessagesQueue/*/
+    /**
+     * The method is aimed for clearing the queue of messages to be sent.
+     * https://greenapi.com/en/docs/api/queues/ClearMessagesQueue/
+     */
     public ResponseEntity<ClearMessagesQueueResp> clearMessagesQueue() {
         var stringBuilder = new StringBuilder();
 
