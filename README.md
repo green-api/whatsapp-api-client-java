@@ -42,6 +42,19 @@ return restTemplateBuilder.build();
 }
 ```
 
+And add "com.greenapi" in @ComponentScan base packages:
+
+```
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.greenapi", "com.example"})
+public class Application {
+
+    public static void main(String[] args) {
+        var context = SpringApplication.run(Application.class, args);
+    }
+}
+```
+
 Now you can inject the WhatsApp client instance into any part of your application.
 
 ```
@@ -49,7 +62,30 @@ Now you can inject the WhatsApp client instance into any part of your applicatio
 private GreenApiClient greenApiClient;
 ```
 
-2. Use a constructor, you can write your own factory if your application simultaneously manages several instances:
+Another way to use yours configuration, for example:
+
+```
+@Configuration
+public class GreenApiConf {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplateBuilder().build();
+    }
+
+    @Bean
+    public GreenApiClient greenApiClient(RestTemplate restTemplate) {
+        return new GreenApiClient(
+            restTemplate,
+            "https://media.greenapi.com",
+            "https://api.greenapi.com",
+            "{{YOUR-ID}}",
+            "{{YOUR-TOKEN}}");
+    }
+}
+```
+
+2. Use a constructor to create a new instances, if your application simultaneously manages several of it:
 
 ```
 var restTemplate = new RestTemplateBuilder().build();
@@ -79,7 +115,7 @@ log.info(response);
 
 The methods are divided into groups just like in the documentation for ease of use.
 
-Example of creating group an sending message - [link](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/Examples.java):
+Example of creating group and sending message - [link](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/Examples.java):
 
 ```
 public void createGroupAndSendMessage(GreenApiClient greenApiClient, ArrayList<String> chatIds) {
