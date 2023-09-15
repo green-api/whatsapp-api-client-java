@@ -5,7 +5,7 @@ using the java programming language and the Spring framework.
 
 ## Installation
 
-1. Download the JAR file of the required version.
+1. Download the JAR file.
 2. Include the JAR file in your project manually by adding it to your libraries folder (usually lib or libs)
    and configure your development environment (eg IntelliJ IDEA) to include this JAR file in the project path:
 
@@ -23,7 +23,7 @@ using the java programming language and the Spring framework.
 To get started, you will need to create an object of the GreenApiClient class.
 Since you are using Spring, you can do this in two ways:
 
-1. Use a ready-made bean that is a street client according to the parameters in the yml file. To do this, specify the parameters of your instance in application.yml in the following form.
+1. Use a ready-made bean that the client builds according to the parameters in the yml file. To do this, specify the parameters of your instance in application.yml in the following form:
 
 ```
 green-api:
@@ -33,7 +33,7 @@ green-api:
    token: {{yourToken}}
 ```
 
-Create RestTemplate bean:
+Create RestTemplate bean with your configuration, for example:
 
 ```
 @Bean
@@ -42,7 +42,7 @@ return restTemplateBuilder.build();
 }
 ```
 
-Now you can then inject the client into any part of your application using @Autowired.
+Now you can inject the WhatsApp client instance into any part of your application.
 
 ```
 @Autowired
