@@ -9,12 +9,12 @@ using the java programming language and the Spring framework.
 2. Include the JAR file in your project manually by adding it to your libraries folder (usually lib or libs)
    and configure your development environment (eg IntelliJ IDEA) to include this JAR file in the project path:
 
-    - Open your project in IntelliJ IDEA.
-    - Go to menu "File" -> "Project Structure".
-    - In the "Modules" section, select your module.
-    - Go to the "Dependencies" tab.
-    - Click on the "+" button and select "JARs or directories".
-    - Select the downloaded JAR file and add it.
+   - Open your project in IntelliJ IDEA.
+   - Go to menu "File" -> "Project Structure".
+   - In the "Modules" section, select your module.
+   - Go to the "Dependencies" tab.
+   - Click on the "+" button and select "JARs or directories".
+   - Select the downloaded JAR file and add it.
 
 3. Now you can use classes and functions from the library in your project code. Import the appropriate packages and start using the library.
 
@@ -32,8 +32,15 @@ Since you are using Spring, you can do this in two ways:
          instanceId: {{yourInstance}}
          token: {{yourToken}}
 
+Create RestTemplate bean:
 
-You can then inject the client into any part of your application using @Autowired.
+
+      @Bean
+      public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+      return restTemplateBuilder.build();
+      }
+
+Now you can then inject the client into any part of your application using @Autowired.
 
      @Autowired
      private GreenApiClient greenApiClient;
@@ -75,10 +82,10 @@ The methods are divided into groups just like in the documentation for ease of u
 ## Установка
 
 1. Скачайте JAR файл нужной версии.
-2. Включите JAR файл в ваш проект вручную, добавив его в папку с библиотеками (обычно lib или libs) 
+2. Включите JAR файл в ваш проект вручную, добавив его в папку с библиотеками (обычно lib или libs)
    и настройте вашу среду разработки (например, IntelliJ IDEA) для включения этого JAR файла в путь проекта:
 
-   - Откройте ваш проект в IntelliJ IDEA. 
+   - Откройте ваш проект в IntelliJ IDEA.
    - Перейдите в меню "File" -> "Project Structure".
    - В разделе "Modules" выберите ваш модуль.
    - Перейдите во вкладку "Dependencies".
@@ -92,7 +99,7 @@ The methods are divided into groups just like in the documentation for ease of u
 Для начала работы вам понадобится создать объект класса GreenApiClient.
 Так как вы используете Spring, вы можете сделать это двумя способами:
 1. Использовать готовый bean который стрит клиент по параметрам в yml файле.
-    Для этого укажите параметры своего инстанса в application.yml в таком виде:
+   Для этого укажите параметры своего инстанса в application.yml в таком виде:
 
 
     green-api:
@@ -101,8 +108,15 @@ The methods are divided into groups just like in the documentation for ease of u
         instanceId: {{yourInstance}}
         token: {{yourToken}}
 
+Создайте свой RestTemplate bean:
 
-После этого вы можете внедрить клиент в любую часть вашего приложения с помощью @Autowired.
+
+      @Bean
+      public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+      return restTemplateBuilder.build();
+      }
+
+После этого вы можете внедрить клиент в любую часть вашего приложения:
 
     @Autowired
     private GreenApiClient greenApiClient;
