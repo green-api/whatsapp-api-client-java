@@ -6,11 +6,8 @@ import com.greenapi.client.dto.request.ChangeParticipantReq;
 import com.greenapi.client.dto.request.CreateGroupReq;
 import com.greenapi.client.dto.response.*;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 

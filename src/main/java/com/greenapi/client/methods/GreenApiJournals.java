@@ -5,8 +5,6 @@ import com.greenapi.client.dto.request.MessageReq;
 import com.greenapi.client.dto.response.ChatMessage;
 import com.greenapi.client.models.ChatHistoryMessage;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;

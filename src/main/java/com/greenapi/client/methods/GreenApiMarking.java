@@ -3,10 +3,7 @@ package com.greenapi.client.methods;
 import com.greenapi.client.dto.request.MessageReq;
 import com.greenapi.client.dto.response.ReadChatResp;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @AllArgsConstructor

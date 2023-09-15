@@ -5,12 +5,9 @@ import com.greenapi.client.dto.response.SendFileByUploadResp;
 import com.greenapi.client.dto.response.SendMessageResp;
 import com.greenapi.client.dto.response.UploadFileResp;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
