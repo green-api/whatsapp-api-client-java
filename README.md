@@ -78,3 +78,36 @@ log.info(response);
 ```
 
 The methods are divided into groups just like in the documentation for ease of use.
+
+Example of creating group an sending message - [link](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/Examples.java):
+
+```
+public void createGroupAndSendMessage(GreenApiClient greenApiClient, ArrayList<String> chatIds) {
+
+        var groupResponse = greenApiClient.groups.createGroup(
+            CreateGroupReq.builder()
+                .groupName("Example Group")
+                .chatIds(chatIds)
+                .build());
+
+        if (groupResponse.getStatusCode().is2xxSuccessful()) {
+            var messageResponse = greenApiClient.sending.sendMessage(
+                OutgoingMessage.builder()
+                    .chatId(groupResponse.getBody().getChatId())
+                    .message("Hola a todos")
+                    .build());
+
+            if (messageResponse.getStatusCode().is2xxSuccessful()) {
+                log.info(
+                    "\nCreate group: " + groupResponse.getBody().isCreated() +
+                    "\nSent message id: " + messageResponse.getBody().getIdMessage()
+                );
+            } else {
+                log.warn("Couldn't send a message. Status code: " + messageResponse.getStatusCode());
+            }
+            
+        } else {
+            log.warn("Couldn't create a group. Status code: " + groupResponse.getStatusCode());
+        }
+    }
+```

@@ -11,31 +11,33 @@ import java.util.ArrayList;
 @Component
 @Log4j2
 class Examples {
+    public void createGroupAndSendMessage(GreenApiClient greenApiClient, ArrayList<String> chatIds) {
 
-    public void createGroupAndSendMessage(GreenApiClient greenApiClient, String chatId) {
-        var chatIds = new ArrayList<String>();
-        chatIds.add(chatId);
+        var groupResponse = greenApiClient.groups.createGroup(
+            CreateGroupReq.builder()
+                .groupName("Example Group")
+                .chatIds(chatIds)
+                .build());
 
-        var group = greenApiClient.groups.createGroup(
-                CreateGroupReq.builder()
-                    .groupName("Test Group")
-                    .chatIds(chatIds)
-                    .build())
-            .getBody();
+        if (groupResponse.getStatusCode().is2xxSuccessful()) {
+            var messageResponse = greenApiClient.sending.sendMessage(
+                OutgoingMessage.builder()
+                    .chatId(groupResponse.getBody().getChatId())
+                    .message("Hola a todos")
+                    .build());
 
-        if (group != null) {
-            var message = greenApiClient.sending.sendMessage(
-                    OutgoingMessage.builder()
-                        .chatId(group.getChatId())
-                        .message("test message")
-                        .build())
-                .getBody();
+            if (messageResponse.getStatusCode().is2xxSuccessful()) {
+                log.info(
+                    "\nCreate group: " + groupResponse.getBody().isCreated() +
+                    "\nSent message id: " + messageResponse.getBody().getIdMessage()
+                );
 
-            if (message != null) {
-
-                log.info("Create group: " + group.isCreated() +
-                    "\nSend message: " + message.getIdMessage());
+            } else {
+                log.warn("Couldn't send a message. Status code: " + messageResponse.getStatusCode());
             }
+
+        } else {
+            log.warn("Couldn't create a group. Status code: " + groupResponse.getStatusCode());
         }
     }
 }
