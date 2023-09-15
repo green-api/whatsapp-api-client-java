@@ -2,8 +2,9 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.response.ClearMessagesQueueResp;
 import com.greenapi.client.models.QueueMessage;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,16 +14,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Component("queues")
+@AllArgsConstructor
 public class GreenApiQueues {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
     private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
     private RestTemplate restTemplate;
 
     /**

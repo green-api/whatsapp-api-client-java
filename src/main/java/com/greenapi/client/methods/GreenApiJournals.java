@@ -4,26 +4,20 @@ import com.greenapi.client.dto.request.GetChatHistoryReq;
 import com.greenapi.client.dto.request.MessageReq;
 import com.greenapi.client.dto.response.ChatMessage;
 import com.greenapi.client.models.ChatHistoryMessage;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Component("journals")
+@AllArgsConstructor
 public class GreenApiJournals {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -37,7 +31,7 @@ public class GreenApiJournals {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getChatHistory/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -58,7 +52,7 @@ public class GreenApiJournals {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getMessage/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -80,7 +74,7 @@ public class GreenApiJournals {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/lastIncomingMessages/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -103,7 +97,7 @@ public class GreenApiJournals {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/lastOutgoingMessages/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

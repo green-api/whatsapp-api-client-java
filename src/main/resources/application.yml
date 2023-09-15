@@ -3,3 +3,10 @@ green-api:
   hostMedia: https://media.green-api.com
   instanceId: 1101848922
   token: ${GAPI_TOKEN}
+  test-data:
+    group-chat-id: 120363169960827018@g.us
+    group-member-id: 79851150769@c.us
+    chat-id: 79851150769@c.us
+    message-id: BAE5A3696DFA6796
+    file-message-id: BAE5F74BAE5B79C9
+    file-url: /Users/kocherov/Desktop/IMG_9545.jpeg

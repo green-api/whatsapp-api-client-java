@@ -2,23 +2,18 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
 import com.greenapi.client.dto.response.ReadChatResp;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@Component("marking")
+@AllArgsConstructor
 public class GreenApiMarking {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -33,7 +28,7 @@ public class GreenApiMarking {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/readChat/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

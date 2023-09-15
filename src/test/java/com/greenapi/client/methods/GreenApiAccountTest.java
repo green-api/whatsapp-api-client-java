@@ -20,6 +20,14 @@ class GreenApiAccountTest extends GreenApiTest {
     }
 
     @Test
+    void getWaSettings() {
+        var response = greenApiClient.account.getWaSettings();
+        log.info(response);
+
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
     void setSetting() {
         var instanceSettings = InstanceSettingsReq.builder()
             .delaySendMessagesMilliseconds(15000)

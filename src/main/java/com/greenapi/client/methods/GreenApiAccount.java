@@ -2,27 +2,19 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.InstanceSettingsReq;
 import com.greenapi.client.dto.response.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 
-@Component(value = "account")
+@AllArgsConstructor
 public class GreenApiAccount {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -35,7 +27,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getSettings/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(requestUrl.toString(), HttpMethod.GET, null, Settings.class);
     }
@@ -50,7 +42,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getWaSettings/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(requestUrl.toString(), HttpMethod.GET, null, WaSettings.class);
     }
@@ -65,7 +57,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/setSettings/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -86,7 +78,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getStateInstance/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, StateInstanceResp.class);
     }
@@ -102,7 +94,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getStatusInstance/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, StatusInstanceResp.class);
     }
@@ -118,7 +110,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/reboot/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, RebootResp.class);
     }
@@ -134,7 +126,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/logout/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, LogoutResp.class);
     }
@@ -151,7 +143,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/qr/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, Qr.class);
     }
@@ -167,7 +159,7 @@ public class GreenApiAccount {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/setProfilePicture/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);

@@ -1,23 +1,19 @@
 package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@Component("receiving")
+@AllArgsConstructor
 public class GreenApiReceiving {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -31,7 +27,7 @@ public class GreenApiReceiving {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/receiveNotification/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, String.class);
     }
@@ -47,7 +43,7 @@ public class GreenApiReceiving {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/deleteNotification/")
-            .append(token)
+            .append(instanceToken)
             .append("/").append(receiptId);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.DELETE, null, String.class);
@@ -67,7 +63,7 @@ public class GreenApiReceiving {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/downloadFile/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

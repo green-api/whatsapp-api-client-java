@@ -5,8 +5,8 @@ import com.greenapi.client.dto.request.ChangeGroupPictureReq;
 import com.greenapi.client.dto.request.ChangeParticipantReq;
 import com.greenapi.client.dto.request.CreateGroupReq;
 import com.greenapi.client.dto.response.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
@@ -17,16 +17,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component("groups")
+@AllArgsConstructor
 public class GreenApiGroups {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -40,7 +35,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/createGroup/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -61,7 +56,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/updateGroupName/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -82,7 +77,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getGroupData/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -106,7 +101,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/addGroupParticipant/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -127,7 +122,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/removeGroupParticipant/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -148,7 +143,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/setGroupAdmin/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -169,7 +164,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/removeAdmin/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -190,7 +185,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/setGroupPicture/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -215,7 +210,7 @@ public class GreenApiGroups {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/leaveGroup/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

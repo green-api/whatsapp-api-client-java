@@ -2,8 +2,8 @@ package com.greenapi.client.methods;
 
 import com.greenapi.client.dto.request.MessageReq;
 import com.greenapi.client.dto.response.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -13,16 +13,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.List;
 
-@Component("service")
+@AllArgsConstructor
 public class GreenApiService {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -36,7 +31,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/checkWhatsapp/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -60,7 +55,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getAvatar/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -84,7 +79,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getContacts/")
-            .append(token);
+            .append(instanceToken);
 
         return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, new ParameterizedTypeReference<>() {
         });
@@ -101,7 +96,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/getContactInfo/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -125,7 +120,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/deleteMessage/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -146,7 +141,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/archiveChat/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -170,7 +165,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/unarchiveChat/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -196,7 +191,7 @@ public class GreenApiService {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/setDisappearingChat/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

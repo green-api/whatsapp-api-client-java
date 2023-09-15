@@ -4,8 +4,8 @@ import com.greenapi.client.dto.request.*;
 import com.greenapi.client.dto.response.SendFileByUploadResp;
 import com.greenapi.client.dto.response.SendMessageResp;
 import com.greenapi.client.dto.response.UploadFileResp;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
@@ -18,18 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@Component("sending")
+@AllArgsConstructor
 public class GreenApiSending {
-    @Value("${green-api.host}")
     private String host;
-    @Value("${green-api.hostMedia}")
     private String hostMedia;
-    @Value("${green-api.instanceId}")
     private String instanceId;
-    @Value("${green-api.token}")
-    private String token;
-    @Autowired
-    @Qualifier("gapiRestTemplate")
+    private String instanceToken;
     private RestTemplate restTemplate;
 
     /**
@@ -43,7 +37,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendMessage/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -67,7 +61,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendButtons/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -91,7 +85,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendTemplateButtons/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -115,7 +109,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendListMessage/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -136,7 +130,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendContact/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -156,7 +150,7 @@ public class GreenApiSending {
             .append(hostMedia)
             .append("/waInstance").append(instanceId)
             .append("/sendFileByUpload/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -184,7 +178,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendFileByUrl/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -205,7 +199,7 @@ public class GreenApiSending {
             .append(hostMedia)
             .append("/waInstance").append(instanceId)
             .append("/uploadFile/")
-            .append(token);
+            .append(instanceToken);
 
         var byteArrayResource = new ByteArrayResource(Files.readAllBytes(file.toPath()));
 
@@ -229,7 +223,7 @@ public class GreenApiSending {
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/sendLocation/")
-            .append(token);
+            .append(instanceToken);
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
