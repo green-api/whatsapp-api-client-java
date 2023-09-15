@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @Component
 @Log4j2
-public class Examples {
+class Examples {
 
     public void createGroupAndSendMessage(GreenApiClient greenApiClient, String chatId) {
         var chatIds = new ArrayList<String>();

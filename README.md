@@ -32,8 +32,15 @@ Since you are using Spring, you can do this in two ways:
          instanceId: {{yourInstance}}
          token: {{yourToken}}
 
+Create RestTemplate bean:
 
-You can then inject the client into any part of your application using @Autowired.
+
+      @Bean
+      public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+      return restTemplateBuilder.build();
+      }
+
+Now you can then inject the client into any part of your application using @Autowired.
 
      @Autowired
      private GreenApiClient greenApiClient;
@@ -101,8 +108,15 @@ The methods are divided into groups just like in the documentation for ease of u
         instanceId: {{yourInstance}}
         token: {{yourToken}}
 
+   Создайте свой RestTemplate bean:
 
-После этого вы можете внедрить клиент в любую часть вашего приложения с помощью @Autowired.
+
+      @Bean
+      public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+      return restTemplateBuilder.build();
+      }
+
+   После этого вы можете внедрить клиент в любую часть вашего приложения:
 
     @Autowired
     private GreenApiClient greenApiClient;
