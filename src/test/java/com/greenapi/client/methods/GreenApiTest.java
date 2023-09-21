@@ -1,7 +1,6 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.GreenApiClient;
-import com.greenapi.examples.Examples;
+import com.greenapi.pkg.api.GreenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +30,5 @@ public abstract class GreenApiTest {
     @Value("${green-api.test-data.file-url}")
     protected String fileUrl;
     @Autowired
-    protected GreenApiClient greenApiClient;
-    @Autowired
-    protected Examples examples;
+    protected GreenApi greenApi;
 }

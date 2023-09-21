@@ -10,7 +10,7 @@ class GreenApiQueuesTest extends GreenApiTest {
 
     @Test
     void showMessagesQueue() {
-        var response = greenApiClient.queues.showMessagesQueue();
+        var response = greenApi.queues.showMessagesQueue();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -18,7 +18,7 @@ class GreenApiQueuesTest extends GreenApiTest {
 
     @Test
     void clearMessagesQueue() {
-        var response = greenApiClient.queues.clearMessagesQueue();
+        var response = greenApi.queues.clearMessagesQueue();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

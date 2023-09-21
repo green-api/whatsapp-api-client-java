@@ -1,7 +1,7 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.dto.request.GetChatHistoryReq;
-import com.greenapi.client.dto.request.MessageReq;
+import com.greenapi.pkg.models.request.GetChatHistoryReq;
+import com.greenapi.pkg.models.request.MessageReq;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class GreenApiJournalsTest extends GreenApiTest {
             .count(3)
             .build();
 
-        var response = greenApiClient.journals.getChatHistory(dto);
+        var response = greenApi.journals.getChatHistory(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -29,7 +29,7 @@ class GreenApiJournalsTest extends GreenApiTest {
             .idMessage(messageId)
             .build();
 
-        var response = greenApiClient.journals.getMessage(dto);
+        var response = greenApi.journals.getMessage(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -37,7 +37,7 @@ class GreenApiJournalsTest extends GreenApiTest {
 
     @Test
     void lastIncomingMessages() {
-        var response = greenApiClient.journals.lastIncomingMessages(3);
+        var response = greenApi.journals.lastIncomingMessages(3);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -45,7 +45,7 @@ class GreenApiJournalsTest extends GreenApiTest {
 
     @Test
     void lastOutgoingMessages() {
-        var response = greenApiClient.journals.lastOutgoingMessages(3);
+        var response = greenApi.journals.lastOutgoingMessages(3);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

@@ -1,7 +1,7 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.dto.request.*;
-import com.greenapi.client.models.*;
+import com.greenapi.pkg.models.*;
+import com.greenapi.pkg.models.request.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .message("TEST")
             .build();
 
-        var response = greenApiClient.sending.sendMessage(textMsg);
+        var response = greenApi.sending.sendMessage(textMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -38,14 +38,14 @@ class GreenApiSendingTest extends GreenApiTest {
                 .build())
             .build();
 
-        var response = greenApiClient.sending.sendContact(contactMsg);
+        var response = greenApi.sending.sendContact(contactMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    void sendFileByUpload() throws IOException {
+    void sendFileByUpload() {
         var file = new File(fileUrl);
         var fileByUploadMsg = OutgoingFileByUpload.builder()
             .chatId(chatId)
@@ -53,7 +53,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .file(file)
             .build();
 
-        var response = greenApiClient.sending.sendFileByUpload(fileByUploadMsg);
+        var response = greenApi.sending.sendFileByUpload(fileByUploadMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -63,7 +63,7 @@ class GreenApiSendingTest extends GreenApiTest {
     void uploadFile() throws IOException {
         var file = new File(fileUrl);
 
-        var response = greenApiClient.sending.uploadFile(file);
+        var response = greenApi.sending.uploadFile(file);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -78,7 +78,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .caption("Лошадка")
             .build();
 
-        var response = greenApiClient.sending.sendFileByUrl(fileByUrlMsg);
+        var response = greenApi.sending.sendFileByUrl(fileByUrlMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -94,7 +94,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .longitude(89.8728409)
             .build();
 
-        var response = greenApiClient.sending.sendLocation(locationMsg);
+        var response = greenApi.sending.sendLocation(locationMsg);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -113,7 +113,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .buttons(buttons)
             .build();
 
-        var response = greenApiClient.sending.sendButtons(dto);
+        var response = greenApi.sending.sendButtons(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -133,7 +133,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .templateButtons(outgoingButtons)
             .build();
 
-        var response = greenApiClient.sending.sendTemplateButtons(dto);
+        var response = greenApi.sending.sendTemplateButtons(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -156,7 +156,7 @@ class GreenApiSendingTest extends GreenApiTest {
             .sections(sections)
             .build();
 
-        var response = greenApiClient.sending.sendListMessage(dto);
+        var response = greenApi.sending.sendListMessage(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

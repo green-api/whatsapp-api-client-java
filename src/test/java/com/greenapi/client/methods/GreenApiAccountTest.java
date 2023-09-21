@@ -1,6 +1,6 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.dto.request.InstanceSettingsReq;
+import com.greenapi.pkg.models.request.InstanceSettingsReq;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void getSettings() {
-        var response = greenApiClient.account.getSettings();
+        var response = greenApi.account.getSettings();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -21,7 +21,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void getWaSettings() {
-        var response = greenApiClient.account.getWaSettings();
+        var response = greenApi.account.getWaSettings();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -33,7 +33,7 @@ class GreenApiAccountTest extends GreenApiTest {
             .delaySendMessagesMilliseconds(15000)
             .build();
 
-        var response = greenApiClient.account.setSetting(instanceSettings);
+        var response = greenApi.account.setSetting(instanceSettings);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -41,7 +41,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void getStateInstance() {
-        var response = greenApiClient.account.getStateInstance();
+        var response = greenApi.account.getStateInstance();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -49,7 +49,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void getStatusInstance() {
-        var response = greenApiClient.account.getStatusInstance();
+        var response = greenApi.account.getStatusInstance();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -57,7 +57,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void reboot() {
-        var response = greenApiClient.account.reboot();
+        var response = greenApi.account.reboot();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -73,7 +73,7 @@ class GreenApiAccountTest extends GreenApiTest {
 
     @Test
     void getQrCode() {
-        var response = greenApiClient.account.getQrCode();
+        var response = greenApi.account.getQrCode();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -83,7 +83,7 @@ class GreenApiAccountTest extends GreenApiTest {
     void setProfilePicture() {
         var file = new File(fileUrl);
 
-        var response = greenApiClient.account.setProfilePicture(file);
+        var response = greenApi.account.setProfilePicture(file);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

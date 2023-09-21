@@ -1,9 +1,9 @@
 package com.greenapi.client.methods;
 
-import com.greenapi.client.dto.request.ChangeGroupNameReq;
-import com.greenapi.client.dto.request.ChangeGroupPictureReq;
-import com.greenapi.client.dto.request.ChangeParticipantReq;
-import com.greenapi.client.dto.request.CreateGroupReq;
+import com.greenapi.pkg.models.request.ChangeGroupNameReq;
+import com.greenapi.pkg.models.request.ChangeGroupPictureReq;
+import com.greenapi.pkg.models.request.ChangeParticipantReq;
+import com.greenapi.pkg.models.request.CreateGroupReq;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .chatIds(membersList)
             .build();
 
-        var response = greenApiClient.groups.createGroup(dto);
+        var response = greenApi.groups.createGroup(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -38,7 +38,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .groupId(groupChatId)
             .build();
 
-        var response = greenApiClient.groups.updateGroupName(dto);
+        var response = greenApi.groups.updateGroupName(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -46,7 +46,7 @@ class GreenApiGroupsTest extends GreenApiTest {
 
     @Test
     void getGroupData() {
-        var response = greenApiClient.groups.getGroupData(groupChatId);
+        var response = greenApi.groups.getGroupData(groupChatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -59,7 +59,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .participantChatId(chatId)
             .build();
 
-        var response = greenApiClient.groups.removeGroupParticipant(dto);
+        var response = greenApi.groups.removeGroupParticipant(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -72,7 +72,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .participantChatId(chatId)
             .build();
 
-        var response = greenApiClient.groups.addGroupParticipant(dto);
+        var response = greenApi.groups.addGroupParticipant(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -85,7 +85,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .participantChatId(chatId)
             .build();
 
-        var response = greenApiClient.groups.setGroupAdmin(dto);
+        var response = greenApi.groups.setGroupAdmin(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -98,7 +98,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .participantChatId(chatId)
             .build();
 
-        var response = greenApiClient.groups.removeGroupAdmin(dto);
+        var response = greenApi.groups.removeGroupAdmin(dto);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -112,7 +112,7 @@ class GreenApiGroupsTest extends GreenApiTest {
             .groupId(groupChatId)
             .build();
 
-        var response = greenApiClient.groups.setGroupPicture(dto);
+        var response = greenApi.groups.setGroupPicture(dto);
         log.info(response);
     }
 

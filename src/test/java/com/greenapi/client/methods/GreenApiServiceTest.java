@@ -12,7 +12,7 @@ class GreenApiServiceTest extends GreenApiTest {
     void checkWhatsapp() {
         var phoneNumber = 79851150769L;
 
-        var response = greenApiClient.service.checkWhatsapp(phoneNumber);
+        var response = greenApi.service.checkWhatsapp(phoneNumber);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -20,7 +20,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void getAvatar() {
-        var response = greenApiClient.service.getAvatar(chatId);
+        var response = greenApi.service.getAvatar(chatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -28,7 +28,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void getContacts() {
-        var response = greenApiClient.service.getContacts();
+        var response = greenApi.service.getContacts();
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -36,7 +36,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void getContactInfo() {
-        var response = greenApiClient.service.getContactInfo(chatId);
+        var response = greenApi.service.getContactInfo(chatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -57,7 +57,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void archiveChat() {
-        var response = greenApiClient.service.archiveChat(chatId);
+        var response = greenApi.service.archiveChat(chatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -65,7 +65,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void unarchiveChat() {
-        var response = greenApiClient.service.unarchiveChat(chatId);
+        var response = greenApi.service.unarchiveChat(chatId);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -73,7 +73,7 @@ class GreenApiServiceTest extends GreenApiTest {
 
     @Test
     void setDisappearingChat() {
-        var response = greenApiClient.service.setDisappearingChat(chatId, 0L);
+        var response = greenApi.service.setDisappearingChat(chatId, 0L);
         log.info(response);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
