@@ -17,22 +17,21 @@ class CreateGroupSendMessageExample {
         groupMembers.add("11001234565@c.us");
 
         var group = greenApi.groups.createGroup(
-                CreateGroupReq.builder()
-                    .groupName("Test Group")
-                    .chatIds(groupMembers)
-                    .build())
+            CreateGroupReq.builder()
+                .groupName("Test Group")
+                .chatIds(groupMembers)
+                .build())
             .getBody();
 
         if (group != null) {
             var message = greenApi.sending.sendMessage(
-                    OutgoingMessage.builder()
-                        .chatId(group.getChatId())
-                        .message("hola a todos")
-                        .build())
+                OutgoingMessage.builder()
+                    .chatId(group.getChatId())
+                    .message("hola a todos")
+                    .build())
                 .getBody();
 
             if (message != null) {
-
                 log.info("Create group: " + group.isCreated() +
                     "\nSend message: " + message.getIdMessage());
             }
