@@ -1,11 +1,8 @@
 package com.greenapi.pkg.api.webhook;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.greenapi.pkg.api.GreenApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -16,11 +13,11 @@ import java.util.Objects;
 public class WebhookConsumer {
 
     private final GreenApi greenApi;
-    private final WebhookTypeHandler webhookTypeHandler = new WebhookTypeHandler();
+    private final NotificationMapper notificationMapper;
 
     private boolean running = true;
 
-    public void start() {
+    public void start(WebhookHandler webhookHandler) {
         running = true;
 
         while (running) {
@@ -28,13 +25,14 @@ public class WebhookConsumer {
 
             if (Objects.equals(response.getBody(), "null")) {
                 log.info("receiveNotification timeout");
+
             } else {
-                var notification = webhookTypeHandler.get(response.getBody());
+                var notification = notificationMapper.get(response.getBody());
                 if (notification == null) {
-                    throw new RuntimeException("Can't map webhook from json");
+                    throw new RuntimeException("Can't map webhook from json!");
                 }
 
-                log.info("new webhook received: " + notification);
+                webhookHandler.handle(notification);
 
                 greenApi.receiving.deleteNotification(notification.getReceiptId());
             }

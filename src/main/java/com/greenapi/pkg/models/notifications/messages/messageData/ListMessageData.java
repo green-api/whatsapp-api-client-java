@@ -1,15 +1,15 @@
 package com.greenapi.pkg.models.notifications.messages.messageData;
 
-import com.greenapi.pkg.models.request.OutgoingListMessage;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ListMessageData {
+@SuperBuilder
+public class ListMessageData extends QuotedMessage {
     private String contentText;
     private String title;
     private String footer;

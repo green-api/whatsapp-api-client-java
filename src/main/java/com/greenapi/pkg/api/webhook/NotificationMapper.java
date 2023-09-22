@@ -1,17 +1,20 @@
 package com.greenapi.pkg.api.webhook;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.greenapi.pkg.models.notifications.*;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 @Log4j2
-public class WebhookTypeHandler {
+public class NotificationMapper {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     @SneakyThrows
     public Notification get(String responseBody) {
@@ -50,58 +53,66 @@ public class WebhookTypeHandler {
         return null;
     }
 
-    @SneakyThrows
-    private Notification messageTypeHandle(JsonNode notificationBody, int receiptId) {
+    private Notification messageTypeHandle(JsonNode notificationBody, int receiptId) throws JsonProcessingException {
+        var typeMessage = notificationBody.get("messageData").get("typeMessage").asText();
 
-        switch (notificationBody.get("messageData").get("typeMessage").asText()) {
-            case "textMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), TextMessageReceived.class));
+        return new Notification(receiptId, (NotificationBody) objectMapper.readValue(
+            notificationBody.toString(), getNotificationClass(typeMessage)));
+    }
+
+    private Class<?> getNotificationClass(String typeMessage) {
+        switch (typeMessage) {
+            case "quotedMessage" -> {
+                return QuotedMessageReceived.class;
             }
-            case "extendedTextMessage", "quotedMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), UrlMessageReceived.class));
+            case "textMessage" -> {
+                return TextMessageReceived.class;
+            }
+            case "extendedTextMessage" -> {
+                return UrlMessageReceived.class;
             }
             case "imageMessage", "videoMessage", "documentMessage", "audioMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), FileMessageReceived.class));
+                return FileMessageReceived.class;
             }
             case "locationMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), LocationMessageReceived.class));
+                return LocationMessageReceived.class;
             }
             case "contactMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ContactMessageReceived.class));
+                return ContactMessageReceived.class;
             }
             case "contactsArrayMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ContactsArrayMessageReceived.class));
+                return ContactsArrayMessageReceived.class;
             }
             case "buttonsMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ButtonMessageReceived.class));
+                return ButtonMessageReceived.class;
             }
             case "listMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ListMessageReceived.class));
+                return ListMessageReceived.class;
             }
             case "templateButtonReplyMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), TemplateButtonSelectionMessageReceived.class));
+                return TemplateButtonSelectionMessageReceived.class;
             }
             case "buttonsResponseMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), SimpleButtonSelectionMessageReceived.class));
+                return SimpleButtonSelectionMessageReceived.class;
             }
             case "listResponseMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ListSelectionMessageReceived.class));
+                return ListSelectionMessageReceived.class;
             }
             case "stickerMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), StickerMessageReceived.class));
+                return StickerMessageReceived.class;
             }
             case "reactionMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), ReactionMessageReceived.class));
+                return ReactionMessageReceived.class;
             }
             case "groupInviteMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), GroupInviteMessageReceived.class));
+                return GroupInviteMessageReceived.class;
             }
             case "pollCreationMessage" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), PollMessageReceived.class));
+                return PollMessageReceived.class;
             }
         }
 
-        log.error("Message data unknown type " + notificationBody);
+        log.error("Message data unknown type " + typeMessage);
         return null;
     }
 }

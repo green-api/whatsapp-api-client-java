@@ -1,12 +1,13 @@
 package com.greenapi.pkg.models.notifications.messages.messageData;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class StickerMessageData {
+@SuperBuilder
+public class StickerMessageData extends QuotedMessage {
     private String downloadUrl;
     private boolean isAnimated;
     private String jpegThumbnail;

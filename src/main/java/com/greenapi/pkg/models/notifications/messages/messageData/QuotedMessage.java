@@ -7,9 +7,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class ContactMessageData extends QuotedMessage {
-    private String displayName;
-    private String vcard;
-    private boolean isForwarded;
-    private Integer forwardingScore;
+public abstract class QuotedMessage {
+    private String stanzaId;
+    private String participant;
+    private String typeMessage;
 }

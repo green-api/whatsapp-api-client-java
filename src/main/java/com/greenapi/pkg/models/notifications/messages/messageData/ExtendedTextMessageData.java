@@ -1,12 +1,13 @@
 package com.greenapi.pkg.models.notifications.messages.messageData;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ExtendedTextMessageData {
+@SuperBuilder
+public class ExtendedTextMessageData extends QuotedMessage {
     private String text;
     private String description;
     private String title;
@@ -21,7 +22,4 @@ public class ExtendedTextMessageData {
     private String sourceType;
     private String sourceUrl;
     private String thumbnailUrl;
-    private String stanzaId;
-    private String participant;
-    private String typeMessage;
 }

@@ -1,15 +1,15 @@
 package com.greenapi.pkg.models.notifications.messages.messageData;
 
-import com.greenapi.pkg.models.Button;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ButtonMessageData {
+@SuperBuilder
+public class ButtonMessageData extends QuotedMessage {
     private String message;
     private String footer;
     private List<Button> buttons;

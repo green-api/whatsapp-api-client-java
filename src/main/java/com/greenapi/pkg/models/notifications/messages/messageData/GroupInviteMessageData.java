@@ -1,12 +1,13 @@
 package com.greenapi.pkg.models.notifications.messages.messageData;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class GroupInviteMessageData {
+@SuperBuilder
+public class GroupInviteMessageData extends QuotedMessage {
     private String groupJid;
     private String inviteCode;
     private String inviteExpiration;
