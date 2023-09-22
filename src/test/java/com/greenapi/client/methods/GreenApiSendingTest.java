@@ -142,8 +142,8 @@ class GreenApiSendingTest extends GreenApiTest {
     @Test
     void sendListMessage() {
         var rows = new ArrayList<OutgoingListMessage.Row>();
-        rows.add(new OutgoingListMessage.Row("id1", "row1"));
-        rows.add(new OutgoingListMessage.Row("id2", "row2"));
+        rows.add(new OutgoingListMessage.Row("id1", "row1", "desc"));
+        rows.add(new OutgoingListMessage.Row("id2", "row2", "desc"));
 
         var sections = new ArrayList<OutgoingListMessage.Section>();
         sections.add(new OutgoingListMessage.Section("Section1", rows));
