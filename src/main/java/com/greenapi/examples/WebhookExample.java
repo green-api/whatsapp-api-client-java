@@ -1,10 +1,6 @@
-package com.greenapi;
+package com.greenapi.examples;
 
 import com.greenapi.pkg.api.webhook.WebhookConsumer;
-import com.greenapi.pkg.api.webhook.WebhookHandler;
-import com.greenapi.pkg.models.Contact;
-import com.greenapi.pkg.models.notifications.Notification;
-import com.greenapi.pkg.models.notifications.messages.messageData.ContactMessageData;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
