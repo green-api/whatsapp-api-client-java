@@ -226,13 +226,12 @@ Link to example: [WebhookExample.java](src/main/java/com/greenapi/WebhookExample
 ```java
 @SpringBootApplication
 public class WebhookExample {
-    public static void main(String[] args) {
-        var context = SpringApplication.run(WebhookExample.class, args);
-        
-        var webhookConsumer = (WebhookConsumer) context.getBean("webhookConsumer");
-        
-        webhookConsumer.start();
-    }
+   public static void main(String[] args) {
+      var context = SpringApplication.run(WebhookExample.class, args);
+
+      var webhookConsumer = (WebhookConsumer) context.getBean("webhookConsumer");
+      webhookConsumer.start(notification -> System.out.println("New webhook received: " + notification));
+   }
 }
 ```
 

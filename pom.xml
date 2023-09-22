@@ -16,6 +16,13 @@
     <properties>
         <java.version>17</java.version>
     </properties>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>whatsapp-api-client-java</name>
+            <url>https://maven.pkg.github.com/green-api/whatsapp-api-client-java</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -61,8 +61,8 @@ Create RestTemplate bean with your configuration, for example:
 ```java
 @Bean
 public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-return restTemplateBuilder.build();
-}
+        return restTemplateBuilder.build();
+        }
 ```
 
 And add "com.greenapi" in @ComponentScan base packages:
@@ -72,9 +72,9 @@ And add "com.greenapi" in @ComponentScan base packages:
 @ComponentScan(basePackages = {"com.greenapi", "com.example"})
 public class Application {
 
-    public static void main(String[] args) {
-        var context = SpringApplication.run(Application.class, args);
-    }
+   public static void main(String[] args) {
+      var context = SpringApplication.run(Application.class, args);
+   }
 }
 ```
 
@@ -91,20 +91,20 @@ private GreenApiClient greenApiClient;
 @Configuration
 public class GreenApiConf {
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplateBuilder().build();
-    }
+   @Bean
+   public RestTemplate restTemplate() {
+      return new RestTemplateBuilder().build();
+   }
 
-    @Bean
-    public GreenApiClient greenApiClient(RestTemplate restTemplate) {
-        return new GreenApiClient(
-            restTemplate,
-            "https://media.greenapi.com",
-            "https://api.greenapi.com",
-            "{{YOUR-ID}}",
-            "{{YOUR-TOKEN}}");
-    }
+   @Bean
+   public GreenApiClient greenApiClient(RestTemplate restTemplate) {
+      return new GreenApiClient(
+              restTemplate,
+              "https://media.greenapi.com",
+              "https://api.greenapi.com",
+              "{{YOUR-ID}}",
+              "{{YOUR-TOKEN}}");
+   }
 }
 ```
 
@@ -113,19 +113,19 @@ public class GreenApiConf {
 ```java
 var restTemplate = new RestTemplateBuilder().build();
 
-var greenApiClient1 = new GreenApiClient(
-    restTemplate,
-    "https://media.green-api.com",
-    "https://api.green-api.com",
-    {{instanceId1}},
-    {{instanceToken1}});
+        var greenApiClient1 = new GreenApiClient(
+        restTemplate,
+        "https://media.green-api.com",
+        "https://api.green-api.com",
+        {{instanceId1}},
+        {{instanceToken1}});
 
-var greenApiClient2 = new GreenApiClient(
-    restTemplate,
-    "https://media.greenapi.com",
-    "https://api.greenapi.com",
-    {{instanceId2}},
-    {{instanceToken2}});
+        var greenApiClient2 = new GreenApiClient(
+        restTemplate,
+        "https://media.greenapi.com",
+        "https://api.greenapi.com",
+        {{instanceId2}},
+        {{instanceToken2}});
 ```
 ### How to create a group and send message
 
@@ -142,17 +142,17 @@ class CreateGroupSendMessageExample {
       groupMembers.add("11001234565@c.us");
 
       var group = greenApi.groups.createGroup(
-                      CreateGroupReq.builder()
-                              .groupName("Test Group")
-                              .chatIds(groupMembers)
-                              .build()).getBody();
+              CreateGroupReq.builder()
+                      .groupName("Test Group")
+                      .chatIds(groupMembers)
+                      .build()).getBody();
 
       if (group != null) {
          var message = greenApi.sending.sendMessage(
-                         OutgoingMessage.builder()
-                                 .chatId(group.getChatId())
-                                 .message("hola a todos")
-                                 .build()).getBody();
+                 OutgoingMessage.builder()
+                         .chatId(group.getChatId())
+                         .message("hola a todos")
+                         .build()).getBody();
 
          if (message != null) {
             log.info("Create group: " + group.isCreated() +
@@ -173,21 +173,21 @@ Link to example: [SendFileByUploadExample.java](src/main/java/com/greenapi/examp
 @Log4j2
 public class SendFileByUploadExample {
 
-    private void sendFileByUploadExample(GreenApi greenApi) {
-        var file = new File("User/username/folder/Go-Logo_Blue.svg");
+   private void sendFileByUploadExample(GreenApi greenApi) {
+      var file = new File("User/username/folder/Go-Logo_Blue.svg");
 
-        var response = greenApi.sending.sendFileByUpload(OutgoingFileByUpload.builder()
-            .file(file)
-            .fileName(file.getName())
-            .chatId("11001234567@c.us")
-            .build());
+      var response = greenApi.sending.sendFileByUpload(OutgoingFileByUpload.builder()
+              .file(file)
+              .fileName(file.getName())
+              .chatId("11001234567@c.us")
+              .build());
 
-        if (response.getStatusCode().isError()) {
-            log.warn("message sending is failed");
-        }
+      if (response.getStatusCode().isError()) {
+         log.warn("message sending is failed");
+      }
 
-        log.info("message sent, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
-    }
+      log.info("message sent, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
+   }
 }
 ```
 
@@ -199,19 +199,19 @@ Link to example: [SendFileByUrlExample.java](src/main/java/com/greenapi/examples
 @Log4j2
 public class SendFileByUrlExample {
 
-    private void sendFileByUrlExample(GreenApi greenApi) {
-        var response = greenApi.sending.sendFileByUrl(OutgoingFileByUrl.builder()
-            .urlFile("https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg")
-            .fileName("Go-Logo_Blue.svg")
-            .chatId("11001234567@c.us")
-            .build());
+   private void sendFileByUrlExample(GreenApi greenApi) {
+      var response = greenApi.sending.sendFileByUrl(OutgoingFileByUrl.builder()
+              .urlFile("https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg")
+              .fileName("Go-Logo_Blue.svg")
+              .chatId("11001234567@c.us")
+              .build());
 
-        if (response.getStatusCode().isError()) {
-            log.warn("message sending is failed");
-        }
+      if (response.getStatusCode().isError()) {
+         log.warn("message sending is failed");
+      }
 
-        log.info("message sent, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
-    }
+      log.info("message sent, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
+   }
 }
 ```
 
@@ -226,13 +226,12 @@ Link to example: [WebhookExample.java](src/main/java/com/greenapi/WebhookExample
 ```java
 @SpringBootApplication
 public class WebhookExample {
-    public static void main(String[] args) {
-        var context = SpringApplication.run(WebhookExample.class, args);
-        
-        var webhookConsumer = (WebhookConsumer) context.getBean("webhookConsumer");
-        
-        webhookConsumer.start();
-    }
+   public static void main(String[] args) {
+      var context = SpringApplication.run(WebhookExample.class, args);
+
+      var webhookConsumer = (WebhookConsumer) context.getBean("webhookConsumer");
+      webhookConsumer.start(notification -> System.out.println("New webhook received: " + notification));
+   }
 }
 ```
 
