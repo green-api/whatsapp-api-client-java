@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class PollMessageData extends QuotedMessage {
     private String name;
     private Option options;

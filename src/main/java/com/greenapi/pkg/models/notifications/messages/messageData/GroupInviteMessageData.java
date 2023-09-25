@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class GroupInviteMessageData extends QuotedMessage {
     private String groupJid;
     private String inviteCode;

@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public class ContactMessageData extends QuotedMessage {
     private String displayName;
     private String vcard;

@@ -3,6 +3,7 @@ package com.greenapi.pkg.models.notifications.messages.messageData;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
