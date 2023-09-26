@@ -16,26 +16,21 @@ authorize the account, go to your [cabinet](https://console.green-api.com/) and 
 
 ## Installation
 
-Do not forget to create a module:
+Use the JAR file, or if you're using Maven, add this dependency to your project:
 
-1. Download the JAR file.
-2. Include the JAR file in your project manually by adding it to your libraries folder (usually lib or libs)
-   and configure your development environment (eg IntelliJ IDEA) to include this JAR file in the project path:
+```
+<dependency>
+   <groupId>github</groupId>
+   <artifactId>whatsapp-api-client-java</artifactId>
+   <version>{{version}}</version>
+</dependency>
+```
 
-   - Open your project in IntelliJ IDEA.
-   - Go to menu "File" -> "Project Structure".
-   - In the "Modules" section, select your module.
-   - Go to the "Dependencies" tab.
-   - Click on the "+" button and select "JARs or directories".
-   - Select the downloaded JAR file and add it.
-
-3. Now you can use classes and functions from the library in your project code. Import the appropriate packages and start using the library.
-
-If you use Gradle, you can build project after add a JAR file in your project folder:
+If you using Gradle - add JAR file in "libs" folder in your project, and write this in your gradle conf:
 
 ```
 dependencies {
-    implementation files('libs/greenapi-java-examples.jar')
+    implementation files('libs/whatsapp-api-client-java.jar')
 }
 ```
 
@@ -217,11 +212,20 @@ public class SendFileByUrlExample {
 
 ### How to receive incoming notifications
 
-To receive incoming webhooks, you must send a handler function to `Webhook().Start`. The handler function should have
-one parameter (`body map[string]interface{}`). When you receive a new notification, your handler function will be
-executed. To stop receiving incoming webhooks, you need to call `Webhook().Stop`.
+To receive incoming webhooks, you must send a handler function to `webhookConsumer.start()`. The handler function should have
+one parameter (`WebhookHandler webhookhandler`). When you receive a new notification, your handler function will be
+executed. To stop receiving incoming webhooks, you need to call `webhookConsumer.stop()`.
 
-Link to example: [WebhookExample.java](src/main/java/com/greenapi/WebhookExample.java).
+WebhookHandler - is an interface. You can write any class to handle notifications, just implement the interface 
+and execute you function in the method `handle()`.
+
+```java
+public interface WebhookHandler {
+    void handle(Notification notification);
+}
+```
+
+Link to example: [WebhookExample.java](src/main/java/com/greenapi/examples/WebhookExample.java).
 
 ```java
 @SpringBootApplication
