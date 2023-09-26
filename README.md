@@ -16,22 +16,12 @@ authorize the account, go to your [cabinet](https://console.green-api.com/) and 
 
 ## Installation
 
-Use the JAR file, or if you're using Maven, add this dependency to your project:
-
 ```
 <dependency>
-   <groupId>github</groupId>
-   <artifactId>whatsapp-api-client-java</artifactId>
-   <version>{{version}}</version>
+  <groupId>green-api</groupId>
+  <artifactId>whatsapp-api-client-java</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 </dependency>
-```
-
-If you using Gradle - add JAR file in "libs" folder in your project, and write this in your gradle conf:
-
-```
-dependencies {
-    implementation files('libs/whatsapp-api-client-java.jar')
-}
 ```
 
 ## Examples
