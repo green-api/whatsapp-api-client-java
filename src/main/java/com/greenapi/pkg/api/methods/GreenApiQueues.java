@@ -1,7 +1,7 @@
 package com.greenapi.pkg.api.methods;
 
-import com.greenapi.pkg.models.response.ClearMessagesQueueResp;
 import com.greenapi.pkg.models.QueueMessage;
+import com.greenapi.pkg.models.response.ClearMessagesQueueResp;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

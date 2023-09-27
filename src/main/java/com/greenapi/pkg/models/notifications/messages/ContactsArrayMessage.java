@@ -2,7 +2,10 @@ package com.greenapi.pkg.models.notifications.messages;
 
 import com.greenapi.pkg.models.notifications.messages.messageData.ContactsArrayMessageData;
 import com.greenapi.pkg.models.notifications.messages.messageData.QuotedMessage;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

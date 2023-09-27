@@ -1,9 +1,9 @@
 package com.greenapi.pkg.api.methods;
 
+import com.greenapi.pkg.models.ChatHistoryMessage;
 import com.greenapi.pkg.models.request.GetChatHistoryReq;
 import com.greenapi.pkg.models.request.MessageReq;
 import com.greenapi.pkg.models.response.ChatMessage;
-import com.greenapi.pkg.models.ChatHistoryMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

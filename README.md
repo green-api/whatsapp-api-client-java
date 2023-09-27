@@ -20,7 +20,7 @@ authorize the account, go to your [cabinet](https://console.green-api.com/) and 
 <dependency>
   <groupId>green-api</groupId>
   <artifactId>whatsapp-api-client-java</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>{{version}}</version>
 </dependency>
 ```
 
@@ -112,6 +112,7 @@ var greenApiClient2 = new GreenApiClient(
     {{instanceId2}},
     {{instanceToken2}});
 ```
+
 ### How to create a group and send message
 
 Link to example: [CreateGroupSendMessageExample.java](src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java).
@@ -301,4 +302,4 @@ public class WebhookExample {
 Licensed under [
 Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
 ](https://creativecommons.org/licenses/by-nd/4.0/) terms.
-Please see file [LICENSE](LICENSE).
+Please see file [LICENSE](https://github.com/green-api/whatsapp-api-client-java/blob/f05e94cc55d66492858bc348315c39759810ae25/LICENSE.txt).

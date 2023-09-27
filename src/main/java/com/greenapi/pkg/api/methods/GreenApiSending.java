@@ -1,9 +1,9 @@
 package com.greenapi.pkg.api.methods;
 
+import com.greenapi.pkg.models.request.*;
 import com.greenapi.pkg.models.response.SendFileByUploadResp;
 import com.greenapi.pkg.models.response.SendMessageResp;
 import com.greenapi.pkg.models.response.UploadFileResp;
-import com.greenapi.pkg.models.request.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;

@@ -1,6 +1,5 @@
 package com.greenapi.pkg.api.methods;
 
-import com.greenapi.pkg.models.notifications.Notification;
 import com.greenapi.pkg.models.request.MessageReq;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;

@@ -1,8 +1,8 @@
 package com.greenapi.pkg.models.notifications;
 
-import com.greenapi.pkg.models.notifications.messages.StickerMessage;
 import com.greenapi.pkg.models.notifications.messages.InstanceData;
 import com.greenapi.pkg.models.notifications.messages.SenderData;
+import com.greenapi.pkg.models.notifications.messages.StickerMessage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

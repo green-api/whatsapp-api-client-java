@@ -1,9 +1,11 @@
 package com.greenapi.pkg.models.notifications.messages;
 
 import com.greenapi.pkg.models.notifications.messages.messageData.QuotedDataReaction;
-import com.greenapi.pkg.models.notifications.messages.messageData.QuotedMessage;
 import com.greenapi.pkg.models.notifications.messages.messageData.ReactionMessageData;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

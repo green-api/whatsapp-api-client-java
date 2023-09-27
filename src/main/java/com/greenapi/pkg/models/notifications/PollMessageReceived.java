@@ -1,7 +1,7 @@
 package com.greenapi.pkg.models.notifications;
 
-import com.greenapi.pkg.models.notifications.messages.PollMessage;
 import com.greenapi.pkg.models.notifications.messages.InstanceData;
+import com.greenapi.pkg.models.notifications.messages.PollMessage;
 import com.greenapi.pkg.models.notifications.messages.SenderData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

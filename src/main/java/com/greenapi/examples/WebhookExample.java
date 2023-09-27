@@ -2,7 +2,6 @@ package com.greenapi.examples;
 
 import com.greenapi.pkg.api.webhook.WebhookConsumer;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class WebhookExample {
     public void webhookExample(String[] args) {
