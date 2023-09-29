@@ -8,10 +8,9 @@
         <version>3.1.1</version>
         <relativePath/>
     </parent>
-    <groupId>green-api</groupId>
+    <groupId>com.green-api</groupId>
     <artifactId>whatsapp-api-client-java</artifactId>
     <version>0.0.1</version>
-    <name>whatsapp-api-client-java</name>
     <description>Java client example for Green API</description>
     <licenses>
         <license>
@@ -26,9 +25,10 @@
     </scm>
     <developers>
         <developer>
-            <id>green-api</id>
             <name>Kocherov Daniil</name>
             <url>https://github.com/kocherovv</url>
+            <organization>GreenAPI</organization>
+            <organizationUrl>http://greenapi.com</organizationUrl>
         </developer>
     </developers>
     <properties>
