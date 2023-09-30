@@ -18,9 +18,9 @@ authorize the account, go to your [cabinet](https://console.green-api.com/) and 
 
 ```
 <dependency>
-  <groupId>green-api</groupId>
+  <groupId>com.green-api</groupId>
   <artifactId>whatsapp-api-client-java</artifactId>
-  <version>{{version}}</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
