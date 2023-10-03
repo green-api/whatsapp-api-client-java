@@ -11,7 +11,7 @@
     <groupId>com.green-api</groupId>
     <artifactId>whatsapp-api-client-java</artifactId>
     <version>0.0.1</version>
-    <description>Java client example for Green API</description>
+    <description>WhatsApp java client Green API</description>
     <licenses>
         <license>
             <name>Attribution-NoDerivatives 4.0 International</name>
