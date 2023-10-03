@@ -117,6 +117,29 @@ var restTemplate = new RestTemplateBuilder().build();
     {{instanceToken2}});
 ```
 
+### Как отправить сообщение
+
+Link to example: [sendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/sendMessageExample.java).
+
+```java
+@Log4j2
+public class SendMessageExample {
+    private void createGroupAndSendMessage(GreenApi greenApi) {
+        var message = greenApi.sending.sendMessage(
+            OutgoingMessage.builder()
+                .chatId("111111111111@c.us")
+                .message("Привет!")
+                .build());
+
+        if (message.getStatusCode().is2xxSuccessful()) {
+            log.info(message.getBody());
+        } else {
+            log.warn("Message isn't sent, status code: " + message.getStatusCode());
+        }
+    }
+}
+```
+
 ### Как отправить файл загрузкой с диска
 
 Чтобы отправить файл, нужно создать объект класса OutgoingFileByUpload и передать его в метод sendFileByUpload.
@@ -172,6 +195,32 @@ public class SendFileByUrlExample {
 }
 ```
 
+### Как отправить файл через uploadFile + sendByUrl
+
+Link to example: [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/UploadFileAndSendByUrlExample.java).
+
+```java
+@Log4j2
+public class UploadFileAndSendByUrlExample {
+
+    private void uploadExample(GreenApi greenApi) throws IOException {
+        var file = new File("User/username/folder/Go-Logo_Blue.svg");
+
+        var response = greenApi.sending.uploadFile(file);
+        if (response.getStatusCode().isError()) {
+            log.error("upload file failed");
+        }
+
+        var responseEntity = greenApi.sending.sendFileByUrl(
+            OutgoingFileByUrl.builder()
+                .urlFile(Objects.requireNonNull(response.getBody()).getUrlFile())
+                .build());
+
+        log.info("file sent, message id: " + Objects.requireNonNull(responseEntity.getBody()).getIdMessage());
+    }
+}
+```
+
 ### Как получать входящие уведомления
 
 Чтобы начать получать уведомления, нужно передать функцию-обработчик в `webhookConsumer.start()`. Функция-обработчик
@@ -211,12 +260,14 @@ public class WebhookExample {
 
 ## Список примеров
 
-| Описание                                    | Ссылка на пример                                                                                             |
-|---------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| Как создать группу и отправить сообщение    | [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java) |
-| Как отправить файл загруженный с устройства | [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUploadExample.java)             |
-| Как отправить файл через ссылку             | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUrlExample.java)                   |
-| Как получать входящие уведомления           | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/WebhookExample.java)                                        |
+| Описание                                        | Ссылка на пример                                                                                                                                                               |
+|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Как создать группу и отправить сообщение        | [SendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendMessageExample.java)                       |
+| Как создать группу и отправить сообщение        | [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java) |
+| Как отправить файл загруженный с устройства     | [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUploadExample.java)             |
+| Как отправить файл через ссылку                 | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUrlExample.java)                   |
+| Как отправить файл через uploadFile + sendByUrl | [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/UploadFileAndSendByUrlExample.java) |
+| Как получать входящие уведомления               | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/WebhookExample.java)                                        |
 
 ## Список всех методов библиотеки
 

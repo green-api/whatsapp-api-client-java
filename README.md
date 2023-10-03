@@ -1,5 +1,7 @@
 # whatsapp-api-client-java
 
+[Ссылка русскоязычную инструкцию](src/main/java/com/greenapi/docs/README_RU.md)
+
 whatsapp-api-client-java is a library for integration with WhatsApp messenger using the API
 service [green-api.com](https://green-api.com/en/). You should get a registration token and an account ID in
 your [personal cabinet](https://console.green-api.com/) to use the library. There is a free developer account tariff.
@@ -115,6 +117,29 @@ var restTemplate = new RestTemplateBuilder().build();
     {{instanceToken2}});
 ```
 
+### How to send message
+
+Link to example: [sendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/sendMessageExample.java).
+
+```java
+@Log4j2
+public class SendMessageExample {
+    private void createGroupAndSendMessage(GreenApi greenApi) {
+        var message = greenApi.sending.sendMessage(
+            OutgoingMessage.builder()
+                .chatId("111111111111@c.us")
+                .message("hola a todos")
+                .build());
+
+        if (message.getStatusCode().is2xxSuccessful()) {
+            log.info(message.getBody());
+        } else {
+            log.warn("Message isn't sent, status code: " + message.getStatusCode());
+        }
+    }
+}
+```
+
 ### How to create a group and send message
 
 Link to example: [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java).
@@ -203,6 +228,32 @@ public class SendFileByUrlExample {
 }
 ```
 
+### How to send a file by UploadFile + SendByUrl
+
+Link to example: [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/UploadFileAndSendByUrlExample.java).
+
+```java
+@Log4j2
+public class UploadFileAndSendByUrlExample {
+
+    private void uploadExample(GreenApi greenApi) throws IOException {
+        var file = new File("User/username/folder/Go-Logo_Blue.svg");
+
+        var response = greenApi.sending.uploadFile(file);
+        if (response.getStatusCode().isError()) {
+            log.error("upload file failed");
+        }
+
+        var responseEntity = greenApi.sending.sendFileByUrl(
+            OutgoingFileByUrl.builder()
+                .urlFile(Objects.requireNonNull(response.getBody()).getUrlFile())
+                .build());
+
+        log.info("file sent, message id: " + Objects.requireNonNull(responseEntity.getBody()).getIdMessage());
+    }
+}
+```
+
 ### How to receive incoming notifications
 
 To receive incoming webhooks, you must send a handler function to `webhookConsumer.start()`. The handler function should have
@@ -234,12 +285,14 @@ public class WebhookExample {
 
 ## List of examples
 
-| Description                                   | Link to example                                                                                                                                                                |
-|-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| How to create a group  and send message       | [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java) |
-| How to send a file by uploading from the disk | [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUploadExample.java)             |
-| How to send a file by URL                     | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUrlExample.java)                   |
-| How to receive incoming notifications         | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/WebhookExample.java)                                        |
+| Description                                   | Link to example                                                                                                                                                                  |
+|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| How to send message                           | [SendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendMessageExample.java)                         |
+| How to create a group  and send message       | [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/CreateGroupSendMessageExample.java)   |
+| How to send a file by uploading from the disk | [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUploadExample.java)               |
+| How to send a file by URL                     | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/SendFileByUrlExample.java)                     |
+| How to send a file by UploadFile + SendByUrl  | [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/examples/UploadFileAndSendByUrlExample.java)   |
+| How to receive incoming notifications         | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/WebhookExample.java)                                          |
 
 ## List of all library methods
 
