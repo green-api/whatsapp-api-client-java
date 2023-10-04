@@ -256,12 +256,19 @@ public class UploadFileAndSendByUrlExample {
 
 ### How to receive incoming notifications
 
-To receive incoming webhooks, you must send a handler function to `webhookConsumer.start()`. The handler function should have
-one parameter (`WebhookHandler webhookhandler`). When you receive a new notification, your handler function will be
-executed. To stop receiving incoming webhooks, you need to call `webhookConsumer.stop()`.
+To start receiving notifications, you need to pass a handler function to `webhookConsumer.start()`. 
+The handler function should implement the `WebhookHandler` interface. 
+When a new notification is received, your handler function will be executed. 
+To stop receiving notifications, you need to call the `webhookConsumer.stop(`) function.
 
-WebhookHandler - is an interface. You can write any class to handle notifications, just implement the interface 
-and execute you function in the method `handle()`.
+`WebhookConsumer` is a class responsible for processing messages. For its correct functioning, it requires `GreenApi` and `NotificationMapper`. 
+You can inject them into it using beans or through the constructor.
+
+`NotificationMapper` is a bean responsible for converting a JSON object into a Java object. 
+It uses the `ObjectMapper` from the `com.fasterxml.jackson` library, which should be available as a bean in your configuration or set via the constructor.
+
+`WebhookHandler` is an interface. You can write any class to handle notifications; just implement the interface 
+and execute your logic in the `handle()` method or use a lambda expression.
 
 ```java
 public interface WebhookHandler {
