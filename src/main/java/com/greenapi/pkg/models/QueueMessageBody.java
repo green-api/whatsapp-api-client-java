@@ -15,7 +15,7 @@ public class QueueMessageBody {
     private String chatId;
     private String message;
     private List<String> messages;
-    private boolean linkPreview;
+    private Boolean linkPreview;
     private String quotedMessageId;
     private String fileName;
     private String caption;

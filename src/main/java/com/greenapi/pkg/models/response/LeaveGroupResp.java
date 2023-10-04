@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LeaveGroupResp {
-    private boolean leaveGroup;
+    private Boolean leaveGroup;
 }

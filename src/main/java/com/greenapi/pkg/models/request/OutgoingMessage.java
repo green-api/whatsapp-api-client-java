@@ -11,5 +11,5 @@ import lombok.experimental.SuperBuilder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OutgoingMessage extends Outgoing {
     private final String message;
-    private final boolean linkPreview;
+    private final Boolean linkPreview;
 }

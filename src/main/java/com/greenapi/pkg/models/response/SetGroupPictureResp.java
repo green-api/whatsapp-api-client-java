@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SetGroupPictureResp {
-    private boolean setGroupPicture;
+    private Boolean setGroupPicture;
     private String urlAvatar;
     private String reason;
 }

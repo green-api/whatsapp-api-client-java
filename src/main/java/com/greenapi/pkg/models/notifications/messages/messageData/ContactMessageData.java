@@ -14,6 +14,6 @@ import lombok.experimental.SuperBuilder;
 public class ContactMessageData extends QuotedMessage {
     private String displayName;
     private String vcard;
-    private boolean isForwarded;
+    private Boolean isForwarded;
     private Integer forwardingScore;
 }

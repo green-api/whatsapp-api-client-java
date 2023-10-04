@@ -86,7 +86,7 @@ public class GreenApiService {
      * The method is aimed for getting information on a contact.
      * https://greenapi.com/en/docs/api/service/GetContactInfo/
      */
-    public ResponseEntity<GetContactInfoResp> getContactInfo(String chatId) { //TODO 400 Bad Request: "{"statusCode":400,"timestamp":"2023-09-13T22:29:37.459Z","path":"/waInstance1101848922/getContactInfo/651450d7045842a58ca7bb62a1eb6e4b09426645ae574fdfaf","message":"Validation failed. Details: 'chatId' is required"}"
+    public ResponseEntity<GetContactInfoResp> getContactInfo(String chatId) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder

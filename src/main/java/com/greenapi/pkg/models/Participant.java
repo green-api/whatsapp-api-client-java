@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Participant {
     private String id;
-    private boolean isAdmin;
-    private boolean isSuperAdmin;
+    private Boolean isAdmin;
+    private Boolean isSuperAdmin;
 }

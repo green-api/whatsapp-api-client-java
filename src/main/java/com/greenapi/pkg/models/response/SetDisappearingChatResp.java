@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SetDisappearingChatResp {
     private String chatId;
-    private boolean disappearingMessagesInChat;
+    private Boolean disappearingMessagesInChat;
     private Long ephemeralExpiration;
 }

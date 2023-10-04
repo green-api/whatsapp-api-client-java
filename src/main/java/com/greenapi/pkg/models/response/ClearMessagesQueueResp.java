@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ClearMessagesQueueResp {
-    private boolean isCleared;
+    private Boolean isCleared;
 }

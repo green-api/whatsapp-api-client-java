@@ -17,5 +17,5 @@ public class OutgoingMessageStatus implements NotificationBody {
     private Long timestamp;
     private String idMessage;
     private String status;
-    private boolean sendByApi;
+    private Boolean sendByApi;
 }

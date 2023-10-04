@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AvatarInfo {
-    private boolean chatId;
-    private boolean existsWhatsapp;
+    private Boolean chatId;
+    private Boolean existsWhatsapp;
     private String urlAvatar;
     private String reason;
 }

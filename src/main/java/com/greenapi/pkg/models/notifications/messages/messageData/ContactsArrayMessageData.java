@@ -16,6 +16,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class ContactsArrayMessageData extends QuotedMessage {
     private List<ChatContact> contacts;
-    private boolean isForwarded;
+    private Boolean isForwarded;
     private Integer forwardingScore;
 }

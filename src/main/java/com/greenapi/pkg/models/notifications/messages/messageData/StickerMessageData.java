@@ -13,9 +13,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class StickerMessageData extends QuotedMessage {
     private String downloadUrl;
-    private boolean isAnimated;
+    private Boolean isAnimated;
     private String jpegThumbnail;
     private String mimeType;
-    private boolean isForwarded;
+    private Boolean isForwarded;
     private Integer forwardingScore;
 }

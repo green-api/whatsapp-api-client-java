@@ -12,6 +12,6 @@ import lombok.experimental.SuperBuilder;
 public class OutgoingLocation extends Outgoing {
     private final String nameLocation;
     private final String address;
-    private final double latitude;
-    private final double longitude;
+    private final Double latitude;
+    private final Double longitude;
 }

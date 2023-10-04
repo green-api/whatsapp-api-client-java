@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CreateGroupResp {
-    private boolean created;
+    private Boolean created;
     private String chatId;
     private String groupInviteLink;
 }

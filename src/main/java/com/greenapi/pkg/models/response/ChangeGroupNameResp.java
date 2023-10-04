@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ChangeGroupNameResp {
-    private boolean updateGroupName;
+    private Boolean updateGroupName;
 }

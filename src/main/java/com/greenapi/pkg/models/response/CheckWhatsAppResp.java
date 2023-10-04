@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CheckWhatsAppResp {
-    private boolean existsWhatsapp;
+    private Boolean existsWhatsapp;
 }

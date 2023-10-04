@@ -32,7 +32,7 @@ public class GreenApiReceiving {
      * The method is aimed for deleting an incoming notification from the notification queue.
      * https://greenapi.com/en/docs/api/receiving/technology-http-api/DeleteNotification/
      */
-    public ResponseEntity<String> deleteNotification(int receiptId) {
+    public ResponseEntity<String> deleteNotification(Integer receiptId) {
         var stringBuilder = new StringBuilder();
 
         stringBuilder

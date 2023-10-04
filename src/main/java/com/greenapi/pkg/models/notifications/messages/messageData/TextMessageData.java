@@ -13,5 +13,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class TextMessageData extends QuotedMessage {
     private String textMessage;
-    private boolean isTemplateMessage;
+    private Boolean isTemplateMessage;
 }

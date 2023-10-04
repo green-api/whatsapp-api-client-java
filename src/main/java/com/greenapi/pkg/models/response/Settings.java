@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Settings {
     private String wid;
     private String webhookUrl;
-    private long delaySendMessagesMilliseconds;
+    private Long delaySendMessagesMilliseconds;
     private String markIncomingMessagesReaded;
     private String markIncomingMessagesReadedOnReply;
     private String sharedSession;

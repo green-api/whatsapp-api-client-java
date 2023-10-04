@@ -17,7 +17,7 @@ public class Product {
     private String name;
     private String description;
     private String price;
-    private boolean isHidden;
+    private Boolean isHidden;
 
     @Data
     @NoArgsConstructor

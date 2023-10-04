@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class LogoutResp {
-    private boolean isLogout;
+    private Boolean isLogout;
 }

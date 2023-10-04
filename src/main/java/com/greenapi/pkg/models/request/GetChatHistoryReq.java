@@ -11,5 +11,5 @@ import lombok.RequiredArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetChatHistoryReq {
     private final String chatId;
-    private final int count;
+    private final Integer count;
 }

@@ -21,9 +21,9 @@ public class GetContactInfoResp {
     private List<Product> products;
     private String chatId;
     private String lastSeen;
-    private boolean isArchive;
-    private boolean isDisappearing;
-    private boolean isMute;
+    private Boolean isArchive;
+    private Boolean isDisappearing;
+    private Boolean isMute;
     private Integer messageexpiration;
     private Integer muteexpiration;
 }

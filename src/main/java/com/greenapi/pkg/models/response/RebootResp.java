@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RebootResp {
-    private boolean isReboot;
+    private Boolean isReboot;
 }

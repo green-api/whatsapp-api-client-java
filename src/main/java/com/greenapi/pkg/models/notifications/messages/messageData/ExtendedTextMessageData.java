@@ -19,9 +19,9 @@ public class ExtendedTextMessageData extends QuotedMessage {
     private String isForwarded;
     private Integer forwardingScore;
     private String previewType;
-    private boolean containsAutoReply;
+    private Boolean containsAutoReply;
     private String mediaType;
-    private boolean showAdAttribution;
+    private Boolean showAdAttribution;
     private String sourceId;
     private String sourceType;
     private String sourceUrl;

@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReadChatResp {
-    private boolean setRead;
+    private Boolean setRead;
 }

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class GetAvatarResp {
     private String urlAvatar;
     private String reason;
-    private boolean existsWhatsapp;
+    private Boolean existsWhatsapp;
 }

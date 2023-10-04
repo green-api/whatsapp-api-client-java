@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RemoveGroupParticipantResp {
-    private boolean removeParticipant;
+    private Boolean removeParticipant;
 }

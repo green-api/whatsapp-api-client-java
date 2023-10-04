@@ -17,6 +17,6 @@ public class GroupInviteMessageData extends QuotedMessage {
     private String inviteExpiration;
     private String groupName;
     private String caption;
-    private boolean name;
+    private Boolean name;
     private Integer jpegThumbnail;
 }

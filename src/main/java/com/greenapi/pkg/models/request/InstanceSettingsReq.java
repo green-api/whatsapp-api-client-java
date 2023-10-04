@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class InstanceSettingsReq {
     private final String webhookUrl;
     private final String webhookUrlToken;
-    private final long delaySendMessagesMilliseconds;
+    private final Integer delaySendMessagesMilliseconds;
     private final String markIncomingMessagesReaded;
     private final String markIncomingMessagesReadedOnReply;
     private final String sharedSession;

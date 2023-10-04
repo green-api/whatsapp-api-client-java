@@ -15,6 +15,6 @@ public class LocationMessageData extends QuotedMessage {
     private Double latitude;
     private Double longitude;
     private String jpegThumbnail;
-    private boolean isForwarded;
+    private Boolean isForwarded;
     private Integer forwardingScore;
 }

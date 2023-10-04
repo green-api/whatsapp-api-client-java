@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ChatLocation {
     private String nameLocation;
     private String address;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
     private String jpegThumbnail;
 }

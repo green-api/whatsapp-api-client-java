@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SetGroupAdminResp {
-    private boolean setGroupAdmin;
+    private Boolean setGroupAdmin;
 }

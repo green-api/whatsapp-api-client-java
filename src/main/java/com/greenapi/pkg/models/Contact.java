@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Contact {
-    private long phoneContact;
+    private Long phoneContact;
     private String firstName;
     private String middleName;
     private String lastName;

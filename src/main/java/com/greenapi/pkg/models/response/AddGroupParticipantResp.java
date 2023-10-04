@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AddGroupParticipantResp {
-    private boolean addParticipant;
+    private Boolean addParticipant;
 }
