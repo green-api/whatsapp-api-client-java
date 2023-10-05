@@ -32,7 +32,7 @@ class CreateGroupSendMessageExample {
                 .getBody();
 
             if (message != null) {
-                log.info("Create group: " + group.isCreated() +
+                log.info("Create group: " + group.getCreated() +
                     "\nSend message: " + message.getIdMessage());
             }
         }
