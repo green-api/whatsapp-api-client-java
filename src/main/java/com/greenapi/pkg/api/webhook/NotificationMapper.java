@@ -21,39 +21,44 @@ public class NotificationMapper {
         var notification = objectMapper.readTree(responseBody);
 
         if (notification.has("body") && notification.has("receiptId")) {
-            var notificationBody = notification.get("body");
-            var receiptId = notification.get("receiptId").asInt();
+            return notificationTypeHandle(notification.get("body"), notification.get("receiptId").asInt());
 
-            switch (notification.get("body").get("typeWebhook").asText()) {
-
-                case "incomingMessageReceived", "outgoingMessageReceived", "outgoingAPIMessageReceived" -> {
-                    return messageTypeHandle(notificationBody, receiptId);
-                }
-                case "outgoingMessageStatus" -> {
-                    return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), OutgoingMessageStatus.class));
-                }
-                case "stateInstanceChanged" -> {
-                    return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountStatus.class));
-                }
-                case "statusInstanceChanged" -> {
-                    return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountSocketStatus.class));
-                }
-                case "deviceInfo" -> {
-                    return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), DeviceStatus.class));
-                }
-                case "incomingCall" -> {
-                    return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingCall.class));
-                }
-            }
-        } else {
-            log.error("Webhook doesn't have a body and receiptId fields");
+        } else if (notification.has("typeWebhook")) {
+            return notificationTypeHandle(notification, null);
         }
 
         log.error("Webhook unknown type " + responseBody);
         return null;
     }
 
-    private Notification messageTypeHandle(JsonNode notificationBody, int receiptId) throws JsonProcessingException {
+    private Notification notificationTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
+
+        switch (notificationBody.get("typeWebhook").asText()) {
+            case "incomingMessageReceived", "outgoingMessageReceived", "outgoingAPIMessageReceived" -> {
+                return messageTypeHandle(notificationBody, receiptId);
+            }
+            case "outgoingMessageStatus" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), OutgoingMessageStatus.class));
+            }
+            case "stateInstanceChanged" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountStatus.class));
+            }
+            case "statusInstanceChanged" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountSocketStatus.class));
+            }
+            case "deviceInfo" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), DeviceStatus.class));
+            }
+            case "incomingCall" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingCall.class));
+            }
+        }
+
+        log.error("Unknown notification type " + notificationBody.toString());
+        return null;
+    }
+
+    private Notification messageTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
         var typeMessage = notificationBody.get("messageData").get("typeMessage").asText();
 
         return new Notification(receiptId, (NotificationBody) objectMapper.readValue(

@@ -16,16 +16,16 @@ public class UploadFileAndSendByUrlExample {
     private void uploadExample(GreenApi greenApi) throws IOException {
         var file = new File("User/username/folder/Go-Logo_Blue.svg");
 
-        var response = greenApi.sending.uploadFile(file);
-        if (response.getStatusCode().isError()) {
+        var uploadFileResp = greenApi.sending.uploadFile(file);
+        if (uploadFileResp.getStatusCode().isError()) {
             log.error("upload file failed");
         }
 
-        var responseEntity = greenApi.sending.sendFileByUrl(
+        var sendUrlResp = greenApi.sending.sendFileByUrl(
             OutgoingFileByUrl.builder()
-                .urlFile(Objects.requireNonNull(response.getBody()).getUrlFile())
+                .urlFile(Objects.requireNonNull(uploadFileResp.getBody()).getUrlFile())
                 .build());
 
-        log.info("file sent, message id: " + Objects.requireNonNull(responseEntity.getBody()).getIdMessage());
+        log.info("file sent, message id: " + Objects.requireNonNull(sendUrlResp.getBody()).getIdMessage());
     }
 }

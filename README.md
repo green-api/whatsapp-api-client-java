@@ -41,7 +41,6 @@ You can configure your bean, use application.yml, or instantiate an object via t
 **Via configuration:**
 
 ```java
-
 @Configuration
 public class GreenApiConf {
 
