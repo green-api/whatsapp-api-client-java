@@ -35,7 +35,7 @@ implementation group: 'com.green-api', name: 'whatsapp-api-client-java', version
 
 ### Как инициализировать объект
 
-Вы можете сконфигурировать свой bean, воспользоваться application.property или создать инстанс объекта через конструктор.
+Вы можете сконфигурировать свой bean, воспользоваться application.property или создать инстанс класса через конструктор.
 
 **Через конфигурацию:**
 

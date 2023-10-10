@@ -36,7 +36,7 @@ implementation group: 'com.green-api', name: 'whatsapp-api-client-java', version
 
 ### How to initialize an object
 
-You can configure your bean, use application.yml, or instantiate an object via the constructor.
+You can configure your bean, use application.yml, or instantiate class via the constructor.
 
 **Via configuration:**
 
