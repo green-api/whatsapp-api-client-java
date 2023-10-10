@@ -123,7 +123,7 @@ Link to example: [sendMessageExample.java](https://github.com/green-api/whatsapp
 ```java
 @Log4j2
 public class SendMessageExample {
-    private void createGroupAndSendMessage(GreenApi greenApi) {
+    private void sendMessageExample(GreenApi greenApi) {
         var message = greenApi.sending.sendMessage(
             OutgoingMessage.builder()
                 .chatId("111111111111@c.us")

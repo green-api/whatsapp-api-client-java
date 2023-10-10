@@ -119,12 +119,12 @@ var restTemplate = new RestTemplateBuilder().build();
 
 ### Как отправить сообщение
 
-Link to example: [sendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/sendMessageExample.java).
+Ссылка на пример: [sendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/sendMessageExample.java).
 
 ```java
 @Log4j2
 public class SendMessageExample {
-    private void createGroupAndSendMessage(GreenApi greenApi) {
+    private void sendMessageExample(GreenApi greenApi) {
         var message = greenApi.sending.sendMessage(
             OutgoingMessage.builder()
                 .chatId("111111111111@c.us")
@@ -140,12 +140,48 @@ public class SendMessageExample {
 }
 ```
 
+### Как создать группу и отправить сообщение
+
+Ссылка на пример: [CreateGroupSendMessageExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CreateGroupSendMessageExample.java).
+
+```java
+@Log4j2
+class CreateGroupSendMessageExample {
+
+   private void createGroupAndSendMessage(GreenApi greenApi) {
+      var groupMembers = new ArrayList<String>();
+      groupMembers.add("11001234567@c.us");
+      groupMembers.add("11001234566@c.us");
+      groupMembers.add("11001234565@c.us");
+
+      var group = greenApi.groups.createGroup(
+                      CreateGroupReq.builder()
+                              .groupName("Test Group")
+                              .chatIds(groupMembers)
+                              .build()).getBody();
+
+      if (group != null) {
+         var message = greenApi.sending.sendMessage(
+                         OutgoingMessage.builder()
+                                 .chatId(group.getChatId())
+                                 .message("hola a todos")
+                                 .build()).getBody();
+
+         if (message != null) {
+            log.info("Create group: " + group.isCreated() +
+                    "\nSend message: " + message.getIdMessage());
+         }
+      }
+   }
+}
+```
+
 ### Как отправить файл загрузкой с диска
 
 Чтобы отправить файл, нужно создать объект класса OutgoingFileByUpload и передать его в метод sendFileByUpload.
 Поля OutgoingFileByUpload соответствуют полям json объекта запроса.
 
-Link to example: [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUploadExample.java).
+Ссылка на пример: [SendFileByUploadExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUploadExample.java).
 
 ```java
 
@@ -172,7 +208,7 @@ public class SendFileByUploadExample {
 
 ### Как отправить файл по ссылке
 
-Link to example: [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUrlExample.java).
+Ссылка на пример: [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUrlExample.java).
 
 ```java
 
@@ -197,7 +233,7 @@ public class SendFileByUrlExample {
 
 ### Как отправить файл через uploadFile + sendFileByUrl
 
-Link to example: [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UploadFileAndSendByUrlExample.java).
+Ссылка на пример: [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UploadFileAndSendByUrlExample.java).
 
 ```java
 @Log4j2
