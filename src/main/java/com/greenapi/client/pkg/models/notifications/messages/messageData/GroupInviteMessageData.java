@@ -1,5 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GroupInviteMessageData extends QuotedMessage {
     private String groupJid;
     private String inviteCode;

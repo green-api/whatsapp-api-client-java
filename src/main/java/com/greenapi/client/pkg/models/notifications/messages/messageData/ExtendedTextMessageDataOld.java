@@ -1,5 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ExtendedTextMessageDataOld {
     private String text;
     private String stanzaId;

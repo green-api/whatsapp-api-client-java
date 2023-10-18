@@ -3,6 +3,7 @@ package com.greenapi.client.pkg.api.webhook;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import com.greenapi.client.pkg.models.notifications.*;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -16,18 +17,21 @@ public class NotificationMapper {
 
     private final ObjectMapper objectMapper;
 
-    @SneakyThrows
     public Notification get(String responseBody) {
-        var notification = objectMapper.readTree(responseBody);
+        try {
+            var notification = objectMapper.readTree(responseBody);
 
-        if (notification.has("body") && notification.has("receiptId")) {
-            return notificationTypeHandle(notification.get("body"), notification.get("receiptId").asInt());
+            if (notification.has("body") && notification.has("receiptId")) {
+                return notificationTypeHandle(notification.get("body"), notification.get("receiptId").asInt());
 
-        } else if (notification.has("typeWebhook")) {
-            return notificationTypeHandle(notification, null);
+            } else if (notification.has("typeWebhook")) {
+                return notificationTypeHandle(notification, null);
+            }
+
+        } catch (JsonProcessingException e) {
+            new GreenApiClientException("Webhook unknown type, please write to green-api support " + responseBody, e).printStackTrace();
         }
 
-        log.error("Webhook unknown type " + responseBody);
         return null;
     }
 
@@ -54,8 +58,7 @@ public class NotificationMapper {
             }
         }
 
-        log.error("Unknown notification type " + notificationBody.toString());
-        return null;
+        throw new GreenApiClientException("Unknown notification type " + notificationBody);
     }
 
     private Notification messageTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
@@ -115,9 +118,7 @@ public class NotificationMapper {
             case "pollCreationMessage" -> {
                 return PollMessageReceived.class;
             }
+            default -> throw new GreenApiClientException("Message data unknown type " + typeMessage);
         }
-
-        log.error("Message data unknown type " + typeMessage);
-        return null;
     }
 }

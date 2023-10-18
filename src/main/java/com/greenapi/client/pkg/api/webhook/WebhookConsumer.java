@@ -1,6 +1,7 @@
 package com.greenapi.client.pkg.api.webhook;
 
 import com.greenapi.client.pkg.api.GreenApi;
+import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class WebhookConsumer {
             } else {
                 var notification = notificationMapper.get(response.getBody());
                 if (notification == null) {
-                    throw new RuntimeException("Can't map webhook from json!");
+                    throw new GreenApiClientException("Can't map webhook from json!");
                 }
 
                 webhookHandler.handle(notification);

@@ -1,5 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StickerMessageData extends QuotedMessage {
     private String downloadUrl;
     private Boolean isAnimated;

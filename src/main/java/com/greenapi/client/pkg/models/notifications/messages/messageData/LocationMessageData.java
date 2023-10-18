@@ -17,4 +17,6 @@ public class LocationMessageData extends QuotedMessage {
     private String jpegThumbnail;
     private Boolean isForwarded;
     private Integer forwardingScore;
+    private String nameLocation;
+    private String address;
 }

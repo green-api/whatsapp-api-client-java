@@ -1,5 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ButtonMessageData extends QuotedMessage {
     private String message;
     private String footer;
