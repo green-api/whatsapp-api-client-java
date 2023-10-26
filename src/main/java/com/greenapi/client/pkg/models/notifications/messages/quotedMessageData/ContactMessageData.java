@@ -1,15 +1,19 @@
-package com.greenapi.client.pkg.models.notifications.messages.messageData;
+package com.greenapi.client.pkg.models.notifications.messages.quotedMessageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ContactMessageData {
+public class ContactMessageData extends QuotedMessage {
     private String displayName;
     private String vcard;
     private Boolean isForwarded;

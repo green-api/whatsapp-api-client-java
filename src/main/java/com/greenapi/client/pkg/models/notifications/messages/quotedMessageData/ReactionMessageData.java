@@ -1,8 +1,9 @@
-package com.greenapi.client.pkg.models.notifications.messages.messageData;
+package com.greenapi.client.pkg.models.notifications.messages.quotedMessageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -10,9 +11,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class QuotedMessage {
-    private String stanzaId;
-    private String participant;
-    private String typeMessage;
+public class ReactionMessageData extends QuotedMessage {
+    private String text;
 }

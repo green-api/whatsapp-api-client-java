@@ -1,4 +1,4 @@
-package com.greenapi.client.pkg.models.notifications.messages.messageData;
+package com.greenapi.client.pkg.models.notifications.messages.quotedMessageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -9,9 +9,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ListMessageData {
+public class ListMessageData extends QuotedMessage {
     private String contentText;
     private String title;
     private String footer;

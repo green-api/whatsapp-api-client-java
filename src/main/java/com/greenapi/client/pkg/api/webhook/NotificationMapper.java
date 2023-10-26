@@ -3,26 +3,38 @@ package com.greenapi.client.pkg.api.webhook;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import com.greenapi.client.pkg.models.notifications.*;
+import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.QuotedMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 @Log4j2
 public class NotificationMapper {
 
     private final ObjectMapper objectMapper;
 
+    public NotificationMapper() {
+        this.objectMapper = new ObjectMapper();
+
+        var module = new SimpleModule();
+        module.addDeserializer(QuotedMessage.class, new QuotedMessageDeserializer());
+        objectMapper.registerModule(module);
+    }
+
     public Notification get(String responseBody) {
+        int receiptId = -1;
+
         try {
             var notification = objectMapper.readTree(responseBody);
 
             if (notification.has("body") && notification.has("receiptId")) {
-                return notificationTypeHandle(notification.get("body"), notification.get("receiptId").asInt());
+                receiptId = notification.get("receiptId").asInt();
+                return notificationTypeHandle(notification.get("body"), receiptId);
 
             } else if (notification.has("typeWebhook")) {
                 return notificationTypeHandle(notification, null);
@@ -32,7 +44,7 @@ public class NotificationMapper {
             new GreenApiClientException("Webhook unknown type, please write to green-api support " + responseBody, e).printStackTrace();
         }
 
-        return null;
+        return new Notification(receiptId, null);
     }
 
     private Notification notificationTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
