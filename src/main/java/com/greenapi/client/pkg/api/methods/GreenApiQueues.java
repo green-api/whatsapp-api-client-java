@@ -23,15 +23,13 @@ public class GreenApiQueues {
      * https://greenapi.com/en/docs/api/queues/ShowMessagesQueue/
      */
     public ResponseEntity<List<QueueMessage>> showMessagesQueue() {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/showMessagesQueue/")
-            .append(token);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/showMessagesQueue/" +
+            token;
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+        return restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -40,14 +38,12 @@ public class GreenApiQueues {
      * https://greenapi.com/en/docs/api/queues/ClearMessagesQueue/
      */
     public ResponseEntity<ClearMessagesQueueResp> clearMessagesQueue() {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/clearMessagesQueue/")
-            .append(token);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/clearMessagesQueue/" +
+            token;
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, ClearMessagesQueueResp.class);
+        return restTemplate.exchange(url, HttpMethod.GET, null, ClearMessagesQueueResp.class);
     }
 }

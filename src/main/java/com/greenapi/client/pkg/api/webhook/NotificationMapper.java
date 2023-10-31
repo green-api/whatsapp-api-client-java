@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import com.greenapi.client.pkg.models.notifications.*;
 import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.QuotedMessage;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -34,10 +32,10 @@ public class NotificationMapper {
 
             if (notification.has("body") && notification.has("receiptId")) {
                 receiptId = notification.get("receiptId").asInt();
-                return notificationTypeHandle(notification.get("body"), receiptId);
+                return webhookTypeHandle(notification.get("body"), receiptId);
 
             } else if (notification.has("typeWebhook")) {
-                return notificationTypeHandle(notification, null);
+                return webhookTypeHandle(notification, null);
             }
 
         } catch (JsonProcessingException e) {
@@ -47,7 +45,7 @@ public class NotificationMapper {
         return new Notification(receiptId, null);
     }
 
-    private Notification notificationTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
+    private Notification webhookTypeHandle(JsonNode notificationBody, Integer receiptId) throws JsonProcessingException {
 
         switch (notificationBody.get("typeWebhook").asText()) {
             case "incomingMessageReceived", "outgoingMessageReceived", "outgoingAPIMessageReceived" -> {
@@ -57,16 +55,19 @@ public class NotificationMapper {
                 return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), OutgoingMessageStatus.class));
             }
             case "stateInstanceChanged" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountStatus.class));
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), StatusInstanceChanged.class));
             }
             case "statusInstanceChanged" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), AccountSocketStatus.class));
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), StateInstanceChanged.class));
             }
             case "deviceInfo" -> {
-                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), DeviceStatus.class));
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), DeviceInfo.class));
             }
             case "incomingCall" -> {
                 return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingCall.class));
+            }
+            case "incomingBlock" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingBlock.class));
             }
         }
 
@@ -83,52 +84,52 @@ public class NotificationMapper {
     private Class<?> getNotificationClass(String typeMessage) {
         switch (typeMessage) {
             case "quotedMessage" -> {
-                return QuotedMessageReceived.class;
+                return QuotedMessageWebhook.class;
             }
             case "textMessage" -> {
-                return TextMessageReceived.class;
+                return TextMessageWebhook.class;
             }
             case "extendedTextMessage" -> {
-                return UrlMessageReceived.class;
+                return UrlMessageWebhook.class;
             }
             case "imageMessage", "videoMessage", "documentMessage", "audioMessage" -> {
-                return FileMessageReceived.class;
+                return FileMessageWebhook.class;
             }
             case "locationMessage" -> {
-                return LocationMessageReceived.class;
+                return LocationMessageWebhook.class;
             }
             case "contactMessage" -> {
-                return ContactMessageReceived.class;
+                return ContactMessageWebhook.class;
             }
             case "contactsArrayMessage" -> {
-                return ContactsArrayMessageReceived.class;
+                return ContactsArrayMessageWebhook.class;
             }
             case "buttonsMessage" -> {
-                return ButtonMessageReceived.class;
+                return ButtonMessageWebhook.class;
             }
             case "listMessage" -> {
-                return ListMessageReceived.class;
+                return ListMessageWebhook.class;
             }
             case "templateButtonReplyMessage" -> {
-                return TemplateButtonSelectionMessageReceived.class;
+                return TemplateButtonSelectionMessageWebhook.class;
             }
             case "buttonsResponseMessage" -> {
-                return SimpleButtonSelectionMessageReceived.class;
+                return SimpleButtonSelectionMessageWebhook.class;
             }
             case "listResponseMessage" -> {
-                return ListSelectionMessageReceived.class;
+                return ListSelectionMessageWebhook.class;
             }
             case "stickerMessage" -> {
-                return StickerMessageReceived.class;
+                return StickerMessageWebhook.class;
             }
             case "reactionMessage" -> {
-                return ReactionMessageReceived.class;
+                return ReactionMessageWebhook.class;
             }
             case "groupInviteMessage" -> {
-                return GroupInviteMessageReceived.class;
+                return GroupInviteMessageWebhook.class;
             }
             case "pollCreationMessage" -> {
-                return PollMessageReceived.class;
+                return PollMessageWebhook.class;
             }
             default -> throw new GreenApiClientException("Message data unknown type " + typeMessage);
         }

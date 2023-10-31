@@ -19,19 +19,17 @@ public class GreenApiMarking {
      * https://greenapi.com/en/docs/api/marks/ReadChat/
      */
     public ResponseEntity<ReadChatResp> readChat(MessageReq messageReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/readChat/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/readChat/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(messageReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, ReadChatResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, ReadChatResp.class);
     }
 }

@@ -28,20 +28,18 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/SendMessage/
      */
     public ResponseEntity<SendMessageResp> sendMessage(OutgoingMessage message) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendMessage/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendMessage/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(message, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -52,20 +50,18 @@ public class GreenApiSending {
      * When the method is called, a 403 error will be returned.
      */
     public ResponseEntity<SendMessageResp> sendButtons(OutgoingButtons buttons) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendButtons/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendButtons/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(buttons, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -76,20 +72,18 @@ public class GreenApiSending {
      * When the method is called, a 403 error will be returned.
      */
     public ResponseEntity<SendMessageResp> sendTemplateButtons(OutgoingTemplateButtons buttons) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendTemplateButtons/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendTemplateButtons/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(buttons, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -100,20 +94,18 @@ public class GreenApiSending {
      * When the method is called, a 403 error will be returned.
      */
     public ResponseEntity<SendMessageResp> sendListMessage(OutgoingListMessage dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendListMessage/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendListMessage/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -121,20 +113,18 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/SendContact/
      */
     public ResponseEntity<SendMessageResp> sendContact(OutgoingContact contact) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendContact/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendContact/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(contact, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -142,12 +132,10 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/SendFileByUpload/
      */
     public ResponseEntity<SendFileByUploadResp> sendFileByUpload(OutgoingFileByUpload dto) {
-        var stringBuilder = new StringBuilder();
-        stringBuilder
-            .append(hostMedia)
-            .append("/waInstance").append(instanceId)
-            .append("/sendFileByUpload/")
-            .append(instanceToken);
+        String url = hostMedia +
+            "/waInstance" + instanceId +
+            "/sendFileByUpload/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -161,7 +149,7 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(form, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendFileByUploadResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendFileByUploadResp.class);
     }
 
     /**
@@ -169,20 +157,18 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/SendFileByUrl/
      */
     public ResponseEntity<SendMessageResp> sendFileByUrl(OutgoingFileByUrl fileByUrl) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendFileByUrl/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendFileByUrl/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(fileByUrl, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 
     /**
@@ -190,13 +176,11 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/UploadFile/
      */
     public ResponseEntity<UploadFileResp> uploadFile(File file) throws IOException {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(hostMedia)
-            .append("/waInstance").append(instanceId)
-            .append("/uploadFile/")
-            .append(instanceToken);
+        String url = hostMedia +
+            "/waInstance" + instanceId +
+            "/uploadFile/" +
+            instanceToken;
 
         var byteArrayResource = new ByteArrayResource(Files.readAllBytes(file.toPath()));
 
@@ -206,7 +190,7 @@ public class GreenApiSending {
 
         var requestEntity = new HttpEntity<>(byteArrayResource, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, UploadFileResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, UploadFileResp.class);
     }
 
     /**
@@ -214,19 +198,17 @@ public class GreenApiSending {
      * https://greenapi.com/en/docs/api/sending/SendLocation/
      */
     public ResponseEntity<SendMessageResp> sendLocation(OutgoingLocation location) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/sendLocation/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendLocation/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(location, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SendMessageResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
 }

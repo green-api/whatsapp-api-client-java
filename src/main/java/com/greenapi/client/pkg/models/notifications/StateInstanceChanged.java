@@ -1,17 +1,17 @@
 package com.greenapi.client.pkg.models.notifications;
 
-import com.greenapi.client.pkg.models.notifications.messages.AvatarInfo;
 import com.greenapi.client.pkg.models.notifications.messages.InstanceData;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Setter(value = AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ContactAvatar extends NotificationBody {
+@SuperBuilder
+public class StateInstanceChanged extends NotificationBody {
     private InstanceData instanceData;
     private Long timestamp;
-    private AvatarInfo avatarInfo;
+    private String statusInstance;
 }

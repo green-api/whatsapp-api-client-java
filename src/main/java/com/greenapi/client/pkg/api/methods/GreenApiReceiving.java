@@ -17,15 +17,13 @@ public class GreenApiReceiving {
      * https://greenapi.com/en/docs/api/receiving/technology-http-api/ReceiveNotification/
      */
     public ResponseEntity<String> receiveNotification() {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/receiveNotification/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/receiveNotification/" +
+            instanceToken;
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, String.class);
+        return restTemplate.exchange(url, HttpMethod.GET, null, String.class);
     }
 
     /**
@@ -33,16 +31,14 @@ public class GreenApiReceiving {
      * https://greenapi.com/en/docs/api/receiving/technology-http-api/DeleteNotification/
      */
     public ResponseEntity<String> deleteNotification(Integer receiptId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/deleteNotification/")
-            .append(instanceToken)
-            .append("/").append(receiptId);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/deleteNotification/" +
+            instanceToken +
+            "/" + receiptId;
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.DELETE, null, String.class);
+        return restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
     }
 
     /**
@@ -53,19 +49,17 @@ public class GreenApiReceiving {
      * https://greenapi.com/en/docs/api/receiving/files/DownloadFile/
      */
     public ResponseEntity<byte[]> downloadFile(MessageReq messageReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/downloadFile/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/downloadFile/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(messageReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, byte[].class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, byte[].class);
     }
 }

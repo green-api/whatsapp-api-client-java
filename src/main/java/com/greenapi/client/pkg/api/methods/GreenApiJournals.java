@@ -23,19 +23,17 @@ public class GreenApiJournals {
      * https://greenapi.com/en/docs/api/journals/GetChatHistory/
      */
     public ResponseEntity<List<ChatHistoryMessage>> getChatHistory(GetChatHistoryReq getChatHistoryReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getChatHistory/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getChatHistory/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(getChatHistoryReq, headers);
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, new ParameterizedTypeReference<>() {
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -44,20 +42,18 @@ public class GreenApiJournals {
      * https://greenapi.com/en/docs/api/journals/GetMessage/
      */
     public ResponseEntity<ChatMessage> getMessage(MessageReq messageReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getMessage/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getMessage/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(messageReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, ChatMessage.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, ChatMessage.class);
     }
 
     /**
@@ -66,20 +62,18 @@ public class GreenApiJournals {
      * https://greenapi.com/en/docs/api/journals/LastIncomingMessages/
      */
     public ResponseEntity<List<ChatMessage>> lastIncomingMessages(Integer minutes) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/lastIncomingMessages/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/lastIncomingMessages/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(minutes, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -89,20 +83,18 @@ public class GreenApiJournals {
      * https://greenapi.com/en/docs/api/journals/LastOutgoingMessages/
      */
     public ResponseEntity<List<ChatMessage>> lastOutgoingMessages(Integer minutes) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/lastOutgoingMessages/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/lastOutgoingMessages/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(minutes, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
         });
     }
 }

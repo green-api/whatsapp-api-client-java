@@ -1,7 +1,7 @@
 package com.greenapi.client.pkg.api.methods;
 
-import com.greenapi.client.pkg.models.response.*;
 import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -22,13 +22,11 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/CheckWhatsapp/
      */
     public ResponseEntity<CheckWhatsAppResp> checkWhatsapp(Long phoneNumber) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/checkWhatsapp/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/checkWhatsapp/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -38,7 +36,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, CheckWhatsAppResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, CheckWhatsAppResp.class);
     }
 
     /**
@@ -46,13 +44,11 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/GetAvatar/
      */
     public ResponseEntity<GetAvatarResp> getAvatar(String chatId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getAvatar/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getAvatar/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -62,7 +58,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, GetAvatarResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, GetAvatarResp.class);
     }
 
     /**
@@ -70,15 +66,13 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/GetContacts/
      */
     public ResponseEntity<List<GetContactsResp>> getContacts() {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getContacts/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getContacts/" +
+            instanceToken;
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+        return restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -87,13 +81,11 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/GetContactInfo/
      */
     public ResponseEntity<GetContactInfoResp> getContactInfo(String chatId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getContactInfo/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getContactInfo/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -103,7 +95,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, GetContactInfoResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, GetContactInfoResp.class);
     }
 
     /**
@@ -111,20 +103,18 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/deleteMessage/
      */
     public ResponseEntity<String> deleteMessage(MessageReq messageReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/deleteMessage/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/deleteMessage/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(messageReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
     }
 
     /**
@@ -132,9 +122,9 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/archiveChat/
      */
     public ResponseEntity<String> archiveChat(String chatId) {
-        var stringBuilder = new StringBuilder();
+        var url = new StringBuilder();
 
-        stringBuilder
+        url
             .append(host)
             .append("/waInstance").append(instanceId)
             .append("/archiveChat/")
@@ -148,7 +138,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(url.toString(), HttpMethod.POST, requestEntity, String.class);
     }
 
     /**
@@ -156,13 +146,11 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/unarchiveChat/
      */
     public ResponseEntity<String> unarchiveChat(String chatId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/unarchiveChat/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/unarchiveChat/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -172,7 +160,7 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, String.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
     }
 
     /**
@@ -182,13 +170,11 @@ public class GreenApiService {
      * https://greenapi.com/en/docs/api/service/SetDisappearingChat/
      */
     public ResponseEntity<SetDisappearingChatResp> setDisappearingChat(String chatId, Long ephemeralExpiration) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/setDisappearingChat/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/setDisappearingChat/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -199,6 +185,6 @@ public class GreenApiService {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetDisappearingChatResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetDisappearingChatResp.class);
     }
 }

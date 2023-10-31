@@ -12,7 +12,7 @@ public class WebhookExample {
     public static void webhookExample(String[] args) {
         var context = SpringApplication.run(WebhookExample.class, args);
 
-        var webhookConsumer = (WebhookConsumer) context.getBean("webhookConsumer");
-        webhookConsumer.start(notification -> System.out.println("New webhook received: " + notification));
+        var webhookConsumer = context.getBean(WebhookConsumer.class);
+        webhookConsumer.start(System.out::println);
     }
 }

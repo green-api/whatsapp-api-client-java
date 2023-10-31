@@ -1,18 +1,17 @@
 package com.greenapi.client.pkg.models.notifications;
 
 import com.greenapi.client.pkg.models.notifications.messages.InstanceData;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Setter(value = AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountSocketStatus implements NotificationBody {
-    private String typeWebhook;
+public class IncomingBlock extends NotificationBody {
     private InstanceData instanceData;
     private Long timestamp;
-    private String statusInstance;
+    private Long chatId;
+    private String chatState;
 }

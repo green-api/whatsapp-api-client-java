@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.green-api</groupId>
     <artifactId>whatsapp-api-client-java</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <description>WhatsApp java client Green API</description>
     <licenses>
         <license>
@@ -33,6 +33,7 @@
     </developers>
     <properties>
         <java.version>17</java.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
     </properties>
     <distributionManagement>
         <snapshotRepository>
@@ -44,6 +45,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

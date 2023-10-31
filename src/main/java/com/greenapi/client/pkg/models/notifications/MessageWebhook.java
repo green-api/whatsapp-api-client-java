@@ -1,22 +1,18 @@
 package com.greenapi.client.pkg.models.notifications;
 
-import com.greenapi.client.pkg.models.notifications.messages.FileMessage;
 import com.greenapi.client.pkg.models.notifications.messages.InstanceData;
 import com.greenapi.client.pkg.models.notifications.messages.SenderData;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Setter(AccessLevel.NONE)
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class FileMessageReceived implements NotificationBody {
-    private String typeWebhook;
+@SuperBuilder
+public abstract class MessageWebhook extends NotificationBody {
     private InstanceData instanceData;
     private Long timestamp;
     private String idMessage;
     private SenderData senderData;
-    private FileMessage messageData;
 }

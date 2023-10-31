@@ -26,20 +26,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/CreateGroup/
      */
     public ResponseEntity<CreateGroupResp> createGroup(CreateGroupReq createGroupReq) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/createGroup/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/createGroup/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(createGroupReq, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, CreateGroupResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, CreateGroupResp.class);
     }
 
     /**
@@ -47,20 +45,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/UpdateGroupName/
      */
     public ResponseEntity<ChangeGroupNameResp> updateGroupName(ChangeGroupNameReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/updateGroupName/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/updateGroupName/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, ChangeGroupNameResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, ChangeGroupNameResp.class);
     }
 
     /**
@@ -68,13 +64,11 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/GetGroupData/
      */
     public ResponseEntity<GroupData> getGroupData(String groupId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/getGroupData/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getGroupData/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -84,7 +78,7 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, GroupData.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, GroupData.class);
     }
 
     /**
@@ -92,20 +86,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/AddGroupParticipant/
      */
     public ResponseEntity<AddGroupParticipantResp> addGroupParticipant(ChangeParticipantReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/addGroupParticipant/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/addGroupParticipant/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, AddGroupParticipantResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, AddGroupParticipantResp.class);
     }
 
     /**
@@ -113,20 +105,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/RemoveGroupParticipant/
      */
     public ResponseEntity<RemoveGroupParticipantResp> removeGroupParticipant(ChangeParticipantReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/removeGroupParticipant/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/removeGroupParticipant/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, RemoveGroupParticipantResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, RemoveGroupParticipantResp.class);
     }
 
     /**
@@ -134,20 +124,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/SetGroupAdmin/
      */
     public ResponseEntity<SetGroupAdminResp> setGroupAdmin(ChangeParticipantReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/setGroupAdmin/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/setGroupAdmin/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetGroupAdminResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetGroupAdminResp.class);
     }
 
     /**
@@ -155,20 +143,18 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/RemoveAdmin/
      */
     public ResponseEntity<RemoveGroupAdminResp> removeGroupAdmin(ChangeParticipantReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/removeAdmin/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/removeAdmin/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(dto, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, RemoveGroupAdminResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, RemoveGroupAdminResp.class);
     }
 
     /**
@@ -176,13 +162,11 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/SetGroupPicture/
      */
     public ResponseEntity<SetGroupPictureResp> setGroupPicture(ChangeGroupPictureReq dto) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/setGroupPicture/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/setGroupPicture/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -193,7 +177,7 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(form, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, SetGroupPictureResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetGroupPictureResp.class);
     }
 
     /**
@@ -201,13 +185,11 @@ public class GreenApiGroups {
      * https://greenapi.com/en/docs/api/groups/LeaveGroup/
      */
     public ResponseEntity<LeaveGroupResp> leaveGroup(String groupId) {
-        var stringBuilder = new StringBuilder();
 
-        stringBuilder
-            .append(host)
-            .append("/waInstance").append(instanceId)
-            .append("/leaveGroup/")
-            .append(instanceToken);
+        String url = host +
+            "/waInstance" + instanceId +
+            "/leaveGroup/" +
+            instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -217,6 +199,6 @@ public class GreenApiGroups {
 
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
-        return restTemplate.exchange(stringBuilder.toString(), HttpMethod.POST, requestEntity, LeaveGroupResp.class);
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, LeaveGroupResp.class);
     }
 }
