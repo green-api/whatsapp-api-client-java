@@ -1,11 +1,10 @@
-import com.greenapi.client.pkg.api.GreenApi;
-import com.greenapi.client.pkg.models.*;
+import com.greenapi.client.pkg.models.Contact;
+import com.greenapi.client.pkg.models.Option;
 import com.greenapi.client.pkg.models.request.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.IOException;

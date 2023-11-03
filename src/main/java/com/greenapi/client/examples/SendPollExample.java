@@ -2,11 +2,8 @@ package com.greenapi.client.examples;
 
 import com.greenapi.client.pkg.api.GreenApi;
 import com.greenapi.client.pkg.models.Option;
-import com.greenapi.client.pkg.models.request.OutgoingMessage;
 import com.greenapi.client.pkg.models.request.OutgoingPoll;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.Assertions;
-import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 

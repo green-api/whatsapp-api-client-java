@@ -1,7 +1,7 @@
 package com.greenapi.client.examples;
 
-import com.greenapi.client.pkg.models.request.OutgoingFileByUpload;
 import com.greenapi.client.pkg.api.GreenApi;
+import com.greenapi.client.pkg.models.request.OutgoingFileByUpload;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.File;

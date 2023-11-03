@@ -1,7 +1,7 @@
 package com.greenapi.client.pkg.api.methods;
 
-import com.greenapi.client.pkg.models.response.ReadChatResp;
 import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.response.ReadChatResp;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;

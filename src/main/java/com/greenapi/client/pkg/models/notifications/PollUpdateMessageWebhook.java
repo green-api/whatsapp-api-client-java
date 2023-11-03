@@ -1,7 +1,5 @@
 package com.greenapi.client.pkg.models.notifications;
 
-import com.greenapi.client.pkg.models.notifications.MessageWebhook;
-import com.greenapi.client.pkg.models.notifications.messages.PollMessage;
 import com.greenapi.client.pkg.models.notifications.messages.PollUpdateMessage;
 import lombok.*;
 
