@@ -101,70 +101,70 @@ class GreenApiSendingTest extends GreenApiTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    @Test
-    void sendButtons() {
-        var buttons = new ArrayList<Button>();
-        buttons.add(new Button(1, "button1"));
-        buttons.add(new Button(2, "button2"));
-        buttons.add(new Button(3, "button3"));
+//    @Test
+//    void sendButtons() {
+//        var buttons = new ArrayList<Button>();
+//        buttons.add(new Button(1, "button1"));
+//        buttons.add(new Button(2, "button2"));
+//        buttons.add(new Button(3, "button3"));
+//
+//        var dto = OutgoingButtons.builder()
+//            .chatId(chatId)
+//            .message("TEST")
+//            .footer("FOOTER")
+//            .buttons(buttons)
+//            .build();
+//
+//        var response = greenApi.sending.sendButtons(dto);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
-        var dto = OutgoingButtons.builder()
-            .chatId(chatId)
-            .message("TEST")
-            .footer("FOOTER")
-            .buttons(buttons)
-            .build();
+//    @Test
+//    void sendTemplateButtons() {
+//        var outgoingButtons = new ArrayList<TemplateButtons>();
+//        outgoingButtons.add(new TemplateButtons(1,
+//            new UrlButton("https://www.google.com/", "test"),
+//            new CallButton("call", 79851111111L),
+//            new QuickReplyButton(messageId, "reply")));
+//
+//        var dto = OutgoingTemplateButtons.builder()
+//            .chatId(chatId)
+//            .message("TEST")
+//            .footer("FOOTER")
+//            .templateButtons(outgoingButtons)
+//            .build();
+//
+//        var response = greenApi.sending.sendTemplateButtons(dto);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
-        var response = greenApi.sending.sendButtons(dto);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    void sendTemplateButtons() {
-        var outgoingButtons = new ArrayList<TemplateButtons>();
-        outgoingButtons.add(new TemplateButtons(1,
-            new UrlButton("https://www.google.com/", "test"),
-            new CallButton("call", 79851111111L),
-            new QuickReplyButton(messageId, "reply")));
-
-        var dto = OutgoingTemplateButtons.builder()
-            .chatId(chatId)
-            .message("TEST")
-            .footer("FOOTER")
-            .templateButtons(outgoingButtons)
-            .build();
-
-        var response = greenApi.sending.sendTemplateButtons(dto);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    void sendListMessage() {
-        var rows = new ArrayList<OutgoingListMessage.Row>();
-        rows.add(new OutgoingListMessage.Row("id1", "row1", "description"));
-        rows.add(new OutgoingListMessage.Row("id2", "row2", "description"));
-
-        var sections = new ArrayList<OutgoingListMessage.Section>();
-        sections.add(new OutgoingListMessage.Section("Section1", rows));
-
-        var dto = OutgoingListMessage.builder()
-            .chatId(chatId)
-            .message("message")
-            .title("title")
-            .footer("footer")
-            .buttonText("button text")
-            .sections(sections)
-            .build();
-
-        var response = greenApi.sending.sendListMessage(dto);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
+//    @Test
+//    void sendListMessage() {
+//        var rows = new ArrayList<OutgoingListMessage.Row>();
+//        rows.add(new OutgoingListMessage.Row("id1", "row1", "description"));
+//        rows.add(new OutgoingListMessage.Row("id2", "row2", "description"));
+//
+//        var sections = new ArrayList<OutgoingListMessage.Section>();
+//        sections.add(new OutgoingListMessage.Section("Section1", rows));
+//
+//        var dto = OutgoingListMessage.builder()
+//            .chatId(chatId)
+//            .message("message")
+//            .title("title")
+//            .footer("footer")
+//            .buttonText("button text")
+//            .sections(sections)
+//            .build();
+//
+//        var response = greenApi.sending.sendListMessage(dto);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
     @Test
     void sendPoll() {

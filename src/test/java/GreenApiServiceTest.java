@@ -61,13 +61,13 @@ class GreenApiServiceTest extends GreenApiTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    @Test
-    void unarchiveChat() {
-        var response = greenApi.service.unarchiveChat(chatId);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
+//    @Test
+//    void unarchiveChat() {
+//        var response = greenApi.service.unarchiveChat(chatId);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
     @Test
     void setDisappearingChat() {

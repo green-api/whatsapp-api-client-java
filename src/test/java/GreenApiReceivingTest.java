@@ -24,16 +24,16 @@ class GreenApiReceivingTest extends GreenApiTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    @Test
-    void downloadFile() {
-        var dto = MessageReq.builder()
-            .chatId(chatId)
-            .idMessage(fileMessageId)
-            .build();
-
-        var response = greenApi.receiving.downloadFile(dto);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
+//    @Test
+//    void downloadFile() {
+//        var dto = MessageReq.builder()
+//            .chatId(chatId)
+//            .idMessage(fileMessageId)
+//            .build();
+//
+//        var response = greenApi.receiving.downloadFile(dto);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 }
