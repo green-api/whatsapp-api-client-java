@@ -253,6 +253,32 @@ public class UploadFileAndSendByUrlExample {
 }
 ```
 
+### How to send a Poll
+
+Link to example: [SendPollExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendPollExample.java).
+
+```java
+@Log4j2
+public class SendPollExample {
+    private void sendPollExample(GreenApi greenApi) {
+        var options = new ArrayList<Option>();
+        options.add(new Option("option 1"));
+        options.add(new Option("option 2"));
+        options.add(new Option("option 3"));
+
+        var dto = OutgoingPoll.builder()
+            .chatId("111111111111@c.us")
+            .message("text message")
+            .options(options)
+            .multipleAnswers(false)
+            .build();
+
+        var response = greenApi.sending.sendPoll(dto);
+        log.info(response);
+    }
+}
+```
+
 ### How to receive incoming notifications
 
 To start receiving notifications, you need to pass a handler function to `webhookConsumer.start()`. 
