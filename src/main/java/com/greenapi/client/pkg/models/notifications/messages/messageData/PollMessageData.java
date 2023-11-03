@@ -1,8 +1,11 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.greenapi.client.pkg.models.Option;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -11,13 +14,6 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PollMessageData {
     private String name;
-    private Option options;
-    private Integer selectableOptionsCount;
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    static class Option {
-        private String optionName;
-    }
+    private List<Option> options;
+    private boolean multipleAnswers;
 }

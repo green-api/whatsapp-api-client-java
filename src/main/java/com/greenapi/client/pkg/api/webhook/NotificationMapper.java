@@ -131,6 +131,9 @@ public class NotificationMapper {
             case "pollCreationMessage" -> {
                 return PollMessageWebhook.class;
             }
+            case "pollUpdateMessage" -> {
+                return PollUpdateMessageWebhook.class;
+            }
             default -> throw new GreenApiClientException("Message data unknown type " + typeMessage);
         }
     }

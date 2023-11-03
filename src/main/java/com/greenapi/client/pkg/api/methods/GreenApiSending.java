@@ -211,4 +211,23 @@ public class GreenApiSending {
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }
+
+    /**
+     * This method is intended for sending messages with a poll to a private or group chat.
+     * https://greenapi.com/en/docs/api/sending/SendPoll/
+     */
+    public ResponseEntity<SendMessageResp> sendPoll(OutgoingPoll poll) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendPoll/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(poll, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
+    }
 }

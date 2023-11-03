@@ -1,6 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages;
 
-import com.greenapi.client.pkg.models.notifications.messages.messageData.PollMessageData;
+import com.greenapi.client.pkg.models.notifications.messages.messageData.PollUpdateMessageData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PollMessage {
+public class PollUpdateMessage {
     private String typeMessage;
-    private PollMessageData pollMessageData;
+    private PollUpdateMessageData pollMessageData;
 }
