@@ -5,6 +5,7 @@ import com.greenapi.client.pkg.models.response.SendFileByUploadResp;
 import com.greenapi.client.pkg.models.response.SendMessageResp;
 import com.greenapi.client.pkg.models.response.UploadFileResp;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @AllArgsConstructor
+@Log4j2
 public class GreenApiSending {
     private String host;
     private String hostMedia;
@@ -218,11 +220,10 @@ public class GreenApiSending {
      */
     public ResponseEntity<SendMessageResp> sendPoll(OutgoingPoll poll) {
 
-        String url = host +
+        var url = host +
             "/waInstance" + instanceId +
-            "/sendPoll/" +
-            instanceToken;
-
+            "/sendPoll/" + instanceToken;
+        log.info(url);
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
