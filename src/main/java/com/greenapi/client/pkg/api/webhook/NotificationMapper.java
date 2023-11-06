@@ -90,7 +90,7 @@ public class NotificationMapper {
                 return TextMessageWebhook.class;
             }
             case "extendedTextMessage" -> {
-                return UrlMessageWebhook.class;
+                return ExtendedTextMessageWebhook.class;
             }
             case "imageMessage", "videoMessage", "documentMessage", "audioMessage" -> {
                 return FileMessageWebhook.class;
@@ -128,7 +128,7 @@ public class NotificationMapper {
             case "groupInviteMessage" -> {
                 return GroupInviteMessageWebhook.class;
             }
-            case "pollCreationMessage" -> {
+            case "pollMessage" -> {
                 return PollMessageWebhook.class;
             }
             case "pollUpdateMessage" -> {

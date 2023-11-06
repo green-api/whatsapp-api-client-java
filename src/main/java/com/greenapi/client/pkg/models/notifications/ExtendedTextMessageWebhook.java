@@ -1,6 +1,6 @@
 package com.greenapi.client.pkg.models.notifications;
 
-import com.greenapi.client.pkg.models.notifications.messages.UrlMessage;
+import com.greenapi.client.pkg.models.notifications.messages.ExtendedTextMessage;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -9,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UrlMessageWebhook extends MessageWebhook {
-    private UrlMessage messageData;
+public class ExtendedTextMessageWebhook extends MessageWebhook {
+    private ExtendedTextMessage messageData;
 }

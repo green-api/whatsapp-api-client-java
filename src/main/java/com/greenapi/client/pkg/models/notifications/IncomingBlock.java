@@ -12,6 +12,6 @@ import lombok.*;
 public class IncomingBlock extends NotificationBody {
     private InstanceData instanceData;
     private Long timestamp;
-    private Long chatId;
+    private String chatId;
     private String chatState;
 }

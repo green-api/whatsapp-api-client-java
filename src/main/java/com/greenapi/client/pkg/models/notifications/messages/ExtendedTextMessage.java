@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UrlMessage {
+public class ExtendedTextMessage {
     private String typeMessage;
     private ExtendedTextMessageData extendedTextMessageData;
     private QuotedMessage quotedMessage;
