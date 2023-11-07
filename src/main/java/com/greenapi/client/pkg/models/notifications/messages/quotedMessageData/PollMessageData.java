@@ -1,11 +1,14 @@
 package com.greenapi.client.pkg.models.notifications.messages.quotedMessageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.greenapi.client.pkg.models.Option;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,13 +18,6 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PollMessageData extends QuotedMessage {
     private String name;
-    private Option options;
-    private Integer selectableOptionsCount;
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    static class Option {
-        private String optionName;
-    }
+    private List<Option> options;
+    private boolean multipleAnswers;
 }
