@@ -9,17 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SimpleButtonSelectionMessage {
+public class ListResponseMessage {
     private String typeMessage;
-    private ButtonsResponseMessage buttonsResponseMessage;
+    private ListResponseMessageData listResponseMessage;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    private static class ButtonsResponseMessage {
-        private String selectedButtonId;
-        private String selectedButtonText;
+    private static class ListResponseMessageData {
+        private String title;
+        private String listType;
+        private String singleSelectReply;
         private String stanzaId;
     }
 }

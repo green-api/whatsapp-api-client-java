@@ -14,4 +14,5 @@ public class IncomingCall extends NotificationBody {
     private Long timestamp;
     private String idMessage;
     private String from;
+    private String status;
 }

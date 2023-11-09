@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import com.greenapi.client.pkg.models.notifications.*;
 import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.QuotedMessage;
+import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.TemplateButtonReplyMessageData;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -105,19 +106,22 @@ public class NotificationMapper {
                 return ContactsArrayMessageWebhook.class;
             }
             case "buttonsMessage" -> {
-                return ButtonMessageWebhook.class;
+                return ButtonsMessageWebhook.class;
+            }
+            case "buttonsResponseMessage" -> {
+                return ButtonsResponseMessageWebhook.class;
+            }
+            case "templateButtonsReplyMessage" -> {
+                return TemplateButtonsReplyMessageWebhook.class;
+            }
+            case "listResponseMessage" -> {
+                return ListResponseMessageWebhook.class;
             }
             case "listMessage" -> {
                 return ListMessageWebhook.class;
             }
-            case "templateButtonReplyMessage" -> {
-                return TemplateButtonSelectionMessageWebhook.class;
-            }
-            case "buttonsResponseMessage" -> {
-                return SimpleButtonSelectionMessageWebhook.class;
-            }
-            case "listResponseMessage" -> {
-                return ListSelectionMessageWebhook.class;
+            case "templateMessage" -> {
+                return TemplateMessageWebhook.class;
             }
             case "stickerMessage" -> {
                 return StickerMessageWebhook.class;

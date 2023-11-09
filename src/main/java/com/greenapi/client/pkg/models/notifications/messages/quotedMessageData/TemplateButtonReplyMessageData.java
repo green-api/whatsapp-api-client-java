@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TemplateButtonReplyMessage extends QuotedMessage {
+public class TemplateButtonReplyMessageData extends QuotedMessage {
     private String selectedIndex;
     private String selectedId;
     private String selectedDisplayText;

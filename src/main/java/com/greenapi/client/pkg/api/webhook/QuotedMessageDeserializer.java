@@ -23,7 +23,6 @@ public class QuotedMessageDeserializer extends StdDeserializer<QuotedMessage> {
         JsonNode node = jp.getCodec().readTree(jp);
 
         if (node.has("typeMessage")) {
-            var typeMessage = node.get("typeMessage");
             switch (node.get("typeMessage").toString()) {
                 case "buttonMessage" -> {
                     return ctxt.readValue(jp, ButtonMessageData.class);
@@ -59,10 +58,13 @@ public class QuotedMessageDeserializer extends StdDeserializer<QuotedMessage> {
                     return ctxt.readValue(jp, StickerMessageData.class);
                 }
                 case "templateMessage" -> {
-                    return ctxt.readValue(jp, TemplateButtonReplyMessage.class);
+                    return ctxt.readValue(jp, TemplateMessageData.class);
                 }
                 case "textMessage" -> {
                     return ctxt.readValue(jp, TextMessageData.class);
+                }
+                case "templateButtonsReplyMessage" -> {
+                    return ctxt.readValue(jp, TemplateButtonReplyMessageData.class);
                 }
             }
         }

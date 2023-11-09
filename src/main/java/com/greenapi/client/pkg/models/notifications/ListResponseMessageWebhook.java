@@ -1,6 +1,6 @@
 package com.greenapi.client.pkg.models.notifications;
 
-import com.greenapi.client.pkg.models.notifications.messages.ButtonMessage;
+import com.greenapi.client.pkg.models.notifications.messages.ListResponseMessage;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -9,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ButtonMessageWebhook extends MessageWebhook {
-    private ButtonMessage messageData;
+public class ListResponseMessageWebhook extends MessageWebhook {
+    private ListResponseMessage messageData;
 }
