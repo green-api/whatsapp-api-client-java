@@ -86,4 +86,12 @@ class GreenApiAccountTest extends GreenApiTest {
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+//    @Test
+//    void getAuthorizationCode() {
+//        var response = greenApi.account.getAuthorizationCode(79851150769L);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 }

@@ -9,6 +9,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.HashMap;
 
 @AllArgsConstructor
 public class GreenApiAccount {
@@ -152,5 +155,27 @@ public class GreenApiAccount {
         var requestEntity = new HttpEntity<>(form, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetProfilePictureResp.class);
+    }
+
+    /**
+     * The method is intended to authorize an instance by phone number. The method is used as an alternative to the QR method.
+     * https://greenapi.com/en/docs/api/account/GetAuthorizationCode/
+     */
+    public ResponseEntity<GetAuthorizationCodeResp> getAuthorizationCode(Long phoneNumber) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/GetAuthorizationCode/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var body = new HashMap<>();
+        body.put("phoneNumber", phoneNumber);
+
+        var requestEntity = new HttpEntity<>(body, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, GetAuthorizationCodeResp.class);
     }
 }
