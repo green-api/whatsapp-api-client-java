@@ -1,6 +1,6 @@
 # whatsapp-api-client-java
 
-[Ссылка русскоязычную инструкцию](src/main/java/com/greenapi/client/docs/README_RU)
+[Ссылка русскоязычную инструкцию](src/main/java/com/greenapi/client/docs/README_RU.md)
 
 whatsapp-api-client-java is a library for integration with WhatsApp messenger using the API
 service [green-api.com](https://green-api.com/en/). You should get a registration token and an account ID in
