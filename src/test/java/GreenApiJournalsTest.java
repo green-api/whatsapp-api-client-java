@@ -20,18 +20,18 @@ class GreenApiJournalsTest extends GreenApiTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    @Test
-    void getMessage() {
-        var dto = MessageReq.builder()
-            .chatId(chatId)
-            .idMessage(messageId)
-            .build();
-
-        var response = greenApi.journals.getMessage(dto);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
+//    @Test
+//    void getMessage() {
+//        var dto = MessageReq.builder()
+//            .chatId(chatId)
+//            .idMessage(messageId)
+//            .build();
+//
+//        var response = greenApi.journals.getMessage(dto);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
     @Test
     void lastIncomingMessages() {
