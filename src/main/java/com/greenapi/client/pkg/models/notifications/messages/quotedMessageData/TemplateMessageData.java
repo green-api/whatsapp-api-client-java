@@ -2,7 +2,10 @@ package com.greenapi.client.pkg.models.notifications.messages.quotedMessageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.greenapi.client.pkg.models.TemplateButtons;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TemplateMessageData extends QuotedMessage{
+public class TemplateMessageData extends QuotedMessage {
     private String namespace;
     private String elementName;
     private String contentText;

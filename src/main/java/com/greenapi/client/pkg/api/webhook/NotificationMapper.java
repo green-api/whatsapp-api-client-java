@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.greenapi.client.pkg.api.exceptions.GreenApiClientException;
 import com.greenapi.client.pkg.models.notifications.*;
 import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.QuotedMessage;
-import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.TemplateButtonReplyMessageData;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 

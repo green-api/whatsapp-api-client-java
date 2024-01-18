@@ -1,7 +1,6 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.greenapi.client.pkg.models.Button;
 import com.greenapi.client.pkg.models.TemplateButtons;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

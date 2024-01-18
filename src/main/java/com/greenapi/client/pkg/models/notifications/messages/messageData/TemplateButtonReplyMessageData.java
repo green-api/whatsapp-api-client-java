@@ -1,9 +1,10 @@
 package com.greenapi.client.pkg.models.notifications.messages.messageData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.greenapi.client.pkg.models.notifications.messages.quotedMessageData.QuotedMessage;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

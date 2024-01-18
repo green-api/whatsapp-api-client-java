@@ -21,7 +21,7 @@ public class PollUpdateMessageData {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Vote {
+    public static class Vote {
         private String optionName;
         private List<Voter> optionVoters;
     }
@@ -29,7 +29,7 @@ public class PollUpdateMessageData {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Voter {
+    public static class Voter {
         private String wid;
     }
 }

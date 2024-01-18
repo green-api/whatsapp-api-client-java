@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
-import java.sql.Time;
 import java.util.Objects;
 
 @Component

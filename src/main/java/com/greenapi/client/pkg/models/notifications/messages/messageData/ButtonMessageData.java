@@ -24,7 +24,7 @@ public class ButtonMessageData {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    private static class Button {
+    public static class Button {
         private Integer buttonId;
         private String buttonText;
     }
