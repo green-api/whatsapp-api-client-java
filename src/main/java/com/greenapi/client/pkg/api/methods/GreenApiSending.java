@@ -223,7 +223,7 @@ public class GreenApiSending {
         var url = host +
             "/waInstance" + instanceId +
             "/sendPoll/" + instanceToken;
-        log.info(url);
+
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
