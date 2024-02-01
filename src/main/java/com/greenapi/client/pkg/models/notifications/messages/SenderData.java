@@ -14,4 +14,5 @@ public class SenderData {
     private String sender;
     private String chatName;
     private String senderName;
+    private String senderContactName;
 }

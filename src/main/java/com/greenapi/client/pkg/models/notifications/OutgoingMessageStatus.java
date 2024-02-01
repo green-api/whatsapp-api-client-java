@@ -16,4 +16,5 @@ public class OutgoingMessageStatus extends NotificationBody {
     private String idMessage;
     private String status;
     private Boolean sendByApi;
+    private String description;
 }
