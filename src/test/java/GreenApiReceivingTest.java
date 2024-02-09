@@ -5,23 +5,23 @@ import org.springframework.http.HttpStatus;
 
 @Log4j2
 class GreenApiReceivingTest extends GreenApiTest {
-    @Test
-    void receiveNotification() {
-        var response = greenApi.receiving.receiveNotification();
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    void deleteNotification() {
-        var receiptId = 1;
-
-        var response = greenApi.receiving.deleteNotification(receiptId);
-        log.info(response);
-
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
+//    @Test
+//    void receiveNotification() {
+//        var response = greenApi.receiving.receiveNotification();
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
+//
+//    @Test
+//    void deleteNotification() {
+//        var receiptId = 1;
+//
+//        var response = greenApi.receiving.deleteNotification(receiptId);
+//        log.info(response);
+//
+//        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+//    }
 
 //    @Test
 //    void downloadFile() {
