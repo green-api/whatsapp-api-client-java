@@ -26,4 +26,6 @@ public class InstanceSettingsReq {
     private final String stateWebhook;
     private final String enableMessagesHistory;
     private final String keepOnlineStatus;
+    private final String pollMessageWebhook;
+    private final String incomingBlockWebhook;
 }

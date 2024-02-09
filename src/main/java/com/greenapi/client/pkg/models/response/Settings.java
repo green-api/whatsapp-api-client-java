@@ -26,4 +26,6 @@ public class Settings {
     private String stateWebhook;
     private String enableMessagesHistory;
     private String keepOnlineStatus;
+    private String pollMessageWebhook;
+    private String incomingBlockWebhook;
 }
