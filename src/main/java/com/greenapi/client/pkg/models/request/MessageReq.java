@@ -12,4 +12,5 @@ import lombok.RequiredArgsConstructor;
 public class MessageReq {
     private final String chatId;
     private final String idMessage;
+    private String message;
 }

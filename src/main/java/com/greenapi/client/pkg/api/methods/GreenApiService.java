@@ -118,6 +118,24 @@ public class GreenApiService {
     }
 
     /**
+     * The method edits a message in a chat.
+     * https://greenapi.com/en/docs/api/service/editMessage/
+     */
+    public ResponseEntity<String> editMessage(MessageReq messageReq) {
+        String url = host +
+                "/waInstance" + instanceId +
+                "/editMessage/" +
+                instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(messageReq, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+    }
+
+    /**
      * The method archives a chat. One can archive chats that have at least one incoming message.
      * https://greenapi.com/en/docs/api/service/archiveChat/
      */
