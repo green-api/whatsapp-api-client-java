@@ -1,6 +1,7 @@
 package com.greenapi.client.pkg.api.methods;
 
 import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.request.EditMessageReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -121,7 +122,7 @@ public class GreenApiService {
      * The method edits a message in a chat.
      * https://greenapi.com/en/docs/api/service/editMessage/
      */
-    public ResponseEntity<String> editMessage(MessageReq messageReq) {
+    public ResponseEntity<String> editMessage(EditMessageReq messageReq) {
         String url = host +
                 "/waInstance" + instanceId +
                 "/editMessage/" +

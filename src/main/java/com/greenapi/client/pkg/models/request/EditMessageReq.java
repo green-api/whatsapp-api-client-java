@@ -1,15 +1,16 @@
 package com.greenapi.client.pkg.models.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MessageReq {
+public class EditMessageReq {
     private final String chatId;
     private final String idMessage;
+    private String message;
 }
