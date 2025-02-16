@@ -2,6 +2,7 @@ package com.greenapi.client.pkg.api.methods;
 
 import com.greenapi.client.pkg.models.request.MessageReq;
 import com.greenapi.client.pkg.models.request.EditMessageReq;
+import com.greenapi.client.pkg.models.request.DeleteMessageReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
