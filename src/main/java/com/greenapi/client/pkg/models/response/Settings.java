@@ -28,4 +28,7 @@ public class Settings {
     private String keepOnlineStatus;
     private String pollMessageWebhook;
     private String incomingBlockWebhook;
+    private String incomingCallWebhook;
+    private String editedMessageWebhook;
+    private String deletedMessageWebhook;
 }

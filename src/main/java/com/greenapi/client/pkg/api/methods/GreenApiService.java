@@ -103,19 +103,21 @@ public class GreenApiService {
      * The method deletes a message from a chat.
      * https://greenapi.com/en/docs/api/service/deleteMessage/
      */
-    public ResponseEntity<String> deleteMessage(MessageReq messageReq) {
-
+    public ResponseEntity<String> deleteMessage(DeleteMessageReq deleteMessageReq) {
         String url = host +
             "/waInstance" + instanceId +
             "/deleteMessage/" +
             instanceToken;
-
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var requestEntity = new HttpEntity<>(messageReq, headers);
+        var requestEntity = new HttpEntity<>(deleteMessageReq, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+    }
+    // Overloaded method for backward compatibility
+    public ResponseEntity<String> deleteMessage(MessageReq messageReq) {
+        return deleteMessage(DeleteMessageReq.from(messageReq));
     }
 
     /**
