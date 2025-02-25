@@ -1,6 +1,8 @@
 package com.greenapi.client.pkg.api.methods;
 
 import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.request.EditMessageReq;
+import com.greenapi.client.pkg.models.request.DeleteMessageReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -102,12 +104,32 @@ public class GreenApiService {
      * The method deletes a message from a chat.
      * https://greenapi.com/en/docs/api/service/deleteMessage/
      */
-    public ResponseEntity<String> deleteMessage(MessageReq messageReq) {
-
+    public ResponseEntity<String> deleteMessage(DeleteMessageReq deleteMessageReq) {
         String url = host +
             "/waInstance" + instanceId +
             "/deleteMessage/" +
             instanceToken;
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(deleteMessageReq, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+    }
+    // Overloaded method for backward compatibility
+    public ResponseEntity<String> deleteMessage(MessageReq messageReq) {
+        return deleteMessage(DeleteMessageReq.from(messageReq));
+    }
+
+    /**
+     * The method edits a message in a chat.
+     * https://greenapi.com/en/docs/api/service/editMessage/
+     */
+    public ResponseEntity<String> editMessage(EditMessageReq messageReq) {
+        String url = host +
+                "/waInstance" + instanceId +
+                "/editMessage/" +
+                instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

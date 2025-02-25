@@ -28,4 +28,7 @@ public class InstanceSettingsReq {
     private final String keepOnlineStatus;
     private final String pollMessageWebhook;
     private final String incomingBlockWebhook;
+    private final String incomingCallWebhook;
+    private final String editedMessageWebhook;
+    private final String deletedMessageWebhook;
 }
