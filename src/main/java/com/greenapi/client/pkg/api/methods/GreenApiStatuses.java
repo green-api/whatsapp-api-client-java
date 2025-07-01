@@ -1,12 +1,17 @@
 package com.greenapi.client.pkg.api.methods;
 
+import com.greenapi.client.pkg.models.response.ChatMessage;
 import lombok.AllArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import com.greenapi.client.pkg.models.response.SendMessageResp;
+import com.greenapi.client.pkg.models.response.GetStatusStatisticResp;
 import com.greenapi.client.pkg.models.request.SendTextStatusResq;
 import com.greenapi.client.pkg.models.request.SendVoiceStatusResq;
 import com.greenapi.client.pkg.models.request.SendMediaStatusResq;
+
+import java.util.List;
 
 @AllArgsConstructor
 public class GreenApiStatuses {
@@ -116,7 +121,7 @@ public class GreenApiStatuses {
      * The method returns an array of recipients marked sent/delivered/read for a given status
      * https://green-api.com/en/docs/api/statuses/GetStatusStatistic/
      */
-    public ResponseEntity<List<GetStatusStatistic>> GetStatusStatistic(String idMessage) {
+    public ResponseEntity<List<GetStatusStatisticResp>> GetStatusStatistic(String idMessage) {
         
         String url = host +
             "/waInstance" + instanceId +

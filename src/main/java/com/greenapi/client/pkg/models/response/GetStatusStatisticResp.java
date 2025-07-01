@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetStatusStatistic {
+public class GetStatusStatisticResp {
     private String id;
     private String name;
     private String contactName;
