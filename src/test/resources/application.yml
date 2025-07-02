@@ -1,7 +1,7 @@
 green-api:
   host: https://api.green-api.com
   hostMedia: https://media.green-api.com
-  instanceId: 9903225972
+  instanceId: 1101848922
   token: ${GAPI_TOKEN}
   test-data:
     group-chat-id: 120363169960827018@g.us
