@@ -16,6 +16,7 @@ public class GreenApi {
     public GreenApiMarking marking;
     public GreenApiReceiving receiving;
     public GreenApiService service;
+    public GreenApiStatuses statuses;
 
     @Autowired
     public GreenApi(RestTemplate restTemplate,
@@ -31,5 +32,6 @@ public class GreenApi {
         this.marking = new GreenApiMarking(host, instanceId, instanceToken, restTemplate);
         this.receiving = new GreenApiReceiving(host, instanceId, instanceToken, restTemplate);
         this.service = new GreenApiService(host, instanceId, instanceToken, restTemplate);
+        this.statuses = new GreenApiStatuses(host, instanceId, instanceToken, restTemplate);
     }
 }
