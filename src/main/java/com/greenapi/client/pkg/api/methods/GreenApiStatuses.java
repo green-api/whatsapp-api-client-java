@@ -62,7 +62,7 @@ public class GreenApiStatuses {
      * The method is aimed for sending a pictures or video status. 
      * https://green-api.com/en/docs/api/statuses/SendMediaStatus/
      */
-    public ResponseEntity<SendMessageResp> sendTextStatus(SendMediaStatusResq request) {
+    public ResponseEntity<SendMessageResp> sendMediaStatus(SendMediaStatusResq request) {
 
         String url = host +
             "/waInstance" + instanceId +
@@ -82,17 +82,22 @@ public class GreenApiStatuses {
      * In the default mode the incoming status messages for 24 hours are returned.
      * https://green-api.com/en/docs/api/statuses/GetIncomingStatuses/
      */
-    public ResponseEntity<List<ChatMessage>> getIncomingStatuses(Integer minutes) {
+    public ResponseEntity<List<ChatMessage>> getIncomingStatuses() {
+        return getIncomingStatuses(null);
+    }
 
+    public ResponseEntity<List<ChatMessage>> getIncomingStatuses(Integer minutes) {
         String url = host +
-            "/waInstance" + instanceId +
-            "/getIncomingStatuses/" +
-            instanceToken;
+                "/waInstance" + instanceId +
+                "/getIncomingStatuses/" +
+                instanceToken;
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var requestEntity = new HttpEntity<>(minutes, headers);
+        HttpEntity<?> requestEntity = minutes != null
+                ? new HttpEntity<>(minutes, headers)
+                : new HttpEntity<>(headers);
 
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
     }
@@ -102,6 +107,10 @@ public class GreenApiStatuses {
      * In the default mode the outgoing status messages for 24 hours are returned.
      * https://green-api.com/en/docs/api/statuses/GetOutgoingStatuses/
      */
+    public ResponseEntity<List<ChatMessage>> getOutgoingStatuses() {
+        return getOutgoingStatuses(null);
+    }
+
     public ResponseEntity<List<ChatMessage>> getOutgoingStatuses(Integer minutes) {
 
         String url = host +
@@ -112,7 +121,9 @@ public class GreenApiStatuses {
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        var requestEntity = new HttpEntity<>(minutes, headers);
+        HttpEntity<?> requestEntity = minutes != null
+                ? new HttpEntity<>(minutes, headers)
+                : new HttpEntity<>(headers);
 
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
     }
@@ -121,7 +132,7 @@ public class GreenApiStatuses {
      * The method returns an array of recipients marked sent/delivered/read for a given status
      * https://green-api.com/en/docs/api/statuses/GetStatusStatistic/
      */
-    public ResponseEntity<List<GetStatusStatisticResp>> GetStatusStatistic(String idMessage) {
+    public ResponseEntity<List<GetStatusStatisticResp>> getStatusStatistic(String idMessage) {
         
         String url = host +
             "/waInstance" + instanceId +
