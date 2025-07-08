@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StickerMessageData {
     private String downloadUrl;
+    private String caption;
+    private String fileName;
     private Boolean isAnimated;
     private String jpegThumbnail;
     private String mimeType;
