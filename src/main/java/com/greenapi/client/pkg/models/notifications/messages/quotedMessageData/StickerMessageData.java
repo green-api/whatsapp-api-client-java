@@ -15,6 +15,8 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StickerMessageData extends QuotedMessage {
     private String downloadUrl;
+    private String caption;
+    private String fileName;
     private Boolean isAnimated;
     private String jpegThumbnail;
     private String mimeType;
