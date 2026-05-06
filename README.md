@@ -315,6 +315,46 @@ public class WebhookExample {
 }
 ```
 
+
+###  How to work with contacts
+
+Link to example: [ContactsMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ContactsMethodsExample.java).
+
+```java
+
+@Log4j2
+class ContactsMethodsExample {
+
+    private void addContact(GreenApi greenApi) {
+        var addContactReq = AddContactReq.builder()
+            .chatId("11001234567@c.us")
+            .firstName("John")
+            .lastName("Doe")
+            .build();
+
+        var addContactResp = greenApi.contacts.addContact(addContactReq).getBody();
+    }
+
+    private void editContact(GreenApi greenApi) {
+        var editContactReq = EditContactReq.builder()
+            .chatId("11001234567@c.us")
+            .firstName("Jane")
+            .lastName("Smith")
+            .build();
+
+        var editContactResp = greenApi.contacts.editContact(editContactReq).getBody();
+    }
+
+    private void deleteContact(GreenApi greenApi) {
+        var deleteContactReq = DeleteContactReq.builder()
+            .chatId("11001234567@c.us")
+            .build();
+
+        var deleteContactResp = greenApi.contacts.deleteContact(deleteContactReq).getBody();
+    }
+}
+```
+
 Since each notification is automatically cast to a java object, you can filter the notification by any field yourself.
 A description of the structure of notification objects can be found at this link: [Documentation](https://green-api.com/docs/api/receiving/notifications-format/type-webhook/)
 For convenience, all types of hooks and messages are named similarly to the documentation:
@@ -350,6 +390,7 @@ For convenience, all types of hooks and messages are named similarly to the docu
 | How to send a file by URL                     | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUrlExample.java)                   |
 | How to send a file by UploadFile + SendByUrl  | [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UploadFileAndSendByUrlExample.java) |
 | How to receive incoming notifications         | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/WebhookExample.java)                               |
+| How to work with contacts                     | [ContactsMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ContactsMethodsExample.java)                               |
 
 ## List of all library methods
 
@@ -364,6 +405,9 @@ For convenience, all types of hooks and messages are named similarly to the docu
 | `account.qr()`                         | The method is aimed for getting QR code                                                                                                                      | [QR](https://greenapi.com/en/docs/api/account/QR)                                                        |
 | `account.getAuthorizationCode()`       | The method is intended to authorize an instance by phone number. The method is used as an alternative to the QR method.                                      | [GetAuthorizationCode](https://greenapi.com/en/docs/api/account/GetAuthorizationCode)                    |
 | `account.setProfilePicture()`          | The method is aimed for setting an account picture                                                                                                           | [SetProfilePicture](https://greenapi.com/en/docs/api/account/SetProfilePicture)                          |
+| `contacts.addContact()`                | The method is aimed for adding a number to contacts                                                                                                          | [AddContact](https://green-api.com/en/docs/api/contacts/AddContact)                              |
+| `contacts.editContact()`               | The method is used to edit a number in contacts                                                                                                              | [EditContact](https://green-api.com/en/docs/api/contacts/EditContact)                             |
+| `contacts.deleteContact()`             | The method is used to remove a number from contacts                                                                                                          | [DeleteContact](https://green-api.com/en/docs/api/contacts/DeleteContact)                  |
 | `device.getDeviceInfo()`               | The method is aimed for getting information about the device (phone) running WhatsApp Business application                                                   | [GetDeviceInfo](https://greenapi.com/en/docs/api/phone/GetDeviceInfo)                                    |
 | `groups.createGroup()`                 | The method adds a participant to a group chat. IMPORTANT: If one tries to create a group with a non-existent number, WhatsApp may block the sender's number. | [CreateGroup](https://greenapi.com/en/docs/api/groups/CreateGroup)                                       |
 | `groups.updateGroupName()`             | The method changes a group chat name                                                                                                                         | [UpdateGroupName](https://greenapi.com/en/docs/api/groups/UpdateGroupName)                               |

@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class GreenApi {
     public GreenApiAccount account;
+    public GreenApiContacts contacts;
     public GreenApiSending sending;
     public GreenApiJournals journals;
     public GreenApiGroups groups;
@@ -25,6 +26,7 @@ public class GreenApi {
                     @Value("${green-api.instanceId}") String instanceId,
                     @Value("${green-api.token}") String instanceToken) {
         this.account = new GreenApiAccount(host, instanceId, instanceToken, restTemplate);
+        this.contacts = new GreenApiContacts(host, instanceId, instanceToken, restTemplate);
         this.sending = new GreenApiSending(host, hostMedia, instanceId, instanceToken, restTemplate);
         this.journals = new GreenApiJournals(host, instanceId, instanceToken, restTemplate);
         this.groups = new GreenApiGroups(host, instanceId, instanceToken, restTemplate);
