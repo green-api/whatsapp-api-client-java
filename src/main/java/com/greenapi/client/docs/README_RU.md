@@ -334,6 +334,46 @@ public class WebhookExample {
 }
 ```
 
+### Как работать с контактами
+
+Ссылка на
+пример: [ContactsMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ContactsMethodsExample.java).
+
+```java
+
+@Log4j2
+class ContactsMethodsExample {
+
+    private void addContact(GreenApi greenApi) {
+        var addContactReq = AddContactReq.builder()
+            .chatId("11001234567@c.us")
+            .firstName("John")
+            .lastName("Doe")
+            .build();
+
+        var addContactResp = greenApi.contacts.addContact(addContactReq).getBody();
+    }
+
+    private void editContact(GreenApi greenApi) {
+        var editContactReq = EditContactReq.builder()
+            .chatId("11001234567@c.us")
+            .firstName("Jane")
+            .lastName("Smith")
+            .build();
+
+        var editContactResp = greenApi.contacts.editContact(editContactReq).getBody();
+    }
+
+    private void deleteContact(GreenApi greenApi) {
+        var deleteContactReq = DeleteContactReq.builder()
+            .chatId("11001234567@c.us")
+            .build();
+
+        var deleteContactResp = greenApi.contacts.deleteContact(deleteContactReq).getBody();
+    }
+}
+```
+
 Так как каждое уведомление автоматически кастится до java объекта, вы можете фильтровать уведомление по любому полю
 самостоятельно.
 С описанием структуры объектов уведомлений можно ознакомиться по этой
@@ -371,6 +411,7 @@ public class WebhookExample {
 | Как отправить файл через ссылку                 | [SendFileByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileByUrlExample.java)                   |
 | Как отправить файл через uploadFile + sendByUrl | [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UploadFileAndSendByUrlExample.java) |
 | Как получать входящие уведомления               | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/WebhookExample.java)                               |
+| Как работать с контактами                       | [ContactsMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ContactsMethodsExample.java)                               |
 
 ## Список всех методов библиотеки
 
@@ -385,6 +426,9 @@ public class WebhookExample {
 | `account.qr()`                    | Метод предназначен для получения QR-кода                                                                                  | [QR](https://green-api.com/docs/api/account/QR)                                                         |
 | `account.getAuthorizationCode()`  | Метод предназначен для авторизации экземпляра по номеру телефона. Метод используется как альтернатива методу QR.          | [GetAuthorizationCode](https://green-api.com/docs/api/account/GetAuthorizationCode)                     |
 | `account.setProfilePicture()`     | Метод предназначен для установки аватара аккаунта                                                                         | [SetProfilePicture](https://green-api.com/docs/api/account/SetProfilePicture)                           |
+| `contacts.addContact()`           | Метод предназначен для добавления контакта                                                                                | [AddContact](https://green-api.com/docs/api/contacts/AddContact)                         |
+| `contacts.editContact()`          | Метод предназначен для изменения контакта                                                                                 | [EditContact](https://green-api.com/docs/api/contacts/EditContact)                        |
+| `contacts.deleteContact()`        | Метод предназначен для удаления контакта                                                                                  | [DeleteContact](https://green-api.com/docs/api/contacts/DeleteContact)             |
 | `device.getDeviceInfo()`          | Метод предназначен для получения информации об устройстве (телефоне), на котором запущено приложение WhatsApp Business    | [GetDeviceInfo](https://green-api.com/docs/api/phone/GetDeviceInfo)                                     |
 | `groups.createGroup()`            | Метод предназначен для создания группового чата                                                                           | [CreateGroup](https://green-api.com/docs/api/groups/CreateGroup)                                        |
 | `groups.updateGroupName()`        | Метод изменяет наименование группового чата                                                                               | [UpdateGroupName](https://green-api.com/docs/api/groups/UpdateGroupName)                                |
