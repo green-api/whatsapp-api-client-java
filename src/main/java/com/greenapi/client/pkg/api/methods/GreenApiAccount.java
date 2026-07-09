@@ -3,6 +3,7 @@ package com.greenapi.client.pkg.api.methods;
 import com.greenapi.client.pkg.models.request.InstanceSettingsReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 @AllArgsConstructor
 public class GreenApiAccount {
@@ -153,6 +155,52 @@ public class GreenApiAccount {
         var requestEntity = new HttpEntity<>(form, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetProfilePictureResp.class);
+    }
+
+    /**
+     * The method returns the authorization state history of the instance.
+     * https://green-api.com/en/docs/api/account/GetStateInstanceHistory/
+     */
+    public ResponseEntity<List<StateInstanceHistoryRecord>> getStateInstanceHistory() {
+        return getStateInstanceHistory(null);
+    }
+
+    public ResponseEntity<List<StateInstanceHistoryRecord>> getStateInstanceHistory(Integer count) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/GetStateInstanceHistory/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<?> requestEntity;
+        if (count != null) {
+            var body = new HashMap<String, Integer>();
+            body.put("count", count);
+            requestEntity = new HttpEntity<>(body, headers);
+        } else {
+            requestEntity = new HttpEntity<>(headers);
+        }
+
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
+    }
+
+    /**
+     * The method generates a new API token for the instance and invalidates the old one.
+     * https://green-api.com/en/docs/api/account/UpdateApiToken/
+     * <p>
+     * Beta version - functionality may change and work inconsistently.
+     */
+    public ResponseEntity<UpdateApiTokenResp> updateApiToken() {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/updateApiToken/" +
+            instanceToken;
+
+        return restTemplate.exchange(url, HttpMethod.GET, null, UpdateApiTokenResp.class);
     }
 
     /**

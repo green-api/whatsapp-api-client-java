@@ -374,6 +374,275 @@ class ContactsMethodsExample {
 }
 ```
 
+### Как переслать сообщения
+
+Ссылка на пример: [ForwardMessagesExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ForwardMessagesExample.java).
+
+```java
+@Log4j2
+public class ForwardMessagesExample {
+
+    private void forwardMessagesExample(GreenApi greenApi) {
+        var response = greenApi.sending.forwardMessages(
+            ForwardMessagesReq.builder()
+                .chatId("11001234567@c.us")
+                .chatIdFrom("11007654321@c.us")
+                .messages(List.of("BAE5DBA5EC1D79E4", "BAE5DBA5EC1D79E5"))
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Forwarded message ids: " + Objects.requireNonNull(response.getBody()).getMessages());
+        } else {
+            log.warn("Forward failed, status: " + response.getStatusCode());
+        }
+    }
+}
+```
+
+### Как отправить интерактивные кнопки
+
+Ссылка на пример: [SendInteractiveButtonsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendInteractiveButtonsExample.java).
+
+```java
+@Log4j2
+public class SendInteractiveButtonsExample {
+
+    private void sendInteractiveButtonsExample(GreenApi greenApi) {
+        var buttons = List.of(
+            InteractiveButton.builder()
+                .type("url")
+                .buttonId("1")
+                .buttonText("Открыть сайт")
+                .url("https://green-api.com")
+                .build(),
+            InteractiveButton.builder()
+                .type("call")
+                .buttonId("2")
+                .buttonText("Позвонить нам")
+                .phoneNumber("11001234567")
+                .build()
+        );
+
+        var response = greenApi.sending.sendInteractiveButtons(
+            OutgoingInteractiveButtons.builder()
+                .chatId("11001234567@c.us")
+                .header("Поддержка")
+                .body("Выберите действие")
+                .footer("GREEN-API")
+                .buttons(buttons)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Кнопки отправлены, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
+        }
+    }
+
+    private void sendInteractiveButtonsReplyExample(GreenApi greenApi) {
+        var buttons = List.of(
+            InteractiveReplyButton.builder().buttonId("1").buttonText("Да").build(),
+            InteractiveReplyButton.builder().buttonId("2").buttonText("Нет").build()
+        );
+
+        var response = greenApi.sending.sendInteractiveButtonsReply(
+            OutgoingInteractiveButtonsReply.builder()
+                .chatId("11001234567@c.us")
+                .body("Подтвердить заказ?")
+                .footer("Заказ #12345")
+                .buttons(buttons)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Кнопки-ответы отправлены, id: " + Objects.requireNonNull(response.getBody()).getIdMessage());
+        }
+    }
+}
+```
+
+### Как показать индикатор набора текста
+
+Ссылка на пример: [SendTypingExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendTypingExample.java).
+
+```java
+@Log4j2
+public class SendTypingExample {
+
+    private void sendTypingExample(GreenApi greenApi) {
+        var response = greenApi.service.sendTyping(
+            SendTypingReq.builder()
+                .chatId("11001234567@c.us")
+                .typingTime(3000)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Индикатор набора отправлен");
+        }
+    }
+
+    private void sendRecordingExample(GreenApi greenApi) {
+        var response = greenApi.service.sendTyping(
+            SendTypingReq.builder()
+                .chatId("11001234567@c.us")
+                .typingTime(5000)
+                .typingType("recording")
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Индикатор записи отправлен");
+        }
+    }
+}
+```
+
+### Как получить список чатов
+
+Ссылка на пример: [GetChatsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/GetChatsExample.java).
+
+```java
+@Log4j2
+public class GetChatsExample {
+
+    private void getAllChatsExample(GreenApi greenApi) {
+        var response = greenApi.service.getChats();
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            var chats = Objects.requireNonNull(response.getBody());
+            log.info("Всего чатов: " + chats.size());
+            chats.forEach(chat -> log.info(chat.getId() + " | " + chat.getName()));
+        }
+    }
+
+    private void getTopChatsExample(GreenApi greenApi) {
+        var response = greenApi.service.getChats(10);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Objects.requireNonNull(response.getBody())
+                .forEach(chat -> log.info(chat.getName() + " [архив: " + chat.getArchive() + "]"));
+        }
+    }
+}
+```
+
+### Как получить журнал звонков
+
+Ссылка на пример: [CallsJournalExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CallsJournalExample.java).
+
+```java
+@Log4j2
+public class CallsJournalExample {
+
+    private void lastIncomingCallsExample(GreenApi greenApi) {
+        var response = greenApi.journals.lastIncomingCalls(60);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Objects.requireNonNull(response.getBody())
+                .forEach(call -> log.info("Входящий от " + call.getChatId() + ", статус: " + call.getStatus()));
+        }
+    }
+
+    private void lastOutgoingCallsExample(GreenApi greenApi) {
+        var response = greenApi.journals.lastOutgoingCalls();
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Objects.requireNonNull(response.getBody())
+                .forEach(call -> log.info("Исходящий на " + call.getChatId() + ", длительность: " + call.getDuration() + "с"));
+        }
+    }
+}
+```
+
+### Как обновить настройки группы
+
+Ссылка на пример: [UpdateGroupSettingsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UpdateGroupSettingsExample.java).
+
+```java
+@Log4j2
+public class UpdateGroupSettingsExample {
+
+    private void lockGroupExample(GreenApi greenApi) {
+        var response = greenApi.groups.updateGroupSettings(
+            UpdateGroupSettingsReq.builder()
+                .groupId("11001234567-1111111111@g.us")
+                .allowParticipantsSendMessages(false)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Группа заблокирована: " + Objects.requireNonNull(response.getBody()).getUpdateGroupSettings());
+        }
+    }
+}
+```
+
+### Как использовать методы аккаунта
+
+Ссылка на пример: [AccountMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/AccountMethodsExample.java).
+
+```java
+@Log4j2
+public class AccountMethodsExample {
+
+    private void getStateInstanceHistoryExample(GreenApi greenApi) {
+        var response = greenApi.account.getStateInstanceHistory(50);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            Objects.requireNonNull(response.getBody())
+                .forEach(r -> log.info(r.getStateInstance() + " в " + r.getTimestamp()));
+        }
+    }
+
+    private void updateApiTokenExample(GreenApi greenApi) {
+        var response = greenApi.account.updateApiToken();
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Новый токен: " + Objects.requireNonNull(response.getBody()).getApiTokenInstance());
+        }
+    }
+}
+```
+
+### Как отправить сообщение с имитацией набора и кастомным превью
+
+Ссылка на пример: [SendMessageWithPreviewExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendMessageWithPreviewExample.java).
+
+```java
+@Log4j2
+public class SendMessageWithPreviewExample {
+
+    private void sendWithTypingExample(GreenApi greenApi) {
+        var response = greenApi.sending.sendMessage(
+            OutgoingMessage.builder()
+                .chatId("11001234567@c.us")
+                .message("Привет! Я долго это писал...")
+                .typingTime(4000)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Сообщение отправлено с имитацией набора");
+        }
+    }
+
+    private void sendWithCustomPreviewExample(GreenApi greenApi) {
+        var customPreview = CustomPreview.builder()
+            .title("Документация GREEN-API")
+            .description("Полный справочник WhatsApp API")
+            .link("green-api.com")
+            .build();
+
+        var response = greenApi.sending.sendMessage(
+            OutgoingMessage.builder()
+                .chatId("11001234567@c.us")
+                .message("Смотрите доку: https://green-api.com/docs/api/")
+                .linkPreview(true)
+                .typePreview("large")
+                .customPreview(customPreview)
+                .build());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Сообщение с кастомным превью отправлено");
+        }
+    }
+}
+```
+
 Так как каждое уведомление автоматически кастится до java объекта, вы можете фильтровать уведомление по любому полю
 самостоятельно.
 С описанием структуры объектов уведомлений можно ознакомиться по этой
@@ -412,6 +681,16 @@ class ContactsMethodsExample {
 | Как отправить файл через uploadFile + sendByUrl | [UploadFileAndSendByUrlExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UploadFileAndSendByUrlExample.java) |
 | Как получать входящие уведомления               | [WebhookExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/WebhookExample.java)                               |
 | Как работать с контактами                       | [ContactsMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ContactsMethodsExample.java)                               |
+| Как переслать сообщения                         | [ForwardMessagesExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/ForwardMessagesExample.java)                               |
+| Как отправить интерактивные кнопки              | [SendInteractiveButtonsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendInteractiveButtonsExample.java)                 |
+| Как показать индикатор набора текста/записи     | [SendTypingExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendTypingExample.java)                                         |
+| Как получить список чатов                       | [GetChatsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/GetChatsExample.java)                                             |
+| Как получить журнал входящих и исходящих звонков | [CallsJournalExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CallsJournalExample.java)                                    |
+| Как обновить настройки группы                   | [UpdateGroupSettingsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UpdateGroupSettingsExample.java)                       |
+| Как использовать getStateInstanceHistory и updateApiToken | [AccountMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/AccountMethodsExample.java)                       |
+| Как удалить статус                              | [DeleteStatusExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/DeleteStatusExample.java)                                     |
+| Как отправить сообщение с имитацией набора и кастомным превью | [SendMessageWithPreviewExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendMessageWithPreviewExample.java) |
+| Как отправить файл с индикатором набора         | [SendFileWithTypingExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendFileWithTypingExample.java)                         |
 
 ## Список всех методов библиотеки
 
@@ -426,6 +705,8 @@ class ContactsMethodsExample {
 | `account.qr()`                    | Метод предназначен для получения QR-кода                                                                                  | [QR](https://green-api.com/docs/api/account/QR)                                                         |
 | `account.getAuthorizationCode()`  | Метод предназначен для авторизации экземпляра по номеру телефона. Метод используется как альтернатива методу QR.          | [GetAuthorizationCode](https://green-api.com/docs/api/account/GetAuthorizationCode)                     |
 | `account.setProfilePicture()`     | Метод предназначен для установки аватара аккаунта                                                                         | [SetProfilePicture](https://green-api.com/docs/api/account/SetProfilePicture)                           |
+| `account.getStateInstanceHistory()` | Метод возвращает историю изменений состояния инстанса                                                                   | [GetStateInstanceHistory](https://green-api.com/docs/api/account/GetStateInstanceHistory/)              |
+| `account.updateApiToken()`        | Метод генерирует новый API-токен для инстанса                                                                             | [UpdateApiToken](https://green-api.com/docs/api/account/UpdateApiToken/)                                |
 | `contacts.addContact()`           | Метод предназначен для добавления контакта                                                                                | [AddContact](https://green-api.com/docs/api/contacts/AddContact)                         |
 | `contacts.editContact()`          | Метод предназначен для изменения контакта                                                                                 | [EditContact](https://green-api.com/docs/api/contacts/EditContact)                        |
 | `contacts.deleteContact()`        | Метод предназначен для удаления контакта                                                                                  | [DeleteContact](https://green-api.com/docs/api/contacts/DeleteContact)             |
@@ -439,10 +720,13 @@ class ContactsMethodsExample {
 | `groups.removeAdmin()`            | Метод лишает участника прав администрирования группового чата                                                             | [RemoveAdmin](https://green-api.com/docs/api/groups/RemoveAdmin)                                        |
 | `groups.setGroupPicture()`        | Метод устанавливает аватар группы                                                                                         | [SetGroupPicture](https://green-api.com/docs/api/groups/SetGroupPicture)                                |
 | `groups.leaveGroup()`             | Метод производит выход пользователя текущего аккаунта из группового чата                                                  | [LeaveGroup](https://green-api.com/docs/api/groups/LeaveGroup)                                          |
+| `groups.updateGroupSettings()`    | Метод обновляет настройки прав группы (кто может отправлять сообщения, редактировать информацию группы)                   | [UpdateGroupSettings](https://green-api.com/docs/api/groups/UpdateGroupSettings/)                       |
 | `journals.getChatHistory()`       | Метод возвращает историю сообщений чата                                                                                   | [GetChatHistory](https://green-api.com/docs/api/journals/GetChatHistory)                                |
 | `journals.getMessage()`           | Метод возвращает сообщение чата                                                                                           | [GetMessage](https://green-api.com/docs/api/journals/GetMessage)                                        |
 | `journals.lastIncomingMessages()` | Метод возвращает крайние входящие сообщения аккаунта                                                                      | [LastIncomingMessages](https://green-api.com/docs/api/journals/LastIncomingMessages)                    |
 | `journals.lastOutgoingMessages()` | Метод возвращает крайние отправленные сообщения аккаунта                                                                  | [LastOutgoingMessages](https://green-api.com/docs/api/journals/LastOutgoingMessages)                    |
+| `journals.lastIncomingCalls()`    | Метод возвращает последние входящие звонки аккаунта                                                                       | [LastIncomingCalls](https://green-api.com/docs/api/journals/LastIncomingCalls/)                         |
+| `journals.lastOutgoingCalls()`    | Метод возвращает последние исходящие звонки аккаунта                                                                      | [LastOutgoingCalls](https://green-api.com/docs/api/journals/LastOutgoingCalls/)                         |
 | `queues.showMessagesQueue()`      | Метод предназначен для получения списка сообщений, находящихся в очереди на отправку                                      | [ShowMessagesQueue](https://green-api.com/docs/api/queues/ShowMessagesQueue)                            |
 | `queues.clearMessagesQueue()`     | Метод предназначен для очистки очереди сообщений на отправку                                                              | [ClearMessagesQueue](https://green-api.com/docs/api/queues/ClearMessagesQueue)                          |
 | `readMark.readChat()`             | Метод предназначен для отметки сообщений в чате прочитанными                                                              | [ReadChat](https://green-api.com/docs/api/marks/ReadChat)                                               |
@@ -461,6 +745,8 @@ class ContactsMethodsExample {
 | `sending.sendContact()`           | Метод предназначен для отправки сообщения с контактом                                                                     | [SendContact](https://green-api.com/docs/api/sending/SendContact)                                       |
 | `sending.sendLink()`              | Метод предназначен для отправки сообщения со ссылкой, по которой будут добавлены превью изображения, заголовок и описание | [SendLink](https://green-api.com/docs/api/sending/SendLink)                                             |
 | `sending.forwardMessages()`       | Метод предназначен для пересылки сообщений в личный или групповой чат                                                     | [ForwardMessages](https://green-api.com/docs/api/sending/ForwardMessages)                               |
+| `sending.sendInteractiveButtons()` | Метод отправляет сообщение с кнопками-действиями (url, звонок, копирование кода) в чат                                  | [SendInteractiveButtons](https://green-api.com/docs/api/sending/SendInteractiveButtons/)                |
+| `sending.sendInteractiveButtonsReply()` | Метод отправляет сообщение с кнопками-ответами в чат. Бета-функция                                                 | [SendInteractiveButtonsReply](https://green-api.com/docs/api/sending/SendInteractiveButtonsReply/)      |
 | `service.checkWhatsapp()`         | Метод проверяет наличие аккаунта WhatsApp на номере телефона                                                              | [CheckWhatsapp](https://green-api.com/docs/api/service/CheckWhatsapp)                                   |
 | `service.getAvatar()`             | Метод возвращает аватар корреспондента или группового чата                                                                | [GetAvatar](https://green-api.com/docs/api/service/GetAvatar)                                           |
 | `service.getContacts()`           | Метод предназначен для получения списка контактов текущего аккаунта                                                       | [GetContacts](https://green-api.com/docs/api/service/GetContacts)                                       |
@@ -469,6 +755,9 @@ class ContactsMethodsExample {
 | `service.archiveChat()`           | Метод архивирует чат                                                                                                      | [ArchiveChat](https://green-api.com/docs/api/service/archiveChat)                                       |
 | `service.unarchiveChat()`         | Метод разархивирует чат                                                                                                   | [UnarchiveChat](https://green-api.com/docs/api/service/unarchiveChat)                                   |
 | `service.setDisappearingChat()`   | Метод предназначен для изменения настроек исчезающих сообщений в чатах                                                    | [SetDisappearingChat](https://green-api.com/docs/api/service/SetDisappearingChat)                       |
+| `service.editMessage()`           | Метод предназначен для редактирования текстового сообщения в чате                                                         | [EditMessage](https://green-api.com/docs/api/service/EditMessage/)                                      |
+| `service.sendTyping()`            | Метод показывает получателю индикатор набора текста или записи аудио                                                      | [SendTyping](https://green-api.com/docs/api/service/SendTyping/)                                        |
+| `service.getChats()`              | Метод возвращает список чатов текущего аккаунта                                                                           | [GetChats](https://green-api.com/docs/api/service/GetChats/)                                            |
 | `webhook.start()`                 | Метод предназначен для старта получения новых уведомлений                                                                 |                                                                                                                           |
 | `webhook.stop()`                  | Метод предназначен для остановки получения новых уведомлений                                                              |                                                                                                                           |
 | `statuses.sendTextStatus()`              | Метод предназначен для отправки текстового статуса                                                                        | [SendTextStatus](https://green-api.com/docs/api/statuses/SendTextStatus/)                                |
@@ -477,6 +766,7 @@ class ContactsMethodsExample {
 | `statuses.getIncomingStatuses()`         | Метод возвращает крайние входящие статусы аккаунта                                                                        | [GetIncomingStatuses](https://green-api.com/docs/api/statuses/GetIncomingStatuses/)                      |
 | `statuses.getOutgoingStatuses()`         | Метод возвращает крайние отправленные статусы аккаунта                                                                    | [GetOutgoingStatuses](https://green-api.com/docs/api/statuses/GetOutgoingStatuses/)                      |
 | `statuses.getStatusStatistic()`          | Метод возвращает массив получателей со статусами, отмеченных как отправлено/доставлено/прочитано, для данного статуса     | [GetStatusStatistic](https://green-api.com/docs/api/statuses/GetStatusStatistic/)                        |
+| `statuses.deleteStatus()`                | Метод удаляет отправленный статус                                                                                         | [DeleteStatus](https://green-api.com/docs/api/statuses/DeleteStatus/)                                    |
 
 ## Документация по методам сервиса
 

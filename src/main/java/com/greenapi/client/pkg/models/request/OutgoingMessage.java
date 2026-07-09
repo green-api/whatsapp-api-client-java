@@ -12,4 +12,7 @@ import lombok.experimental.SuperBuilder;
 public class OutgoingMessage extends Outgoing {
     private final String message;
     private final Boolean linkPreview;
+    private final String typePreview;
+    private final CustomPreview customPreview;
+    private final Integer typingTime;
 }

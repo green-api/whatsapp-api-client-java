@@ -1,12 +1,14 @@
 package com.greenapi.client.pkg.models.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@SuperBuilder
+@RequiredArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DeleteContactReq {
-    private final String chatId;
+public class DeleteStatusReq {
+    private final String idMessage;
 }

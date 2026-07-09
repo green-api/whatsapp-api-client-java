@@ -13,4 +13,6 @@ public class OutgoingFileByUrl extends Outgoing {
     private final String urlFile;
     private final String fileName;
     private final String caption;
+    private final Integer typingTime;
+    private final String typingType;
 }
