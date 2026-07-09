@@ -15,4 +15,6 @@ public class OutgoingFileByUpload extends Outgoing {
     private final File file;
     private final String fileName;
     private final String caption;
+    private final Integer typingTime;
+    private final String typingType;
 }

@@ -1,8 +1,9 @@
 package com.greenapi.client.pkg.api.methods;
 
-import com.greenapi.client.pkg.models.request.MessageReq;
-import com.greenapi.client.pkg.models.request.EditMessageReq;
 import com.greenapi.client.pkg.models.request.DeleteMessageReq;
+import com.greenapi.client.pkg.models.request.EditMessageReq;
+import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.request.SendTypingReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 public class GreenApiService {
@@ -183,6 +185,51 @@ public class GreenApiService {
         var requestEntity = new HttpEntity<>(requestBody, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+    }
+
+    /**
+     * The method sends a typing indicator to the specified chat.
+     * typingType can be set to "recording" to show an audio recording indicator instead.
+     * https://green-api.com/en/docs/api/service/SendTyping/
+     */
+    public ResponseEntity<Void> sendTyping(SendTypingReq dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendTyping/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, Void.class);
+    }
+
+    /**
+     * The method returns the list of current account chats, sorted by activity time.
+     * https://green-api.com/en/docs/api/service/GetChats/
+     */
+    public ResponseEntity<List<GetChatsResp>> getChats() {
+        return getChats(null);
+    }
+
+    public ResponseEntity<List<GetChatsResp>> getChats(Integer count) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/getChats/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<?> requestEntity = count != null
+            ? new HttpEntity<>(Map.of("count", count), headers)
+            : new HttpEntity<>(headers);
+
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
     }
 
     /**

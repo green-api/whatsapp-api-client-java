@@ -1,6 +1,7 @@
 package com.greenapi.client.pkg.api.methods;
 
 import com.greenapi.client.pkg.models.request.*;
+import com.greenapi.client.pkg.models.response.ForwardMessagesResp;
 import com.greenapi.client.pkg.models.response.SendFileByUploadResp;
 import com.greenapi.client.pkg.models.response.SendMessageResp;
 import com.greenapi.client.pkg.models.response.UploadFileResp;
@@ -148,6 +149,12 @@ public class GreenApiSending {
         form.add("fileName", dto.getFileName());
         form.add("caption", dto.getCaption());
         form.add("quotedMessageId", dto.getQuotedMessageId());
+        if (dto.getTypingTime() != null) {
+            form.add("typingTime", dto.getTypingTime());
+        }
+        if (dto.getTypingType() != null) {
+            form.add("typingType", dto.getTypingType());
+        }
 
         var requestEntity = new HttpEntity<>(form, headers);
 
@@ -210,6 +217,67 @@ public class GreenApiSending {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var requestEntity = new HttpEntity<>(location, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
+    }
+
+    /**
+     * The method is aimed for forwarding messages to a personal or a group chat.
+     * https://green-api.com/en/docs/api/sending/ForwardMessages/
+     */
+    public ResponseEntity<ForwardMessagesResp> forwardMessages(ForwardMessagesReq dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/forwardMessages/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, ForwardMessagesResp.class);
+    }
+
+    /**
+     * The method is aimed for sending a message with interactive buttons to a personal or a group chat.
+     * Supported button types: copy, call, url.
+     * https://green-api.com/en/docs/api/sending/SendInteractiveButtons/
+     */
+    public ResponseEntity<SendMessageResp> sendInteractiveButtons(OutgoingInteractiveButtons dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendInteractiveButtons/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
+    }
+
+    /**
+     * The method is aimed for sending a message with reply buttons to a personal or a group chat.
+     * Buttons return their text back into the conversation when clicked.
+     * https://green-api.com/en/docs/api/sending/SendInteractiveButtonsReply/
+     * <p>
+     * Beta version - functionality may change and work inconsistently.
+     */
+    public ResponseEntity<SendMessageResp> sendInteractiveButtonsReply(OutgoingInteractiveButtonsReply dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/sendInteractiveButtonsReply/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SendMessageResp.class);
     }

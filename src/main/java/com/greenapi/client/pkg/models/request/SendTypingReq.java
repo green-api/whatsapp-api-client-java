@@ -1,15 +1,16 @@
 package com.greenapi.client.pkg.models.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@SuperBuilder
+@RequiredArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EditContactReq {
+public class SendTypingReq {
     private final String chatId;
-    private final String firstName;
-    private final String lastName;
-    private final Boolean saveInAddressbook;
+    private final Integer typingTime;
+    private final String typingType;
 }

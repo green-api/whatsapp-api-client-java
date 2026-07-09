@@ -31,4 +31,9 @@ public class Settings {
     private String incomingCallWebhook;
     private String editedMessageWebhook;
     private String deletedMessageWebhook;
+    private String webhookUrlToken;
+    private String countryInstance;
+    private Integer autoTyping;
+    private Boolean linkPreview;
+    private Boolean enableLidMode;
 }

@@ -4,6 +4,7 @@ import com.greenapi.client.pkg.models.request.ChangeGroupNameReq;
 import com.greenapi.client.pkg.models.request.ChangeGroupPictureReq;
 import com.greenapi.client.pkg.models.request.ChangeParticipantReq;
 import com.greenapi.client.pkg.models.request.CreateGroupReq;
+import com.greenapi.client.pkg.models.request.UpdateGroupSettingsReq;
 import com.greenapi.client.pkg.models.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
@@ -178,6 +179,26 @@ public class GreenApiGroups {
         var requestEntity = new HttpEntity<>(form, headers);
 
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, SetGroupPictureResp.class);
+    }
+
+    /**
+     * The method changes group chat settings (who can edit settings, who can send messages).
+     * If the setting is already at the desired value, no change occurs.
+     * https://green-api.com/en/docs/api/groups/UpdateGroupSettings/
+     */
+    public ResponseEntity<UpdateGroupSettingsResp> updateGroupSettings(UpdateGroupSettingsReq dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/updateGroupSettings/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, UpdateGroupSettingsResp.class);
     }
 
     /**

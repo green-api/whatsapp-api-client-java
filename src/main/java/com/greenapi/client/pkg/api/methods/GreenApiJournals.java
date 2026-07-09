@@ -3,7 +3,9 @@ package com.greenapi.client.pkg.api.methods;
 import com.greenapi.client.pkg.models.ChatHistoryMessage;
 import com.greenapi.client.pkg.models.request.GetChatHistoryReq;
 import com.greenapi.client.pkg.models.request.MessageReq;
+import com.greenapi.client.pkg.models.response.CallRecord;
 import com.greenapi.client.pkg.models.response.ChatMessage;
+import com.greenapi.client.pkg.models.response.OutgoingCallRecord;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -96,5 +98,61 @@ public class GreenApiJournals {
 
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {
         });
+    }
+
+    /**
+     * The method returns the last incoming calls of the account.
+     * In the default mode calls for 24 hours are returned.
+     * https://green-api.com/en/docs/api/journals/LastIncomingCalls/
+     * <p>
+     * Beta version - functionality may change and work inconsistently.
+     */
+    public ResponseEntity<List<CallRecord>> lastIncomingCalls() {
+        return lastIncomingCalls(null);
+    }
+
+    public ResponseEntity<List<CallRecord>> lastIncomingCalls(Integer minutes) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/lastIncomingCalls/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<?> requestEntity = minutes != null
+            ? new HttpEntity<>(minutes, headers)
+            : new HttpEntity<>(headers);
+
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
+    }
+
+    /**
+     * The method returns the last outgoing calls of the account.
+     * In the default mode calls for 24 hours are returned.
+     * https://green-api.com/en/docs/api/journals/LastOutgoingCalls/
+     * <p>
+     * Beta version - functionality may change and work inconsistently.
+     */
+    public ResponseEntity<List<OutgoingCallRecord>> lastOutgoingCalls() {
+        return lastOutgoingCalls(null);
+    }
+
+    public ResponseEntity<List<OutgoingCallRecord>> lastOutgoingCalls(Integer minutes) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/lastOutgoingCalls/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<?> requestEntity = minutes != null
+            ? new HttpEntity<>(minutes, headers)
+            : new HttpEntity<>(headers);
+
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
     }
 }

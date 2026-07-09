@@ -31,4 +31,8 @@ public class InstanceSettingsReq {
     private final String incomingCallWebhook;
     private final String editedMessageWebhook;
     private final String deletedMessageWebhook;
+    private final String countryInstance;
+    private final Integer autoTyping;
+    private final Boolean linkPreview;
+    private final Boolean enableLidMode;
 }

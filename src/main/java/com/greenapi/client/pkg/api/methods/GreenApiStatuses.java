@@ -7,9 +7,10 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import com.greenapi.client.pkg.models.response.SendMessageResp;
 import com.greenapi.client.pkg.models.response.GetStatusStatisticResp;
+import com.greenapi.client.pkg.models.request.DeleteStatusReq;
+import com.greenapi.client.pkg.models.request.SendMediaStatusResq;
 import com.greenapi.client.pkg.models.request.SendTextStatusResq;
 import com.greenapi.client.pkg.models.request.SendVoiceStatusResq;
-import com.greenapi.client.pkg.models.request.SendMediaStatusResq;
 
 import java.util.List;
 
@@ -126,6 +127,27 @@ public class GreenApiStatuses {
                 : new HttpEntity<>(headers);
 
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, new ParameterizedTypeReference<>() {});
+    }
+
+    /**
+     * The method deletes a previously sent status.
+     * https://green-api.com/en/docs/api/statuses/DeleteStatus/
+     * <p>
+     * Beta version - access must be requested at support@green-api.com.
+     */
+    public ResponseEntity<Void> deleteStatus(DeleteStatusReq dto) {
+
+        String url = host +
+            "/waInstance" + instanceId +
+            "/deleteStatus/" +
+            instanceToken;
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var requestEntity = new HttpEntity<>(dto, headers);
+
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, Void.class);
     }
 
     /**
