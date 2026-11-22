@@ -29,6 +29,7 @@ public class Settings {
     private String pollMessageWebhook;
     private String incomingBlockWebhook;
     private String incomingCallWebhook;
+    private String outgoingCallWebhook;
     private String editedMessageWebhook;
     private String deletedMessageWebhook;
     private String webhookUrlToken;

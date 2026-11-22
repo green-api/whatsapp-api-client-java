@@ -378,7 +378,86 @@ For convenience, all types of hooks and messages are named similarly to the docu
 | `ContactsArrayMessageWebhook`         | [ContactMessage](https://greenapi.com/en/docs/api/receiving/notifications-format/incoming-message/ContactsArrayMessage/)                                    |
 | `TemplateButtonsReplyMessageWebhook`  | [TemplateButtonsReplyMessage](https://greenapi.com/en/docs/api/receiving/notifications-format/selected-buttons/TemplateButtonsReplyMessage/)                |
 | `ButtonsResponseMessageWebhook`       | [ButtonsResponseMessage](https://greenapi.com/en/docs/api/receiving/notifications-format/selected-buttons/ButtonsResponseMessage/)                          |
+| `IncomingCall`                        | [IncomingCall](https://green-api.com/en/docs/api/receiving/notifications-format/IncomingCall/) |
+| `OutgoingCall`                        | [OutgoingCall](https://green-api.com/en/docs/api/receiving/notifications-format/OutgoingCall/) |
 | `ListResponseMessageWebhook`          | [ListResponseMessage](https://greenapi.com/en/docs/api/receiving/notifications-format/selected-buttons/ListResponseMessage/)                                |
+
+### How to make and receive voice calls
+
+WhatsApp voice calls from the instance: 1:1 only, one call at a time, on plans that include calls. Outgoing calls work
+only to chats that wrote or called the instance in the last 72 hours. Calls documentation:
+[WhatsApp Calling API](https://green-api.com/en/docs/calls/).
+
+The control methods are in `greenApi.calls`. To hear the other side and play audio into the call, add the optional
+dependency [webrtc-java](https://github.com/devopvoid/webrtc-java), it works without sound hardware:
+
+```xml
+<dependency>
+    <groupId>dev.onvoid.webrtc</groupId>
+    <artifactId>webrtc-java</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
+Outgoing call that plays a message:
+
+```java
+try (var calls = greenApi.calls.connectCalls()) {
+    calls.open();
+    greenApi.calls.callsDial(new CallsDialReq("79001234567@c.us"));
+    calls.startAudioBridge();
+    calls.waitFor(CallStateKind.ON_CALL, Duration.ofSeconds(60));
+    calls.play(Path.of("hello.wav"));
+    greenApi.calls.callsHangUp();
+}
+```
+
+Answering incoming calls:
+
+```java
+var calls = greenApi.calls.connectCalls();
+var worker = Executors.newSingleThreadExecutor();
+
+calls.addListener(new CallsListener() {
+    @Override
+    public void onIncomingCall(CallInfo info) {
+        worker.execute(() -> {
+            greenApi.calls.callsAccept();
+            calls.startAudioBridge();
+            calls.play(Path.of("greeting.wav"));
+            greenApi.calls.callsHangUp();
+        });
+    }
+
+    @Override
+    public void onEndCall(CallEnd detail) {
+        System.out.println("Call ended: " + detail.getDescription());
+    }
+});
+calls.open();
+```
+
+Realtime audio in both directions: `calls.sendPcm(pcm)` sends 16-bit little-endian mono PCM into the call as it comes,
+in chunks of any size, and `onRemotePcm(byte[] pcm)` gives the other side's audio as PCM. The sample rate is set with
+`connectCalls(CallsConnectionOptions.builder().pcmSampleRate(16000).build())`: 8000, 12000, 16000, 24000 (default) or
+48000, the same for both directions. `clearAudio()` drops the audio that is queued and not sent yet, `drainAudio()`
+waits until it is sent, `pendingAudioMs()` says how much is queued.
+
+- Listener methods run one after another on one thread of the connection. Do long work, like answering and playing,
+  on your own thread as in the examples.
+- `play()` takes a WAV file (16-bit PCM) or a stream. Other formats (mp3, ogg and so on) need
+  [ffmpeg](https://ffmpeg.org/) on the PATH or `ffmpegPath` in `CallsConnectionOptions`. `play()` and `sendPcm()`
+  replace each other.
+- The calls methods and the connection throw `CallException` with `getCode()` and a readable message, for example
+  `INVALID_CREDENTIALS`, `INVALID_CHAT_ID`, `NO_RECENT_CONTACT`, `NOT_IN_TARIFF`, `ALREADY_IN_CALL`, `NO_ACTIVE_CALL`.
+- `callsDial` returns the `callId`. It is the `idMessage` of the call webhooks (`IncomingCall`, `OutgoingCall`) and the
+  input of `getCallRecording`. Enable the call webhooks with `incomingCallWebhook` and `outgoingCallWebhook` in
+  `setSettings`.
+
+Links to examples: [OutgoingCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/OutgoingCallExample.java),
+[IncomingCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/IncomingCallExample.java),
+[EchoCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/EchoCallExample.java),
+[CallErrorsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CallErrorsExample.java).
 
 ## List of examples
 
@@ -396,6 +475,10 @@ For convenience, all types of hooks and messages are named similarly to the docu
 | How to send a typing/recording indicator      | [SendTypingExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/SendTypingExample.java)                                         |
 | How to get the list of chats                  | [GetChatsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/GetChatsExample.java)                                             |
 | How to get incoming and outgoing calls        | [CallsJournalExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CallsJournalExample.java)                                     |
+| How to make a voice call with a message       | [OutgoingCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/OutgoingCallExample.java) |
+| How to answer incoming voice calls            | [IncomingCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/IncomingCallExample.java) |
+| How to send and receive realtime call audio   | [EchoCallExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/EchoCallExample.java) |
+| How to handle call errors                     | [CallErrorsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/CallErrorsExample.java) |
 | How to update group settings                  | [UpdateGroupSettingsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/UpdateGroupSettingsExample.java)                       |
 | How to use getStateInstanceHistory and updateApiToken | [AccountMethodsExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/AccountMethodsExample.java)                         |
 | How to delete a status                        | [DeleteStatusExample.java](https://github.com/green-api/whatsapp-api-client-java/blob/master/src/main/java/com/greenapi/client/examples/DeleteStatusExample.java)                                     |
@@ -437,6 +520,14 @@ For convenience, all types of hooks and messages are named similarly to the docu
 | `journals.lastOutgoingMessages()`      | The method returns the last outgoing messages of the account. In the default mode the last messages for 24 hours are returned                                | [LastOutgoingMessages](https://greenapi.com/en/docs/api/journals/LastOutgoingMessages)                   |
 | `journals.lastIncomingCalls()`         | The method returns the last incoming calls of the account                                                                                                    | [LastIncomingCalls](https://green-api.com/docs/api/journals/LastIncomingCalls/)                          |
 | `journals.lastOutgoingCalls()`         | The method returns the last outgoing calls of the account                                                                                                    | [LastOutgoingCalls](https://green-api.com/docs/api/journals/LastOutgoingCalls/)                          |
+| `calls.callsDial()`                    | The method starts an outgoing voice call | [CallsDial](https://green-api.com/en/docs/api/calls/callsDial/) |
+| `calls.callsAccept()`                  | The method accepts the incoming call | [CallsAccept](https://green-api.com/en/docs/api/calls/callsAccept/) |
+| `calls.callsReject()`                  | The method rejects the incoming call | [CallsReject](https://green-api.com/en/docs/api/calls/callsReject/) |
+| `calls.callsHangUp()`                  | The method ends the current call | [CallsHangUp](https://green-api.com/en/docs/api/calls/callsHangUp/) |
+| `calls.callsState()`                   | The method returns the current call state | [CallsState](https://green-api.com/en/docs/api/calls/callsState/) |
+| `calls.callsGetIceServers()`           | The method returns the ICE servers for the call audio | [CallsGetIceServers](https://green-api.com/en/docs/api/calls/callsGetIceServers/) |
+| `calls.getCallRecording()`             | The method returns the recording of a call |  |
+| `calls.connectCalls()`                 | The method creates the live calls connection: call state, incoming calls, audio files and realtime audio in both directions | [WhatsApp Calling API](https://green-api.com/en/docs/calls/) |
 | `queues.showMessagesQueue()`           | The method is aimed for getting a list of messages in the queue to be sent                                                                                   | [ShowMessagesQueue](https://greenapi.com/en/docs/api/queues/ShowMessagesQueue)                           |
 | `queues.slearMessagesQueue()`          | The method is aimed for clearing the queue of messages to be sent                                                                                            | [ClearMessagesQueue](https://greenapi.com/en/docs/api/queues/ClearMessagesQueue)                         |
 | `readMark.readChat()`                  | The method is aimed for marking messages in a chat as read. Either all messages or a specified message in a chat can be marked as read                       | [ReadChat](https://greenapi.com/en/docs/api/marks/ReadChat)                                              |

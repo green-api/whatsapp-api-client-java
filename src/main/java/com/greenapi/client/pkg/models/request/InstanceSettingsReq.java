@@ -29,6 +29,7 @@ public class InstanceSettingsReq {
     private final String pollMessageWebhook;
     private final String incomingBlockWebhook;
     private final String incomingCallWebhook;
+    private final String outgoingCallWebhook;
     private final String editedMessageWebhook;
     private final String deletedMessageWebhook;
     private final String countryInstance;

@@ -66,6 +66,9 @@ public class NotificationMapper {
             case "incomingCall" -> {
                 return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingCall.class));
             }
+            case "outgoingCall" -> {
+                return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), OutgoingCall.class));
+            }
             case "incomingBlock" -> {
                 return new Notification(receiptId, objectMapper.readValue(notificationBody.toString(), IncomingBlock.class));
             }

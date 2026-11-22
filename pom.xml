@@ -37,6 +37,7 @@
         <snakeyaml.version>2.2</snakeyaml.version>
         <logback-classic.version>1.4.14</logback-classic.version>
         <logback-core.version>1.4.14</logback-core.version>
+        <webrtc-java.version>1.0.1</webrtc-java.version>
     </properties>
 <!--    <distributionManagement>-->
 <!--        <snapshotRepository>-->
@@ -78,6 +79,12 @@
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.onvoid.webrtc</groupId>
+            <artifactId>webrtc-java</artifactId>
+            <version>${webrtc-java.version}</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
